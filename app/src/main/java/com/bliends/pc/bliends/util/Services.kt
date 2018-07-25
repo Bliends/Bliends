@@ -1,5 +1,6 @@
-package com.bliends.pc.bliends
+package com.bliends.pc.bliends.util
 
+import com.bliends.pc.bliends.data.Sign
 import retrofit2.Call
 import retrofit2.http.*
 

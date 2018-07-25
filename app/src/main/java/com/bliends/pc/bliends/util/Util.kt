@@ -1,4 +1,4 @@
-package com.bliends.pc.bliends
+package com.bliends.pc.bliends.util
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

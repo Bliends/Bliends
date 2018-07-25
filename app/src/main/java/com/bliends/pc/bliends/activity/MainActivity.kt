@@ -1,7 +1,8 @@
-package com.bliends.pc.bliends
+package com.bliends.pc.bliends.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.bliends.pc.bliends.R
 
 class MainActivity : AppCompatActivity() {
 

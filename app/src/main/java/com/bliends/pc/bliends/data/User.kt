@@ -1,4 +1,4 @@
-package com.bliends.pc.bliends
+package com.bliends.pc.bliends.data
 
 class User(){
     var _id : String = ""

@@ -1,4 +1,4 @@
-package com.bliends.pc.bliends
+package com.bliends.pc.bliends.activity
 
 import android.content.Context
 import android.content.Intent
@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.bliends.pc.bliends.R
+import com.bliends.pc.bliends.data.Sign
+import com.bliends.pc.bliends.util.Util
 import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,7 +19,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        var intent = Intent(this,MainActivity::class.java)
+        var intent = Intent(this, MainActivity::class.java)
         loginBtn.setOnClickListener {
             var res: Call<Sign> = Util.postService.Sign(loginId.text.toString(),loginPasswd.text.toString())
             res.enqueue(object : Callback<Sign> {
