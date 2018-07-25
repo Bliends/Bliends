@@ -15,5 +15,6 @@
     <style name="LoginStyle">
         <item name="colorControlNormal">@color/colorLogin</item>
         <item name="android:textColorHighlight">#8f8f8f</item>
+        <item name="colorControlActivated">@color/colorLogin</item>
     </style>
 </resources>

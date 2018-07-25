@@ -11,10 +11,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        >
+        android:layout_weight="1">
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,11 +30,8 @@
             android:layout_marginRight="46dp"
             android:fontFamily="sans-serif-medium"
             android:hint="아이디"
-            android:letterSpacing="0.07"
-            android:lineSpacingExtra="1sp"
             android:textSize="13sp"
             android:theme="@style/LoginStyle"/>
-
 
         <EditText
             android:id="@+id/loginPasswd"
@@ -47,8 +42,6 @@
             android:layout_marginTop="51dp"
             android:fontFamily="sans-serif-medium"
             android:hint="비밀번호"
-            android:letterSpacing="0.07"
-            android:lineSpacingExtra="1sp"
             android:textSize="13sp"
             android:theme="@style/LoginStyle"/>
 
@@ -61,6 +54,8 @@
             android:orientation="horizontal">
 
                 <CheckBox
+                    android:id="@+id/loginCheak"
+                    android:buttonTint="@color/colorLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -77,6 +72,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/loginBtn"
             android:layout_marginTop="42dp"
             android:background="@drawable/ic_loginbtn"
             android:textColor="#FFF"
@@ -90,8 +86,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp">
             <TextView
+                android:id="@+id/loginSignup"
                 android:letterSpacing="0.03"
-                android:lineSpacingExtra="2sp"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:fontFamily="sans-serif-medium"
@@ -101,7 +97,6 @@
 
             <TextView
                 android:letterSpacing="0.03"
-                android:lineSpacingExtra="2sp"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:fontFamily="sans-serif-medium"
@@ -111,6 +106,7 @@
                 android:text="/"/>
 
             <TextView
+                android:id="@+id/loginSerch"
                 android:letterSpacing="0.03"
                 android:textStyle="bold"
                 android:textSize="12sp"
