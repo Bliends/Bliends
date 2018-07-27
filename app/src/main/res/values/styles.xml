@@ -18,4 +18,17 @@
         <item name="android:textColorHighlight">#8f8f8f</item>
         <item name="colorControlActivated">@color/colorLogin</item>
     </style>
+
+
+    <style name="SignupStyle">
+        <!-- Hint color and label color in FALSE state -->
+        <item name="android:textColorHint">@color/colorLogin</item>
+        <item name="colorAccent">@color/colorLogin</item>
+        <item name="android:textSize">13sp</item>
+        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+        <item name="colorControlNormal">@color/colorLogin</item>
+        <item name="android:textColorHighlight">@color/colorLogin</item>
+        <item name="android:textColor">@color/colorLogin</item>
+        <item name="colorControlActivated">@color/colorLogin</item>
+    </style>
 </resources>

@@ -1,6 +1,5 @@
 package com.bliends.pc.bliends.activity
 
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -8,6 +7,7 @@ import android.util.Log
 import com.bliends.pc.bliends.R
 import com.bliends.pc.bliends.util.ORMUtil
 import com.bliends.pc.bliends.data.Sign
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 class SplashActivity : AppCompatActivity() {
@@ -27,12 +27,11 @@ class SplashActivity : AppCompatActivity() {
         Handler().postDelayed({
             if (token != null) {
                 toast("자동로그인 완료 되었습니다.")
-                var intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
+                startActivity<MainActivity>()
                 finish()
             } else {
                 toast("로그인이 필요한 서비스 입니다.")
-                startActivity(Intent(this, LoginActivity::class.java))
+                startActivity<LoginActivity>()
                 finish()
             }
         }, 2000)

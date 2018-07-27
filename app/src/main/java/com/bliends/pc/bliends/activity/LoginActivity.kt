@@ -13,6 +13,7 @@ import com.bliends.pc.bliends.data.UserInfo
 import com.bliends.pc.bliends.util.RetrofitUtil
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_login.*
+import org.jetbrains.anko.startActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,13 +24,16 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        loginSignup.setOnClickListener {
+            startActivity<SignupSelectActivity>()
+        }
+
         loginBtn.setOnClickListener {
             Login()
         }
     }
 
     fun Login() {
-        var intent = Intent(this, MainActivity::class.java)
         var res: Call<Sign> = RetrofitUtil.postService.Sign(loginId.text.toString(), loginPasswd.text.toString())
 
         res.enqueue(object : Callback<Sign> {
@@ -38,14 +42,15 @@ class LoginActivity : AppCompatActivity() {
                 Log.e("login" + response!!.code().toString(), response.message())
                 when {
                     response!!.code() == 200 -> response.body()?.let {
+                        toast(response.body()!!.message)
                         var token = response.body()!!.token
                         GetUser(token)
                         ORMUtil(this@LoginActivity).tokenORM.save(response.body()!!)
-                        startActivity(intent)
+                        startActivity<MainActivity>()
                         finish()
                     }
-                    response!!.code() == 403 -> toast("유효하지 않은 사용자명이나 암호입니다.")
-                    response!!.code() == 401 -> toast(response.message())
+                    response!!.code() == 403 -> toast(response.body()!!.message)
+                    response!!.code() == 401 -> toast(response.body()!!.message)
                 }
             }
 
@@ -53,7 +58,6 @@ class LoginActivity : AppCompatActivity() {
                 toast("Sever Error")
                 Log.e("login Error", t!!.message)
             }
-
         })
     }
 

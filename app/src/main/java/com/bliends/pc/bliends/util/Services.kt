@@ -1,6 +1,7 @@
 package com.bliends.pc.bliends.util
 
 import com.bliends.pc.bliends.data.Sign
+import com.bliends.pc.bliends.data.SignUp
 import com.bliends.pc.bliends.data.User
 import com.bliends.pc.bliends.data.UserInfo
 import retrofit2.Call
@@ -15,4 +16,12 @@ interface Services{
 
     @GET("sign")
     fun UserInfo(@Header ("Authorization") Authorization : String) : Call<UserInfo>
+
+    @FormUrlEncoded
+    @POST("users")
+    fun SignUp(@Field("userid") userid : String,
+               @Field("password")password : String,
+               @Field("name") name : String,
+               @Field("tpye") type : String,
+               @Field("phone") phone : String) : Call<SignUp>
 }
