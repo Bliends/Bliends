@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+//apply plugin: 'realm-android'
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -35,5 +37,6 @@ dependencies {
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-
+    //anko
+    implementation 'org.jetbrains.anko:anko:0.10.3'
 }

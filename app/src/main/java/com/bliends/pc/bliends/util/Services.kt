@@ -1,6 +1,8 @@
 package com.bliends.pc.bliends.util
 
 import com.bliends.pc.bliends.data.Sign
+import com.bliends.pc.bliends.data.User
+import com.bliends.pc.bliends.data.UserInfo
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -12,5 +14,5 @@ interface Services{
              @Field("password") password: String) : Call<Sign>
 
     @GET("sign")
-    fun GetSign(@Header ("Authorization") authorization : String) : Call<Sign>
+    fun UserInfo(@Header ("Authorization") Authorization : String) : Call<UserInfo>
 }

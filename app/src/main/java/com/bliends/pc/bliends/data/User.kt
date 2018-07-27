@@ -5,7 +5,7 @@ class User(){
     var userid : String = ""
     var name : String = ""
     var type : String = ""
-    var phone : String = ""
+    var phone : Int = 0
     var createdAt : String = ""
     var updatedAt : String = ""
 }

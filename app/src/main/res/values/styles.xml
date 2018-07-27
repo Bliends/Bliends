@@ -8,10 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="NoTitle" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="LoginStyle">
         <item name="colorControlNormal">@color/colorLogin</item>
         <item name="android:textColorHighlight">#8f8f8f</item>
