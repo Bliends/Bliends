@@ -14,6 +14,7 @@ import com.bliends.pc.bliends.data.SignUp
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -71,18 +72,14 @@ class SignUpUtil(context: Context) {
                 when {
                     response!!.code() == 200 -> {
                         response.body().let {
-                            context!!.toast(response.body()!!.message)
+                            context!!.toast("회원가입이 정상적으로 완료되었습니다.")
                             context!!.startActivity<LoginActivity>()
                             activity.finish()
                         }
                     }
-                    response.code() == 400 -> {
-                        Log.e("400", response.message())
-//                        context!!.toast(response.body()!!.message)
-                    }
-                    response.code() == 409 -> {
-                        Log.e("409", response.message())
-                        context!!.toast(response.body()!!.message)
+                    else ->{
+                        val ErrorObj = JSONObject(response.errorBody()!!.string())
+                        context!!.toast(ErrorObj.getString("message"))
                     }
                 }
             }

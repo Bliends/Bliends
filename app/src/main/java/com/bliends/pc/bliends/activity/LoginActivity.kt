@@ -18,6 +18,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import org.jetbrains.anko.toast
+import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
         res.enqueue(object : Callback<Sign> {
 
             override fun onResponse(call: Call<Sign>?, response: Response<Sign>?) {
-                Log.e("login" + response!!.code().toString(), response.message())
+//                Log.e("login" + response!!.code().toString(), response.body()!!.message)
                 when {
                     response!!.code() == 200 -> response.body()?.let {
                         toast(response.body()!!.message)
@@ -49,8 +50,11 @@ class LoginActivity : AppCompatActivity() {
                         startActivity<MainActivity>()
                         finish()
                     }
-                    response!!.code() == 403 -> toast(response.body()!!.message)
-                    response!!.code() == 401 -> toast(response.body()!!.message)
+                    else ->{
+                        val ErrorObj = JSONObject(response.errorBody()!!.string())
+                        toast(ErrorObj.getString("message"))
+                    }
+
                 }
             }
 
@@ -71,7 +75,10 @@ class LoginActivity : AppCompatActivity() {
                         Log.e("name", Gson().toJson(response.body()!!))
                         ORMUtil(this@LoginActivity).userORM.save(response.body()!!.user!!)
                     }
-                    response!!.code() == 401 -> Log.e("getUser 401", response.message())
+                    else ->{
+                        val ErrorObj = JSONObject(response.errorBody()!!.string())
+                        toast(ErrorObj.getString("message"))
+                    }
                 }
             }
 

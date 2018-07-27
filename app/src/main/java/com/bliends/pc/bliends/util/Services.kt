@@ -22,6 +22,6 @@ interface Services{
     fun SignUp(@Field("userid") userid : String,
                @Field("password")password : String,
                @Field("name") name : String,
-               @Field("tpye") type : String,
+               @Field("type") type : String,
                @Field("phone") phone : String) : Call<SignUp>
 }
