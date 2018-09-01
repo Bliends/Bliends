@@ -1,4 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_activity_log"
+        android:enabled="true"
+        android:title="활동 로그"
+        android:icon="@drawable/nav_activity_log"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_location"
+        android:enabled="true"
+        android:title="위치 추적"
+        app:showAsAction="always"
+        android:icon="@drawable/nav_location"/>
+
+    <item
+        android:id="@+id/action_chat"
+        android:enabled="true"
+        android:title="채팅"
+        android:icon="@drawable/nav_chat"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_setting"
+        android:enabled="true"
+        android:title="설정"
+        android:icon="@drawable/nav_setting"
+        app:showAsAction="always"/>
 
 </menu>
