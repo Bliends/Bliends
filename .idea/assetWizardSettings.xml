@@ -19,23 +19,10 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\pc\Downloads\8_2018-07-24\drawable-hdpi\8.png" />
-                                      <entry key="outputName" value="ic_app" />
+                                      <entry key="imageAsset" value="$USER_HOME$/Downloads/2_2018-09-01/drawable-hdpi/2.png" />
+                                      <entry key="outputName" value="nav_activity_log" />
                                       <entry key="theme" value="CUSTOM" />
                                       <entry key="themeColor" value="000000" />
-                                    </map>
-                                  </option>
-                                </PersistentState>
-                              </value>
-                            </entry>
-                            <entry key="launcher">
-                              <value>
-                                <PersistentState>
-                                  <option name="values">
-                                    <map>
-                                      <entry key="backgroundLayerName" value="ic_launcher_background" />
-                                      <entry key="foregroundLayerName" value="ic_app" />
-                                      <entry key="outputName" value="ic_app" />
                                     </map>
                                   </option>
                                 </PersistentState>
