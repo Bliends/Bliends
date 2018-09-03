@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
             ORMUtil(this@MainActivity).tokenORM.delete(Sign())
             ORMUtil(this@MainActivity).userORM.delete(User())
             startActivity<LoginActivity>()
-            toast("로그아웃")
+            toast("로그아웃");
             finish()
         }
         disableShiftMode(mainBottomNav)
