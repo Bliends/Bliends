@@ -6,7 +6,7 @@
         android:id="@+id/action_activity_log"
         android:enabled="true"
         android:title="활동 로그"
-        android:icon="@drawable/nav_activity_log"
+        android:icon="@drawable/nav_log"
         app:showAsAction="always"/>
 
     <item
