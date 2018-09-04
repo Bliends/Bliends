@@ -52,9 +52,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:gravity="center"
-            android:textStyle="bold"
             android:text="취소"
-            android:textSize="12sp"/>
+            android:textSize="14sp"/>
     </android.support.constraint.ConstraintLayout>
 
     <android.support.v7.widget.RecyclerView
