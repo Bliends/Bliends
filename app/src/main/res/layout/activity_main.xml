@@ -8,27 +8,27 @@
     tools:context=".activity.MainActivity">
 
 
-    <TextView
-        android:id="@+id/logout"
-        android:text="LogOut"
-        android:textSize="50sp"
-        android:gravity="center"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/mainViewPag"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </TextView>
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/mainBottomNav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </android.support.v4.view.ViewPager>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/mainBottomNav"
         android:layout_width="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_height="wrap_content"
         app:itemBackground="@android:color/white"
         app:itemIconTint="@drawable/bottomnav_item_color"
         app:itemTextColor="@drawable/bottomnav_item_color"
-        app:menu="@menu/nav_menu"
-        android:layout_alignParentBottom="true">
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/nav_menu">
     </android.support.design.widget.BottomNavigationView>
 
 </android.support.constraint.ConstraintLayout>

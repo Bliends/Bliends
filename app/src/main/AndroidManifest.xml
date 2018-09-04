@@ -12,10 +12,7 @@
         android:supportsRtl="true"
         android:name=".socket.SocketApplication"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".activity.SplashActivity"
-            android:theme="@style/NoTitle">
-        </activity>
+        <activity android:name=".activity.SplashActivity" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -23,20 +20,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.LoginActivity"
-            android:theme="@style/NoTitle">
-        </activity>
-        <activity android:name=".activity.SignupSelectActivity">
-        </activity>
-        <activity
-            android:name=".activity.SignupProtectorActivity"
-            android:theme="@style/NoTitle">
-        </activity>
-        <activity
-            android:name=".activity.SignupUserActivity"
-            android:theme="@style/NoTitle">
-        </activity>
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.SignupSelectActivity" />
+        <activity android:name=".activity.SignupProtectorActivity" />
+        <activity android:name=".activity.SignupUserActivity" />
     </application>
 
 </manifest>

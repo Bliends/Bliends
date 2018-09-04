@@ -4,33 +4,45 @@ import android.annotation.SuppressLint
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.bliends.pc.bliends.R
-import com.bliends.pc.bliends.util.ORMUtil
-import com.bliends.pc.bliends.data.Sign
-import com.bliends.pc.bliends.data.User
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
 import android.support.design.internal.BottomNavigationItemView
-import java.lang.reflect.AccessibleObject.setAccessible
-import java.lang.reflect.Array.setBoolean
 import android.support.design.internal.BottomNavigationMenuView
 import android.support.design.widget.BottomNavigationView
 import android.util.Log
-
+import com.bliends.pc.bliends.adapter.MainPagerAdapter
+import com.bliends.pc.bliends.adapter.ViewPagerOnPageSelected
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        logout.setOnClickListener {
-            ORMUtil(this@MainActivity).tokenORM.delete(Sign())
-            ORMUtil(this@MainActivity).userORM.delete(User())
-            startActivity<LoginActivity>()
-            toast("로그아웃");
-            finish()
+        mainViewPag.adapter = MainPagerAdapter(supportFragmentManager)
+
+        mainViewPag.addOnPageChangeListener(ViewPagerOnPageSelected(this@MainActivity::onPageSelected))
+
+        mainBottomNav.setOnNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.action_activity_log -> mainViewPag.currentItem = 0
+                R.id.action_location -> mainViewPag.currentItem = 1
+                R.id.action_chat -> mainViewPag.currentItem = 2
+                R.id.action_setting -> mainViewPag.currentItem = 3
+            }
+            return@setOnNavigationItemSelectedListener true
         }
+
         disableShiftMode(mainBottomNav)
+    }
+
+    private fun onPageSelected(position: Int) {
+        if(mainBottomNav != null){
+            when(position){
+                0 -> mainBottomNav.selectedItemId = R.id.action_activity_log
+                1 -> mainBottomNav.selectedItemId = R.id.action_location
+                2 -> mainBottomNav.selectedItemId = R.id.action_chat
+                3 -> mainBottomNav.selectedItemId = R.id.action_setting
+            }
+        }
     }
 
     @SuppressLint("RestrictedApi")
@@ -54,7 +66,5 @@ class MainActivity : AppCompatActivity() {
         } catch (e: IllegalAccessException) {
             Log.e("BNVHelper", "Unable to change value of shift mode", e)
         }
-
     }
-
 }

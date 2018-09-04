@@ -6,9 +6,6 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="NoTitle" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -18,7 +15,6 @@
         <item name="android:textColorHighlight">#8f8f8f</item>
         <item name="colorControlActivated">@color/colorLogin</item>
     </style>
-
 
     <style name="SignupStyle">
         <!-- Hint color and label color in FALSE state -->
