@@ -1,9 +1,7 @@
 package com.bliends.pc.bliends.data
 
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
-
 
 data class Chat(val type : Int){
     lateinit var message: String
@@ -19,7 +17,7 @@ data class Chat(val type : Int){
     }
     init {
         if(type == TYPE_TIME_CHAT){
-            val dateFormat : DateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+            val dateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
             val cal : Calendar = Calendar.getInstance()
             message = dateFormat.format(cal.time)
         }
