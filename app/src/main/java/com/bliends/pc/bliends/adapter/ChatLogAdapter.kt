@@ -40,4 +40,8 @@ class ChatLogAdapter(private var mChatLog : ArrayList<Chat>) : RecyclerView.Adap
         val chatResend: TextView? = itemView!!.findViewById(R.id.chat_resend_btn)
         val chatSendFail: LinearLayout? = itemView!!.findViewById(R.id.chat_send_fail)
     }
+
+    fun sendFail(position: Int){
+
+    }
 }
