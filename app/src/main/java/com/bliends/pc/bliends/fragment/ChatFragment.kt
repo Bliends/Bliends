@@ -35,6 +35,7 @@ class ChatFragment : Fragment() {
         mChatLog.add(Chat("싫은데", TYPE_OTHER_CHAT))
         mChatLog.add(Chat(TYPE_TIME_CHAT))
         mChatLog.add(Chat("유감 이구나...", TYPE_MY_CHAT))
+        mChatLog.add(Chat("정말 보내야되??????", TYPE_OTHER_CHAT))
 
         mChatAdapter.notifyItemInserted(mChatLog.size - 1)
         recycler_chat_log.scrollToPosition(mChatAdapter.itemCount - 1)
@@ -45,21 +46,20 @@ class ChatFragment : Fragment() {
         sendFail(3)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_chat, container, false)
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+            = inflater.inflate(R.layout.fragment_chat, container, false)
 
-    companion object {
-        fun newInstance() = ChatFragment()
-    }
+    companion object { fun newInstance() = ChatFragment() }
 
     private fun sendFail(position: Int){
         recycler_chat_log.postDelayed({
             if(recycler_chat_log.findViewHolderForAdapterPosition(position) != null){
-                recycler_chat_log.findViewHolderForAdapterPosition(position).itemView.find<LinearLayout>(R.id.chat_send_fail).visibility = View.VISIBLE
-                recycler_chat_log.findViewHolderForAdapterPosition(position).itemView.find<TextView>(R.id.chat_resend_btn).setOnClickListener {
-                    recycler_chat_log.findViewHolderForAdapterPosition(position).itemView.find<LinearLayout>(R.id.chat_send_fail).visibility = View.GONE
+                recycler_chat_log.findViewHolderForAdapterPosition(position)
+                        .itemView.find<LinearLayout>(R.id.chat_send_fail).visibility = View.VISIBLE
+                recycler_chat_log.findViewHolderForAdapterPosition(position)
+                        .itemView.find<TextView>(R.id.chat_resend_btn).setOnClickListener {
+                            recycler_chat_log.findViewHolderForAdapterPosition(position)
+                                    .itemView.find<LinearLayout>(R.id.chat_send_fail).visibility = View.GONE
                     toast("재전송 했습니다.")
                 }
             }

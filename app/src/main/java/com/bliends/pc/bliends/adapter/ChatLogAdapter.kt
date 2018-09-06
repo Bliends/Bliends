@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import com.bliends.pc.bliends.R
 import com.bliends.pc.bliends.R.layout.*
@@ -14,7 +13,6 @@ import com.bliends.pc.bliends.data.Chat.Companion.TYPE_OTHER_CHAT
 import com.bliends.pc.bliends.data.Chat.Companion.TYPE_TIME_CHAT
 
 class ChatLogAdapter(private var mChatLog : ArrayList<Chat>) : RecyclerView.Adapter<ChatLogAdapter.ViewHolder>() {
-    lateinit var chatResend : TextView
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.chatText.text = mChatLog[position].message
@@ -37,11 +35,5 @@ class ChatLogAdapter(private var mChatLog : ArrayList<Chat>) : RecyclerView.Adap
 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
         var chatText: TextView = itemView!!.findViewById(R.id.chat_log)
-        val chatResend: TextView? = itemView!!.findViewById(R.id.chat_resend_btn)
-        val chatSendFail: LinearLayout? = itemView!!.findViewById(R.id.chat_send_fail)
-    }
-
-    fun sendFail(position: Int){
-
     }
 }
