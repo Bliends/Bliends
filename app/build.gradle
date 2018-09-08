@@ -46,4 +46,7 @@ dependencies {
         exclude group: 'org.json', module: 'json'
     }
     implementation 'com.android.support:recyclerview-v7:27.1.1'
+    // maps
+    implementation 'com.google.android.gms:play-services-maps:15.0.1'
+    implementation 'com.google.android.gms:play-services-location:15.0.1'
 }
