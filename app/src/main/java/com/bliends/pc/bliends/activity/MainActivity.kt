@@ -11,7 +11,6 @@ import android.support.design.widget.BottomNavigationView
 import android.util.Log
 import com.bliends.pc.bliends.adapter.MainPagerAdapter
 import com.bliends.pc.bliends.adapter.ViewPagerOnPageSelected
-import com.bliends.pc.bliends.util.TTSUtil
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
