@@ -1,29 +1,31 @@
 package com.bliends.pc.bliends.util
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.os.Build
 import android.speech.tts.TextToSpeech
 
-import android.speech.tts.TextToSpeech.ERROR
+import android.speech.tts.TextToSpeech.SUCCESS
 import android.util.Log
 import java.util.*
 
 object TTSUtil : TextToSpeech.OnInitListener {
     private var tts : TextToSpeech? = null
+    lateinit var text : String
 
     fun usingTTS(context: Context, text: String){
         tts = TextToSpeech(context, this)
-        speak(text)
+        this.text = text
     }
 
     override fun onInit(status: Int) {
-        if(status != ERROR){
-            val language = this.tts!!.setLanguage(Locale.KOREAN)
+        if(status == SUCCESS){
+            val language = this.tts!!.setLanguage(Locale.KOREA)
             if (language == TextToSpeech.LANG_MISSING_DATA
                     || language == TextToSpeech.LANG_NOT_SUPPORTED){
-                Log.e("SUCESS", "TSDF")
+                Log.e(TAG, "Language is not available.");
             }else{
-                Log.e("FAILLLLLLL", "TSDF")
+                speak(this.text)
             }
         }
     }
