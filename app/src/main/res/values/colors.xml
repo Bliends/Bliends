@@ -5,4 +5,6 @@
     <color name="colorAccent">#3cb371</color>
     <color name="colorLogin">#3cb371</color>
     <color name="bottomNavColor">#1e2640</color>
+
+    <color name="helpNewItemBackground">#f6f6f7</color>
 </resources>

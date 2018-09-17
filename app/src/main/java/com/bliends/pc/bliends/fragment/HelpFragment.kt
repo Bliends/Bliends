@@ -12,7 +12,6 @@ import com.bliends.pc.bliends.adapter.HelpAdapter
 import com.bliends.pc.bliends.data.Help
 import kotlinx.android.synthetic.main.fragment_help.*
 
-
 class HelpFragment : Fragment() {
 
     var mLog = ArrayList<Help>()
@@ -20,9 +19,14 @@ class HelpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val mLayoutManager = LinearLayoutManager(context)
+        mLayoutManager.reverseLayout = true
+        mLayoutManager.stackFromEnd = true
+
         mHelpAdapter = HelpAdapter(mLog)
         recycle_help_log.adapter = mHelpAdapter
-        recycle_help_log.layoutManager = LinearLayoutManager(context)
+        recycle_help_log.layoutManager = mLayoutManager
         recycle_help_log.setHasFixedSize(false)
         recycle_help_log.itemAnimator = DefaultItemAnimator()
 
