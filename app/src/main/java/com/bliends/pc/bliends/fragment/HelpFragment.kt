@@ -31,15 +31,8 @@ class HelpFragment : Fragment() {
         mHelpAdapter.add(Help(2))
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_help, container, false)
-
-
-
-
-        return view
-    }
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+            = inflater.inflate(R.layout.fragment_help, container, false)
 
     companion object { fun newInstance() = HelpFragment() }
 }
