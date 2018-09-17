@@ -17,9 +17,9 @@
         android:icon="@drawable/nav_location"/>
 
     <item
-        android:id="@+id/action_chat"
+        android:id="@+id/action_help"
         android:enabled="true"
-        android:title="채팅"
+        android:title="도움요청"
         android:icon="@drawable/nav_chat"
         app:showAsAction="always"/>
 

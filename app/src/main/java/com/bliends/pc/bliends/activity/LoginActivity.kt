@@ -40,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
         res.enqueue(object : Callback<Sign> {
 
             override fun onResponse(call: Call<Sign>?, response: Response<Sign>?) {
-//                Log.e("login" + response!!.code().toString(), response.body()!!.message)
+//                Help.e("login" + response!!.code().toString(), response.body()!!.message)
                 when {
                     response!!.code() == 200 -> response.body()?.let {
                         toast(response.body()!!.message)

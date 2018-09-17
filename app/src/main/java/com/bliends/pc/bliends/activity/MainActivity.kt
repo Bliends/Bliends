@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         mainViewPag.adapter = MainPagerAdapter(supportFragmentManager)
+        mainViewPag.offscreenPageLimit = 4
 
         mainViewPag.addOnPageChangeListener(ViewPagerOnPageSelected(this@MainActivity::onPageSelected))
 
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.action_activity_log -> mainViewPag.currentItem = 0
                 R.id.action_location -> mainViewPag.currentItem = 1
-                R.id.action_chat -> mainViewPag.currentItem = 2
+                R.id.action_help -> mainViewPag.currentItem = 2
                 R.id.action_setting -> mainViewPag.currentItem = 3
             }
             return@setOnNavigationItemSelectedListener true
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             when(position){
                 0 -> mainBottomNav.selectedItemId = R.id.action_activity_log
                 1 -> mainBottomNav.selectedItemId = R.id.action_location
-                2 -> mainBottomNav.selectedItemId = R.id.action_chat
+                2 -> mainBottomNav.selectedItemId = R.id.action_help
                 3 -> mainBottomNav.selectedItemId = R.id.action_setting
             }
         }

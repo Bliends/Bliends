@@ -4,10 +4,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.ViewPager
-import com.bliends.pc.bliends.fragment.ActLogFragment
-import com.bliends.pc.bliends.fragment.ChatFragment
-import com.bliends.pc.bliends.fragment.LocationFragment
-import com.bliends.pc.bliends.fragment.SettingFragment
+import com.bliends.pc.bliends.fragment.*
 
 class MainPagerAdapter(fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
     override fun getCount(): Int = 4
@@ -16,7 +13,7 @@ class MainPagerAdapter(fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
         when (position){
             0 -> return ActLogFragment.newInstance()
             1 -> return LocationFragment.newInstance()
-            2 -> return ChatFragment.newInstance()
+            2 -> return HelpFragment.newInstance()
             3 -> return SettingFragment.newInstance()
         }
         return null
