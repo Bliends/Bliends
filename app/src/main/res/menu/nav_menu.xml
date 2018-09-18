@@ -20,7 +20,7 @@
         android:id="@+id/action_help"
         android:enabled="true"
         android:title="도움요청"
-        android:icon="@drawable/nav_chat"
+        android:icon="@drawable/nav_help"
         app:showAsAction="always"/>
 
     <item
