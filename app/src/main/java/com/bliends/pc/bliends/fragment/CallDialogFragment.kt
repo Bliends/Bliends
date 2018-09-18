@@ -48,7 +48,7 @@ class CallDialogFragment : DialogFragment(), View.OnClickListener{
 
     override fun onClick(v: View?) {
         when(v!!.id){
-            R.id.call_weak_person -> startActivity(Intent("android.intent.action.DIAL", Uri.parse("tel:01097432771")))
+            R.id.call_weak_person -> startActivity(Intent("android.intent.action.DIAL", Uri.parse("tel:01094732771")))
             R.id.call_police -> startActivity(Intent("android.intent.action.DIAL", Uri.parse("tel:112")))
             R.id.btn_cancel -> dismiss()
         }

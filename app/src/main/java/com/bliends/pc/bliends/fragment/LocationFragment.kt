@@ -15,23 +15,40 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.content.ContextCompat
+import android.widget.LinearLayout
 import com.google.android.gms.maps.model.BitmapDescriptor
+import kotlinx.android.synthetic.main.fragment_location.*
+import org.jetbrains.anko.find
 
-class LocationFragment : Fragment(), OnMapReadyCallback {
+class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
 
     private lateinit var mapView : MapView
     private lateinit var cameraUpdate : CameraUpdate
 
+    private lateinit var behavior: BottomSheetBehavior<LinearLayout>
+
     private var googleMap : GoogleMap? = null
-    private var geocoder : Geocoder? = null
+    private var geoCoder : Geocoder? = null
+
+    companion object {
+        fun newInstance() = LocationFragment()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        behavior = BottomSheetBehavior.from(bottom_sheet)
+        btn_open_log.setOnClickListener(this)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{
         val rootView = inflater.inflate(R.layout.fragment_location, container, false)
-        mapView = rootView.findViewById(R.id.map)
+        mapView = rootView.find(R.id.map)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
-        geocoder = Geocoder(context)
+        geoCoder = Geocoder(context)
+
         return rootView
     }
 
@@ -50,23 +67,16 @@ class LocationFragment : Fragment(), OnMapReadyCallback {
         mapView.onLowMemory()
     }
 
-
-    companion object {
-        fun newInstance() = LocationFragment()
-    }
-
     override fun onMapReady(googleMap: GoogleMap?) {
         MapsInitializer.initialize(activity)
-
         this.googleMap = googleMap!!
-
         setLocation(36.39145, 127.363096)
     }
 
     private fun setLocation(lat : Double, lng : Double){
         val latLng = LatLng(lat, lng)
 
-        val locationName : Address? = geocoder!!.getFromLocation(lat, lng, 1)[0]
+        val locationName : Address? = geoCoder !!.getFromLocation(lat, lng, 1)[0]
         val marker = MarkerOptions()
                 .position(latLng)
                 .title(locationName!!.featureName)
@@ -75,9 +85,7 @@ class LocationFragment : Fragment(), OnMapReadyCallback {
         marker.icon(bitmapDescriptorFromVector(context, R.drawable.location_wad))
 
         cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16.25F)
-
         googleMap!!.animateCamera(cameraUpdate)
-
         googleMap!!.addMarker(marker)
     }
 
@@ -88,5 +96,14 @@ class LocationFragment : Fragment(), OnMapReadyCallback {
         val canvas = Canvas(bitmap)
         vectorDrawable.draw(canvas)
         return BitmapDescriptorFactory.fromBitmap(bitmap)
+    }
+
+    override fun onClick(v: View?) {
+        if(behavior.state == BottomSheetBehavior.STATE_COLLAPSED){
+            behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+        else if(behavior.state == BottomSheetBehavior.STATE_EXPANDED){
+            behavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
     }
 }

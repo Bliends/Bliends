@@ -3,11 +3,11 @@
 
     <item
         android:state_checked="true"
-        android:color ="@color/bottomNavColor"
+        android:color ="#3cb371"
         />
 
     <item
-        android:color="#000000"
+        android:color="#1e2640"
         />
 
 </selector>
