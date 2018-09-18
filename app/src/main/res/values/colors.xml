@@ -7,4 +7,5 @@
     <color name="bottomNavColor">#1e2640</color>
 
     <color name="helpNewItemBackground">#f6f6f7</color>
+    <color name="dialogBackground">#0a000000</color>
 </resources>

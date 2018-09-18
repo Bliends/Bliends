@@ -12,10 +12,10 @@ import com.bliends.pc.bliends.adapter.HelpAdapter
 import com.bliends.pc.bliends.data.Help
 import kotlinx.android.synthetic.main.fragment_help.*
 
-class HelpFragment : Fragment() {
+class HelpFragment : Fragment(), View.OnClickListener{
 
-    var mLog = ArrayList<Help>()
-    lateinit var mHelpAdapter : HelpAdapter
+    private var mLog = ArrayList<Help>()
+    private lateinit var mHelpAdapter : HelpAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,10 +33,19 @@ class HelpFragment : Fragment() {
         mHelpAdapter.add(Help(0))
         mHelpAdapter.add(Help(1))
         mHelpAdapter.add(Help(2))
+
+        floating_call.setOnClickListener(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
             = inflater.inflate(R.layout.fragment_help, container, false)
 
     companion object { fun newInstance() = HelpFragment() }
+
+    override fun onClick(v: View?) {
+        val dialogFragment = CallDialogFragment()
+        dialogFragment.isCancelable = false
+        dialogFragment.show(activity!!.fragmentManager, "call_dialog")
+    }
+
 }
