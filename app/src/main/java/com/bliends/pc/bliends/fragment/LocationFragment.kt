@@ -1,8 +1,5 @@
 package com.bliends.pc.bliends.fragment
 
-import android.content.Context
-import android.location.Address
-import android.location.Geocoder
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -10,32 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import com.bliends.pc.bliends.R
 import com.google.android.gms.maps.*
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.support.design.widget.BottomSheetBehavior
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.LinearLayout
 import com.bliends.pc.bliends.adapter.LocationAdapter
 import com.bliends.pc.bliends.data.Location
+import com.bliends.pc.bliends.util.AddMarkerUtil
 import com.bliends.pc.bliends.util.GPSUtil
-import com.google.android.gms.maps.model.BitmapDescriptor
 import kotlinx.android.synthetic.main.fragment_location.*
 import org.jetbrains.anko.find
 
 class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
 
     private lateinit var mapView : MapView
-    private lateinit var cameraUpdate : CameraUpdate
 
     private lateinit var behavior: BottomSheetBehavior<LinearLayout>
-
-    private var googleMap : GoogleMap? = null
-    private var geoCoder : Geocoder? = null
 
     private var mLog = ArrayList<Location>()
     private lateinit var mLocationAdapter : LocationAdapter
@@ -78,7 +65,6 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
         mapView = rootView.find(R.id.map)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
-        geoCoder = Geocoder(context)
 
         return rootView
     }
@@ -100,36 +86,12 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
 
     override fun onMapReady(googleMap: GoogleMap?) {
         MapsInitializer.initialize(activity)
-        this.googleMap = googleMap!!
 
         val gps = GPSUtil(context!!)
         gps.getLocation()
-        setLocation(gps.latitude, gps.longitude)
-    }
-
-    private fun setLocation(lat : Double, lng : Double){
-        val latLng = LatLng(lat, lng)
-
-        val locationName : Address? = geoCoder !!.getFromLocation(lat, lng, 1)[0]
-        val marker = MarkerOptions()
-                .position(latLng)
-                .title(locationName!!.featureName)
-                .snippet(locationName.getAddressLine(0))
-
-        marker.icon(bitmapDescriptorFromVector(context, R.drawable.location_wad))
-
-        cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16.25F)
-        googleMap!!.animateCamera(cameraUpdate)
-        googleMap!!.addMarker(marker)
-    }
-
-    private fun bitmapDescriptorFromVector(context: Context?, vectorResId: Int): BitmapDescriptor {
-        val vectorDrawable = ContextCompat.getDrawable(context!!, vectorResId)
-        vectorDrawable!!.setBounds(0, 0, 150, 150)
-        val bitmap = Bitmap.createBitmap(150, 150, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        vectorDrawable.draw(canvas)
-        return BitmapDescriptorFactory.fromBitmap(bitmap)
+        gps.stopUsingGPS()
+        AddMarkerUtil.addWad(context!!, googleMap!!, 36.3907123,127.3632759, R.drawable.location_wad)
+        AddMarkerUtil.followUserWad(context!!, googleMap, gps.latitude, gps.longitude)
     }
 
     override fun onClick(v: View?) {
