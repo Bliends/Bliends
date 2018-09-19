@@ -41,11 +41,15 @@ object AddMarkerUtil{
     }
 
     fun followUserWad(context: Context, googleMap: GoogleMap, lat: Double, lng : Double){
+        val latLng = LatLng(lat, lng)
+
         if(userBindMarker != null) userBindMarker!!.remove()
+        else {
+            cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16.25F)
+            googleMap.animateCamera(cameraUpdate)
+        }
 
         geoCoder = Geocoder(context)
-
-        val latLng = LatLng(lat, lng)
 
         val locationName : Address? = geoCoder !!.getFromLocation(lat, lng, 1)[0]
         val marker = MarkerOptions()
@@ -54,9 +58,6 @@ object AddMarkerUtil{
                 .snippet(locationName.getAddressLine(0))
 
         marker.icon(bitmapDescriptorFromVector(context, R.drawable.location_wad))
-
-        cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16.25F)
-        googleMap.animateCamera(cameraUpdate)
 
         userBindMarker = googleMap.addMarker(marker)
     }

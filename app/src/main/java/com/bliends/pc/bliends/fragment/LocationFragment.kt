@@ -21,7 +21,6 @@ import org.jetbrains.anko.find
 class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
 
     private lateinit var mapView : MapView
-
     private lateinit var behavior: BottomSheetBehavior<LinearLayout>
 
     private var mLog = ArrayList<Location>()
@@ -35,29 +34,6 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         behavior = BottomSheetBehavior.from(bottom_sheet)
         btn_open_log.setOnClickListener(this)
-
-        val mLayoutManager = LinearLayoutManager(context)
-        mLayoutManager.reverseLayout = true
-        mLayoutManager.stackFromEnd = true
-
-        mLocationAdapter  = LocationAdapter(mLog)
-        location_log.adapter = mLocationAdapter
-        location_log.layoutManager = mLayoutManager
-        location_log.setHasFixedSize(false)
-        location_log.itemAnimator = DefaultItemAnimator()
-
-        mLocationAdapter .add(Location())
-        mLocationAdapter .add(Location())
-        mLocationAdapter .add(Location())
-        mLocationAdapter .add(Location())
-        mLocationAdapter .add(Location())
-        mLocationAdapter .add(Location())
-        mLocationAdapter .add(Location())
-        mLocationAdapter .add(Location())
-        mLocationAdapter .add(Location())
-        mLocationAdapter .add(Location())
-        mLocationAdapter .add(Location())
-        mLocationAdapter .add(Location())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{
@@ -90,8 +66,32 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
         val gps = GPSUtil(context!!)
         gps.getLocation()
         gps.stopUsingGPS()
+
         AddMarkerUtil.addWad(context!!, googleMap!!, 36.3907123,127.3632759, R.drawable.location_wad)
         AddMarkerUtil.followUserWad(context!!, googleMap, gps.latitude, gps.longitude)
+
+        val mLayoutManager = LinearLayoutManager(context)
+        mLayoutManager.reverseLayout = true
+        mLayoutManager.stackFromEnd = true
+
+        mLocationAdapter  = LocationAdapter(context!!, googleMap, behavior, mLog)
+        location_log.adapter = mLocationAdapter
+        location_log.layoutManager = LinearLayoutManager(context)
+        location_log.setHasFixedSize(false)
+        location_log.itemAnimator = DefaultItemAnimator()
+
+        mLocationAdapter.add(Location())
+        mLocationAdapter.add(Location())
+        mLocationAdapter.add(Location())
+        mLocationAdapter.add(Location())
+        mLocationAdapter.add(Location())
+        mLocationAdapter.add(Location())
+        mLocationAdapter.add(Location())
+        mLocationAdapter.add(Location())
+        mLocationAdapter.add(Location())
+        mLocationAdapter.add(Location())
+        mLocationAdapter.add(Location())
+        mLocationAdapter.add(Location())
     }
 
     override fun onClick(v: View?) {

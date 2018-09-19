@@ -1,19 +1,23 @@
 package com.bliends.pc.bliends.adapter
 
+import android.content.Context
+import android.support.design.widget.BottomSheetBehavior
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import com.bliends.pc.bliends.R
 import com.bliends.pc.bliends.data.Location
+import com.bliends.pc.bliends.util.AddMarkerUtil
+import com.google.android.gms.maps.GoogleMap
 import org.jetbrains.anko.find
 
-class LocationAdapter(private var mLocationLog: ArrayList<Location>) :
+class LocationAdapter(private val context: Context,
+                      private val googleMap: GoogleMap,
+                      private val behavior: BottomSheetBehavior<LinearLayout>,
+                      private var mLocationLog: ArrayList<Location>) :
         RecyclerView.Adapter<LocationAdapter.ViewHolder>(), View.OnClickListener {
-
-    override fun onClick(v: View?) {
-
-    }
 
     private lateinit var view : View
 
@@ -39,4 +43,9 @@ class LocationAdapter(private var mLocationLog: ArrayList<Location>) :
     override fun getItemCount(): Int = mLocationLog.size
 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView)
+
+    override fun onClick(v: View?) {
+        AddMarkerUtil.addWad(context, googleMap, 36.3907123, 127.3654646, R.drawable.location_wad)
+        behavior.state = BottomSheetBehavior.STATE_COLLAPSED
+    }
 }
