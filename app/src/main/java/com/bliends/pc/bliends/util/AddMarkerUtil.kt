@@ -6,8 +6,6 @@ import android.graphics.Canvas
 import android.location.Address
 import android.location.Geocoder
 import android.support.v4.content.ContextCompat
-import android.util.Log
-import android.view.View
 import com.bliends.pc.bliends.R
 import com.google.android.gms.maps.CameraUpdate
 import com.google.android.gms.maps.CameraUpdateFactory
