@@ -22,7 +22,7 @@
         android:id="@+id/mainBottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemBackground="@android:color/white"
+        android:background="@color/helpNewItemBackground"
         app:itemIconTint="@drawable/bottomnav_item_color"
         app:itemTextColor="@drawable/bottomnav_item_color"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -22,6 +22,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.widget.LinearLayout
 import com.bliends.pc.bliends.adapter.LocationAdapter
 import com.bliends.pc.bliends.data.Location
+import com.bliends.pc.bliends.util.GPSUtil
 import com.google.android.gms.maps.model.BitmapDescriptor
 import kotlinx.android.synthetic.main.fragment_location.*
 import org.jetbrains.anko.find
@@ -100,7 +101,10 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
     override fun onMapReady(googleMap: GoogleMap?) {
         MapsInitializer.initialize(activity)
         this.googleMap = googleMap!!
-        setLocation(36.39145, 127.363096)
+
+        val gps = GPSUtil(context!!)
+        gps.getLocation()
+        setLocation(gps.latitude, gps.longitude)
     }
 
     private fun setLocation(lat : Double, lng : Double){
