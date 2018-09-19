@@ -19,6 +19,9 @@
         <item name="colorControlActivated">@color/colorLogin</item>
     </style>
 
+    <style name="HintTextStyle" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">10sp</item>
+    </style>
 
     <style name="SignupStyle">
         <!-- Hint color and label color in FALSE state -->

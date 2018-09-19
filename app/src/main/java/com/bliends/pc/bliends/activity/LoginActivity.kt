@@ -3,7 +3,9 @@ package com.bliends.pc.bliends.activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.bliends.pc.bliends.R
 import com.bliends.pc.bliends.util.ORMUtil
@@ -19,14 +21,51 @@ import retrofit2.Callback
 import retrofit2.Response
 import org.jetbrains.anko.toast
 import org.json.JSONObject
+import android.view.View.OnFocusChangeListener
+
+
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        loginPasswd.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
+
+            if (hasFocus) {
+                Handler().postDelayed(Runnable {
+                    //흰색배경으로 덮어줌
+                    LoginHintPasswd.visibility = View.VISIBLE
+                }, 100)
+            } else {
+                //흰색 배경을 표시/숨기기
+                if (loginPasswd.text.isNotEmpty())
+                    LoginHintPasswd.visibility = View.VISIBLE
+                else
+                    LoginHintPasswd.visibility = View.INVISIBLE
+            }
+        }
+
+        loginId.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
+
+            if (hasFocus) {
+                Handler().postDelayed(Runnable {
+                    //흰색배경으로 덮어줌
+                    LoginHintId.visibility = View.VISIBLE
+                }, 100)
+            } else {
+                //흰색 배경을 표시/숨기기
+                if (loginId.text.isNotEmpty())
+                    LoginHintId.visibility = View.VISIBLE
+                else
+                    LoginHintId.visibility = View.INVISIBLE
+            }
+        }
+
+
         loginSignup.setOnClickListener {
             startActivity<SignupSelectActivity>()
+            finish()
         }
 
         loginBtn.setOnClickListener {
