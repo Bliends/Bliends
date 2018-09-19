@@ -32,7 +32,7 @@
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@drawable/chat_log_line"
+            android:background="@drawable/help_log_line"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
@@ -42,7 +42,7 @@
         android:id="@+id/recycle_help_log"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/chat_log_line"
+        android:background="@drawable/help_log_line"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

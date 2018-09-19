@@ -17,7 +17,11 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.LinearLayoutManager
 import android.widget.LinearLayout
+import com.bliends.pc.bliends.adapter.LocationAdapter
+import com.bliends.pc.bliends.data.Location
 import com.google.android.gms.maps.model.BitmapDescriptor
 import kotlinx.android.synthetic.main.fragment_location.*
 import org.jetbrains.anko.find
@@ -32,6 +36,9 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
     private var googleMap : GoogleMap? = null
     private var geoCoder : Geocoder? = null
 
+    private var mLog = ArrayList<Location>()
+    private lateinit var mLocationAdapter : LocationAdapter
+
     companion object {
         fun newInstance() = LocationFragment()
     }
@@ -40,6 +47,29 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         behavior = BottomSheetBehavior.from(bottom_sheet)
         btn_open_log.setOnClickListener(this)
+
+        val mLayoutManager = LinearLayoutManager(context)
+        mLayoutManager.reverseLayout = true
+        mLayoutManager.stackFromEnd = true
+
+        mLocationAdapter  = LocationAdapter(mLog)
+        location_log.adapter = mLocationAdapter
+        location_log.layoutManager = mLayoutManager
+        location_log.setHasFixedSize(false)
+        location_log.itemAnimator = DefaultItemAnimator()
+
+        mLocationAdapter .add(Location())
+        mLocationAdapter .add(Location())
+        mLocationAdapter .add(Location())
+        mLocationAdapter .add(Location())
+        mLocationAdapter .add(Location())
+        mLocationAdapter .add(Location())
+        mLocationAdapter .add(Location())
+        mLocationAdapter .add(Location())
+        mLocationAdapter .add(Location())
+        mLocationAdapter .add(Location())
+        mLocationAdapter .add(Location())
+        mLocationAdapter .add(Location())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{
