@@ -50,8 +50,7 @@
                     tools:ignore="RtlSymmetry"
                     android:clipToPadding="false"
                     android:layout_marginBottom="21dp"
-                    android:layout_marginTop="8dp"
-                    app:layout_goneMarginStart="16dp"
+                    android:layout_marginTop="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -92,15 +91,16 @@
             <android.support.v7.widget.CardView
                 android:id="@+id/active_graph"
                 android:layout_width="match_parent"
-                android:layout_height="254dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="24dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 app:cardCornerRadius="5dp"
+                app:layout_constraintBottom_toTopOf="@id/how_many_place_text"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/active_text">
 
@@ -111,27 +111,31 @@
                 android:id="@+id/how_many_place_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
                 android:text="가장 많이 간 장소"
+                app:layout_constraintBottom_toTopOf="@+id/how_many_place_log"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/active_graph" />
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/how_many_place_log"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="24dp"
-                android:layout_marginTop="16dp"
+                android:layout_height="166dp"
+                android:clipToPadding="false"
+                android:paddingEnd="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="8dp"
+                android:paddingStart="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/how_many_place_text" />
+                tools:ignore="RtlSymmetry" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

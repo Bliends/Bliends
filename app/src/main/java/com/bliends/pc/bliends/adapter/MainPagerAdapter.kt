@@ -12,7 +12,7 @@ class MainPagerAdapter(fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
     override fun getItem(position: Int): Fragment? {
         when (position){
             0 -> return DashBoardFragment.newInstance()
-            1 -> return HelpFragment.newInstance()
+            1 -> return LocationFragment.newInstance()
             2 -> return HelpFragment.newInstance()
             3 -> return SettingFragment.newInstance()
         }

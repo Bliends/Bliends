@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.bliends.pc.bliends.R
 import com.bliends.pc.bliends.adapter.DashBoardCurrentSituationAdapter
+import com.bliends.pc.bliends.adapter.DashBoardHowManyPlaceAdapter
 import com.bliends.pc.bliends.data.CurrentSituation
+import com.bliends.pc.bliends.data.HowManyPlace
 import kotlinx.android.synthetic.main.fragment_dash_board.*
 
 
@@ -17,6 +19,9 @@ class DashBoardFragment : Fragment() {
 
     private lateinit var dashBoardCurrentSituationAdapter : DashBoardCurrentSituationAdapter
     private var mSituationLog = ArrayList<CurrentSituation>()
+
+    private lateinit var dashBoardHowManyPlaceAdapter : DashBoardHowManyPlaceAdapter
+    private var mPlaceLog = ArrayList<HowManyPlace>()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -28,6 +33,12 @@ class DashBoardFragment : Fragment() {
         current_situation_log.setHasFixedSize(false)
         current_situation_log.itemAnimator = DefaultItemAnimator()
 
+        dashBoardHowManyPlaceAdapter = DashBoardHowManyPlaceAdapter(mPlaceLog)
+        how_many_place_log.adapter = dashBoardHowManyPlaceAdapter
+        how_many_place_log.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        how_many_place_log.setHasFixedSize(true)
+        how_many_place_log.itemAnimator = DefaultItemAnimator()
+
         dashBoardCurrentSituationAdapter.add(CurrentSituation())
         dashBoardCurrentSituationAdapter.add(CurrentSituation())
         dashBoardCurrentSituationAdapter.add(CurrentSituation())
@@ -35,6 +46,14 @@ class DashBoardFragment : Fragment() {
         dashBoardCurrentSituationAdapter.add(CurrentSituation())
         dashBoardCurrentSituationAdapter.add(CurrentSituation())
         dashBoardCurrentSituationAdapter.add(CurrentSituation())
+
+        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
+        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
+        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
+        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
+        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
+        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
+        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

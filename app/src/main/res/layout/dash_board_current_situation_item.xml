@@ -85,21 +85,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginTop="16dp"
-                android:paddingTop="4dp"
+                android:background="@drawable/rounded_week_black"
                 android:paddingBottom="4dp"
-                android:paddingStart="6dp"
                 android:paddingEnd="6dp"
-                android:textSize="12sp"
+                android:paddingStart="6dp"
+                android:paddingTop="4dp"
                 android:text="위치 확인하기"
                 android:textColor="@android:color/white"
-                android:background="@drawable/rounded_week_black"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/current_situation_message_two"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.954"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/current_situation_message_two"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/current_situation_message_two" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 </android.support.constraint.ConstraintLayout>
