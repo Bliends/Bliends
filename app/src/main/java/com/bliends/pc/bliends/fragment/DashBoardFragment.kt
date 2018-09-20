@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.bliends.pc.bliends.R
 
 
-class ActLogFragment : Fragment() {
+class DashBoardFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,10 +16,10 @@ class ActLogFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_act_log, container, false)
+        return inflater.inflate(R.layout.fragment_dash_board, container, false)
     }
 
     companion object {
-        fun newInstance() = ActLogFragment()
+        fun newInstance() = DashBoardFragment()
     }
 }

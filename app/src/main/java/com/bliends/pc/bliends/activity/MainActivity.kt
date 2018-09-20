@@ -1,6 +1,8 @@
 package com.bliends.pc.bliends.activity
 
 import android.annotation.SuppressLint
+import android.annotation.TargetApi
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.bliends.pc.bliends.R
@@ -8,11 +10,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 import android.support.design.internal.BottomNavigationItemView
 import android.support.design.internal.BottomNavigationMenuView
 import android.support.design.widget.BottomNavigationView
+import android.support.v4.content.ContextCompat
 import android.util.Log
+import android.view.MenuItem
 import com.bliends.pc.bliends.adapter.MainPagerAdapter
-import com.bliends.pc.bliends.adapter.ViewPagerOnPageSelected
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -20,30 +25,36 @@ class MainActivity : AppCompatActivity() {
         mainViewPag.adapter = MainPagerAdapter(supportFragmentManager)
         mainViewPag.offscreenPageLimit = 4
 
-        mainViewPag.addOnPageChangeListener(ViewPagerOnPageSelected(this@MainActivity::onPageSelected))
+        window.statusBarColor = ContextCompat.getColor(applicationContext, R.color.colorAccent)
 
-        mainBottomNav.setOnNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.action_activity_log -> mainViewPag.currentItem = 0
-                R.id.action_location -> mainViewPag.currentItem = 1
-                R.id.action_help -> mainViewPag.currentItem = 2
-                R.id.action_setting -> mainViewPag.currentItem = 3
-            }
-            return@setOnNavigationItemSelectedListener true
-        }
+        mainViewPag.setPagingEnabled(false)
+
+        mainBottomNav.setOnNavigationItemSelectedListener(this)
 
         disableShiftMode(mainBottomNav)
     }
 
-    private fun onPageSelected(position: Int) {
-        if(mainBottomNav != null){
-            when(position){
-                0 -> mainBottomNav.selectedItemId = R.id.action_activity_log
-                1 -> mainBottomNav.selectedItemId = R.id.action_location
-                2 -> mainBottomNav.selectedItemId = R.id.action_help
-                3 -> mainBottomNav.selectedItemId = R.id.action_setting
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_dash_board -> {
+                mainViewPag.currentItem = 0
+                window.statusBarColor = ContextCompat.getColor(applicationContext, R.color.colorAccent)
+            }
+            R.id.action_location -> {
+                mainViewPag.currentItem = 1
+                window.statusBarColor = ContextCompat.getColor(applicationContext, R.color.helpNewItemBackground)
+            }
+            R.id.action_help -> {
+                mainViewPag.currentItem = 2
+                window.statusBarColor = ContextCompat.getColor(applicationContext, R.color.helpNewItemBackground)
+            }
+            R.id.action_setting -> {
+                mainViewPag.currentItem = 3
+                window.statusBarColor = ContextCompat.getColor(applicationContext, R.color.helpNewItemBackground)
             }
         }
+        return true
     }
 
     @SuppressLint("RestrictedApi")
