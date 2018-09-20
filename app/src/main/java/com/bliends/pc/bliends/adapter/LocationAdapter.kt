@@ -45,7 +45,7 @@ class LocationAdapter(private val context: Context,
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView)
 
     override fun onClick(v: View?) {
-        AddMarkerUtil.addWad(context, googleMap, 36.3907123, 127.3654646, R.drawable.location_wad)
+        AddMarkerUtil.addWad(36.3907123, 127.3654646, R.drawable.location_wad)
         behavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 }

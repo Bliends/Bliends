@@ -1,7 +1,9 @@
 package com.bliends.pc.bliends.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewPager
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -12,8 +14,8 @@ import com.bliends.pc.bliends.adapter.DashBoardCurrentSituationAdapter
 import com.bliends.pc.bliends.adapter.DashBoardHowManyPlaceAdapter
 import com.bliends.pc.bliends.data.CurrentSituation
 import com.bliends.pc.bliends.data.HowManyPlace
+import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.fragment_dash_board.*
-
 
 class DashBoardFragment : Fragment() {
 
@@ -23,6 +25,7 @@ class DashBoardFragment : Fragment() {
     private lateinit var dashBoardHowManyPlaceAdapter : DashBoardHowManyPlaceAdapter
     private var mPlaceLog = ArrayList<HowManyPlace>()
 
+    private var mainViewPager : ViewPager? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -67,8 +67,10 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
         gps.getLocation()
         gps.stopUsingGPS()
 
-        AddMarkerUtil.addWad(context!!, googleMap!!, 36.3907123,127.3632759, R.drawable.location_wad)
-        AddMarkerUtil.followUserWad(context!!, googleMap, gps.latitude, gps.longitude)
+        AddMarkerUtil.setInit(context!!, googleMap!!)
+
+        AddMarkerUtil.addWad(36.3907123,127.3632759, R.drawable.location_wad)
+        AddMarkerUtil.followUserWad(gps.latitude, gps.longitude)
 
         val mLayoutManager = LinearLayoutManager(context)
         mLayoutManager.reverseLayout = true

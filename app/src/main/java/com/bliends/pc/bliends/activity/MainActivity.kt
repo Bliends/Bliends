@@ -14,6 +14,8 @@ import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.MenuItem
 import com.bliends.pc.bliends.adapter.MainPagerAdapter
+import com.bliends.pc.bliends.adapter.ViewPagerOnPageSelected
+import com.bliends.pc.bliends.util.AddMarkerUtil
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -24,6 +26,9 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         mainViewPag.adapter = MainPagerAdapter(supportFragmentManager)
         mainViewPag.offscreenPageLimit = 4
+        mainViewPag.addOnPageChangeListener(ViewPagerOnPageSelected(this@MainActivity::onPageSelected))
+
+        AddMarkerUtil.mainViewPager = mainViewPag
 
         window.statusBarColor = ContextCompat.getColor(applicationContext, R.color.colorAccent)
 
@@ -32,6 +37,17 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         mainBottomNav.setOnNavigationItemSelectedListener(this)
 
         disableShiftMode(mainBottomNav)
+    }
+
+    private fun onPageSelected(position: Int) {
+        if (mainBottomNav != null) {
+            when (position) {
+                0 -> mainBottomNav.selectedItemId = R.id.action_dash_board
+                1 -> mainBottomNav.selectedItemId = R.id.action_location
+                2 -> mainBottomNav.selectedItemId = R.id.action_help
+                3 -> mainBottomNav.selectedItemId = R.id.action_setting
+            }
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)

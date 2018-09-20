@@ -1,5 +1,7 @@
 package com.bliends.pc.bliends.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.bliends.pc.bliends.R
 import com.bliends.pc.bliends.data.CurrentSituation
+import com.bliends.pc.bliends.util.AddMarkerUtil
 import org.jetbrains.anko.find
 
 class DashBoardCurrentSituationAdapter(private var mSituationLog: ArrayList<CurrentSituation>)
@@ -37,5 +40,9 @@ class DashBoardCurrentSituationAdapter(private var mSituationLog: ArrayList<Curr
 
     override fun onClick(v: View?) {
         // TODO("뷰 타입 구해서 0 일 때, 로케이션 보여주고 아니면 전화 걸기") //To change body of created functions use File | Settings | File Templates.
+        AddMarkerUtil.mainViewPager!!.currentItem = 1
+        AddMarkerUtil.addWad(36.3656889, 127.4417913, R.drawable.location_wad)
+
+        //AddMarkerUtil.context!!.startActivity(Intent("android.intent.action.DIAL", Uri.parse("tel:01094732771")))
     }
 }

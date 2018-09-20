@@ -7,9 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.bliends.pc.bliends.R
 import com.bliends.pc.bliends.data.HowManyPlace
+import com.bliends.pc.bliends.util.AddMarkerUtil
 import org.jetbrains.anko.find
 
-class DashBoardHowManyPlaceAdapter(private var mPlaceLog: ArrayList<HowManyPlace>)
+class DashBoardHowManyPlaceAdapter(private val mPlaceLog: ArrayList<HowManyPlace>)
     : RecyclerView.Adapter<DashBoardHowManyPlaceAdapter.ViewHolder>(), View.OnClickListener {
 
     fun add(hmp: HowManyPlace){
@@ -34,5 +35,7 @@ class DashBoardHowManyPlaceAdapter(private var mPlaceLog: ArrayList<HowManyPlace
 
     override fun onClick(v: View?) {
         // TODO("누르면 그 위치를 맵에다 와드 박아서 보여주기") //To change body of created functions use File | Settings | File Templates.
+        AddMarkerUtil.mainViewPager!!.currentItem = 1
+        AddMarkerUtil.addWad(36.3656889, 127.4417913, R.drawable.location_wad)
     }
 }
