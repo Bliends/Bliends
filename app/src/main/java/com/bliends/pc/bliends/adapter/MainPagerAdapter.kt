@@ -18,7 +18,6 @@ class MainPagerAdapter(fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
         }
         return null
     }
-
 }
 
 class ViewPagerOnPageSelected(private val pageSelected: (Int) -> Unit = {}) : ViewPager.OnPageChangeListener {
