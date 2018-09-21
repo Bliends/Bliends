@@ -24,7 +24,7 @@ class SignupSelectActivity : AppCompatActivity() {
         }
 
         protectorBtn.setOnClickListener {
-            startActivity<SignupProtectorActivity>("type" to "C")
+            startActivity<ProtectorSignup1>("type" to "C")
             finish()
         }
     }

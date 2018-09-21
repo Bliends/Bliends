@@ -11,6 +11,7 @@
     <style name="NoTitle" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="colorPrimaryDark">@color/colorLoginPrimaryDark</item>
     </style>
 
     <style name="LoginStyle">
@@ -23,9 +24,14 @@
         <item name="android:textSize">10sp</item>
     </style>
 
+    <style name="HintError" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/colorError</item>
+    </style>
+
     <style name="SignupStyle">
         <!-- Hint color and label color in FALSE state -->
-        <item name="android:textColorHint">@color/colorLogin</item>
+        <item name="android:textColorHint">@color/colornotselectcolor</item>
         <item name="colorAccent">@color/colorLogin</item>
         <item name="android:textSize">13sp</item>
         <!-- Label color in TRUE state and bar color FALSE and TRUE State -->

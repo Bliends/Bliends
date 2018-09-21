@@ -5,8 +5,10 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorLogin">#3cb371</color>
     <color name="colorStrokeLogin">#d9d9d9</color>
-    <color name="ColorbottomNav">#000000</color>
+    <color name="colorbottomNav">#000000</color>
     <color name="colorMain">#FFF2F2F2</color>
     <color name="colorSub">#1e2640</color>
+    <color name="colornotselectcolor">#c4c5c5</color>
     <color name="colorLoginPrimaryDark">#FFF2F2F2</color>
+    <color name="colorError">#d31237</color>
 </resources>

@@ -19,8 +19,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\pc\Downloads\8_2018-07-24\drawable-hdpi\8.png" />
-                                      <entry key="outputName" value="ic_app" />
+                                      <entry key="imageAsset" value="$USER_HOME$/Downloads/무제 폴더 4/0.75x/안보이기ldpi.png" />
+                                      <entry key="outputName" value="look_icon" />
                                       <entry key="theme" value="CUSTOM" />
                                       <entry key="themeColor" value="000000" />
                                     </map>
