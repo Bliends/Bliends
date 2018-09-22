@@ -75,13 +75,13 @@ class DashBoardFragment : Fragment() {
         dashBoardHowManyPlaceAdapter.add(HowManyPlace())
 
 
-        graph.gridLabelRenderer.gridColor = Color.WHITE
-        graph.gridLabelRenderer.horizontalLabelsColor = R.color.bottomNavColor
+        graph.gridLabelRenderer.gridColor = Color.TRANSPARENT
         graph.gridLabelRenderer.verticalLabelsColor = Color.TRANSPARENT
         val staticLabelsFormatter = StaticLabelsFormatter(graph)
         staticLabelsFormatter.setHorizontalLabels(arrayOf("월", "화", "수", "목", "금", "토", "일"))
         graph.gridLabelRenderer.labelFormatter = staticLabelsFormatter
         graph.gridLabelRenderer.labelHorizontalHeight = 180
+        graph.gridLabelRenderer.horizontalLabelsColor = Color.argb(255, 30, 38, 64)
 
         val lineSeries = LineGraphSeries(
                 arrayOf(DataPoint(0.0, 18.0),
@@ -111,7 +111,7 @@ class DashBoardFragment : Fragment() {
                         DataPoint(6.0, 9.0)))
 
         barSeries.isDrawValuesOnTop = true
-        barSeries.valuesOnTopColor = R.color.bottomNavColor
+        barSeries.valuesOnTopColor = Color.argb(255, 30, 38, 64)
         barSeries.color = Color.TRANSPARENT
         barSeries.spacing = 100
 
