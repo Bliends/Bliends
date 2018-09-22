@@ -82,7 +82,7 @@
 
             <TextView
                 android:id="@+id/current_situation_btn"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:layout_marginEnd="8dp"
@@ -93,7 +93,8 @@
                 android:paddingEnd="6dp"
                 android:paddingStart="6dp"
                 android:paddingTop="4dp"
-                android:text="위치 확인하기"
+                android:gravity="center"
+                android:text="전화 걸기"
                 android:textColor="@android:color/white"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"

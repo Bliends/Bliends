@@ -8,4 +8,5 @@
 
     <color name="helpNewItemBackground">#f6f6f7</color>
     <color name="dialogBackground">#0a000000</color>
+    <color name="trans">#00000000</color>
 </resources>
