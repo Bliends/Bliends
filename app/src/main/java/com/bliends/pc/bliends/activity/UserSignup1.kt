@@ -23,7 +23,7 @@ class UserSignup1 : AppCompatActivity() {
     var oknumbercheck = false
     var okcheck = false
     var number = "^010-\\d{4}-\\d{4}$"
-    var namecheck = "^(?=.*)[^\\s]{1,20}\$"
+    var namecheck = "^(?=.*)[^\\s]{1,20}$"
     var usernumber = ""
     var username = ""
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -239,6 +239,7 @@ class UserSignup1 : AppCompatActivity() {
     fun notname(){
         okcheck = false
         namem = true
+        user1NameDelete.visibility = View.INVISIBLE
         user1NameError.visibility = View.VISIBLE
         userNameView.setBackgroundResource(R.drawable.bg_login_error_et)
         user1NameLayout.setHintTextAppearance(R.style.HintError)

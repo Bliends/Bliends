@@ -242,7 +242,7 @@ class ProtectorSignup3 : AppCompatActivity() {
 
             override fun onResponse(call: Call<SignUp>?, response: Response<SignUp>?) {
                 when{
-                    response!!.code() == 200 -> {
+                    response!!.code() == 201 -> {
                         response.body().let {
                             toast(name + "님의 회원가입이 정상적으로 완료되었습니다.")
                             startActivity<LoginActivity>()
