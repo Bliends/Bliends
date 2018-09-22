@@ -1,6 +1,5 @@
 package com.bliends.pc.bliends.fragment
 
-import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -18,17 +17,8 @@ import com.bliends.pc.bliends.data.HowManyPlace
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import kotlinx.android.synthetic.main.fragment_dash_board.*
-import android.graphics.DashPathEffect
 import android.graphics.Paint
-import android.util.Log
-import com.jjoe64.graphview.GridLabelRenderer
-import com.jjoe64.graphview.LegendRenderer
-import com.bliends.pc.bliends.R.id.graph
 import com.jjoe64.graphview.helper.StaticLabelsFormatter
-import com.jjoe64.graphview.DefaultLabelFormatter
-import com.bliends.pc.bliends.R.id.graph
-import com.bliends.pc.bliends.R.id.graph
-import com.jjoe64.graphview.Viewport
 import com.jjoe64.graphview.series.BarGraphSeries
 import com.jjoe64.graphview.series.PointsGraphSeries
 
@@ -40,8 +30,6 @@ class DashBoardFragment : Fragment() {
 
     private lateinit var dashBoardHowManyPlaceAdapter : DashBoardHowManyPlaceAdapter
     private var mPlaceLog = ArrayList<HowManyPlace>()
-
-    private var mainViewPager : ViewPager? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -58,23 +46,22 @@ class DashBoardFragment : Fragment() {
         how_many_place_log.setHasFixedSize(true)
         how_many_place_log.itemAnimator = DefaultItemAnimator()
 
-        dashBoardCurrentSituationAdapter.add(CurrentSituation())
-        dashBoardCurrentSituationAdapter.add(CurrentSituation())
-        dashBoardCurrentSituationAdapter.add(CurrentSituation())
-        dashBoardCurrentSituationAdapter.add(CurrentSituation())
-        dashBoardCurrentSituationAdapter.add(CurrentSituation())
-        dashBoardCurrentSituationAdapter.add(CurrentSituation())
-        dashBoardCurrentSituationAdapter.add(CurrentSituation())
+        initGraph()
+        setGraphData()
 
-        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
-        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
-        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
-        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
-        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
-        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
-        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
+        setLogData()
+    }
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_dash_board, container, false)
+    }
 
+    companion object {
+        fun newInstance() = DashBoardFragment()
+    }
+
+    private fun initGraph(){
         graph.gridLabelRenderer.gridColor = Color.TRANSPARENT
         graph.gridLabelRenderer.verticalLabelsColor = Color.TRANSPARENT
         val staticLabelsFormatter = StaticLabelsFormatter(graph)
@@ -82,7 +69,27 @@ class DashBoardFragment : Fragment() {
         graph.gridLabelRenderer.labelFormatter = staticLabelsFormatter
         graph.gridLabelRenderer.labelHorizontalHeight = 180
         graph.gridLabelRenderer.horizontalLabelsColor = Color.argb(255, 30, 38, 64)
+    }
 
+    private fun setLogData(){
+        dashBoardCurrentSituationAdapter.add(CurrentSituation())
+        dashBoardCurrentSituationAdapter.add(CurrentSituation())
+        dashBoardCurrentSituationAdapter.add(CurrentSituation())
+        dashBoardCurrentSituationAdapter.add(CurrentSituation())
+        dashBoardCurrentSituationAdapter.add(CurrentSituation())
+        dashBoardCurrentSituationAdapter.add(CurrentSituation())
+        dashBoardCurrentSituationAdapter.add(CurrentSituation())
+
+        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
+        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
+        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
+        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
+        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
+        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
+        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
+    }
+
+    private fun setGraphData(){
         val lineSeries = LineGraphSeries(
                 arrayOf(DataPoint(0.0, 18.0),
                         DataPoint(1.0, 14.0),
@@ -132,16 +139,8 @@ class DashBoardFragment : Fragment() {
         graph.addSeries(barSeries)
         graph.addSeries(pointSeries)
         graph.addSeries(pointSeries2)
+
         graph.viewport.isYAxisBoundsManual = true
         graph.viewport.isXAxisBoundsManual = true
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_dash_board, container, false)
-    }
-
-    companion object {
-        fun newInstance() = DashBoardFragment()
     }
 }
