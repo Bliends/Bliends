@@ -41,7 +41,7 @@ class DashBoardCurrentSituationAdapter(private var mSituationLog: ArrayList<Curr
     override fun onClick(v: View?) {
         // TODO("뷰 타입 구해서 0 일 때, 로케이션 보여주고 아니면 전화 걸기") //To change body of created functions use File | Settings | File Templates.
         AddMarkerUtil.mainViewPager!!.currentItem = 1
-        AddMarkerUtil.addWad(36.3656889, 127.4417913, R.drawable.location_wad)
+        AddMarkerUtil.addWad(36.3656889, 127.4417913, "길을 잃어버렸습니다")
 
         //AddMarkerUtil.context!!.startActivity(Intent("android.intent.action.DIAL", Uri.parse("tel:01094732771")))
     }

@@ -11,6 +11,7 @@ import android.support.design.widget.BottomSheetBehavior
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.LinearLayout
+import android.widget.TextView
 import com.bliends.pc.bliends.adapter.LocationAdapter
 import com.bliends.pc.bliends.data.Location
 import com.bliends.pc.bliends.util.AddMarkerUtil
@@ -67,9 +68,11 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
         gps.getLocation()
         gps.stopUsingGPS()
 
+
+
+
         AddMarkerUtil.setInit(context!!, googleMap!!)
 
-        AddMarkerUtil.addWad(36.3907123,127.3632759, R.drawable.location_wad)
         AddMarkerUtil.followUserWad(gps.latitude, gps.longitude)
 
         val mLayoutManager = LinearLayoutManager(context)

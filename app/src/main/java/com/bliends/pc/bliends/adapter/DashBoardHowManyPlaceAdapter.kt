@@ -36,6 +36,6 @@ class DashBoardHowManyPlaceAdapter(private val mPlaceLog: ArrayList<HowManyPlace
     override fun onClick(v: View?) {
         // TODO("누르면 그 위치를 맵에다 와드 박아서 보여주기") //To change body of created functions use File | Settings | File Templates.
         AddMarkerUtil.mainViewPager!!.currentItem = 1
-        AddMarkerUtil.addWad(36.3656889, 127.4417913, R.drawable.location_wad)
+        AddMarkerUtil.addWad(36.3656889, 127.4417913, "집")
     }
 }

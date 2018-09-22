@@ -104,7 +104,50 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/active_text">
 
-                <!-- 그래프 부분 -->
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginEnd="38dp"
+                    android:layout_marginRight="54dp"
+                    android:layout_marginBottom="24dp">
+
+                    <TextView
+                        android:id="@+id/best_day_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="월요일에"
+                        android:textColor="#3cb371"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toTopOf="@+id/best_day_down_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/best_day_down_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="가장 많이 활동하였습니다."
+                        android:textColor="#3a4567"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toTopOf="@+id/graph"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/best_day_text" />
+
+                    <com.jjoe64.graphview.GraphView
+                        android:id="@+id/graph"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/best_day_down_text" />
+
+                </android.support.constraint.ConstraintLayout>
             </android.support.v7.widget.CardView>
 
             <TextView

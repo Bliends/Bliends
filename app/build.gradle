@@ -50,4 +50,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:15.0.1'
     implementation 'com.google.android.gms:play-services-location:15.0.1'
     implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation 'com.jjoe64:graphview:4.2.2'
 }
