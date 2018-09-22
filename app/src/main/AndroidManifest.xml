@@ -39,10 +39,11 @@
         <activity
             android:name=".activity.ProtectorSignup2"
             android:theme="@style/NoTitle" />
-        <activity android:name=".activity.ProtectorSignup3"
-            android:theme="@style/NoTitle" >
-
-        </activity>
+        <activity
+            android:name=".activity.ProtectorSignup3"
+            android:theme="@style/NoTitle"></activity>
+        <activity android:name=".activity.UserSignup1"
+            android:theme="@style/NoTitle"></activity>
     </application>
 
 </manifest>

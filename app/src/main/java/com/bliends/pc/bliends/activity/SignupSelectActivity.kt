@@ -19,7 +19,7 @@ class SignupSelectActivity : AppCompatActivity() {
         }
 
         userBtn.setOnClickListener {
-            startActivity<SignupUserActivity>("type" to "P")
+            startActivity<UserSignup1>("type" to "P")
                     finish()
         }
 

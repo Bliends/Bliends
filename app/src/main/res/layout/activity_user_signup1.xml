@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:weightSum="3"
     android:background="@color/colorMain"
-    tools:context=".activity.ProtectorSignup1">
+    tools:context=".activity.UserSignup1">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
 
         <TextView
             android:textStyle="bold"
-            android:id="@+id/protector2Back"
+            android:id="@+id/user1Back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -42,7 +42,7 @@
         android:layout_weight="0.35"
         android:gravity="bottom"
         android:layout_marginLeft="24dp"
-        android:text="보호자 회원가입(2/3)"
+        android:text="사용자 회원가입(1/3)"
         android:textColor="@color/colorSub"
         android:textSize="16sp" />
 
@@ -58,25 +58,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
-            android:layout_marginTop="85dp">
-
-
-            <Button
-                android:visibility="invisible"
-                android:id="@+id/protector2InspectionBtn"
-                android:layout_width="65dp"
-                android:layout_height="25dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="15dp"
-                android:background="@drawable/bg_inspection_btn"
-                android:text="중복확인"
-                android:textColor="#ffffff"
-                android:textStyle="normal"
-                android:textSize="12sp"/>
+            android:layout_marginTop="42dp">
 
             <View
-                android:id="@+id/protector2hintIdView"
+                android:id="@+id/userNameView"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -84,31 +69,30 @@
                 android:background="@drawable/bg_login_et" />
 
             <Button
-                android:id="@+id/protector2Error"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:id="@+id/user1NameDelete"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/error_icon"
+                android:background="@drawable/delete_icon"
                 android:visibility="invisible" />
 
             <TextView
-                android:id="@+id/protector2hintId"
+                android:id="@+id/userHintName"
                 android:layout_width="wrap_content"
                 android:layout_height="4dp"
                 android:layout_marginTop="3dp"
                 android:layout_marginLeft="8dp"
                 android:paddingLeft="6dp"
-                android:paddingRight="8dp"
+                android:paddingRight="4dp"
                 android:textSize="6sp"
                 android:textColor="@color/colorMain"
-                android:text="아이디"
+                android:text="이름"
                 android:background="@color/colorMain"
                 android:visibility="invisible"/>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/Protector2IdLayout"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:gravity="center"
@@ -118,24 +102,92 @@
                 android:theme="@style/SignupStyle">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/Protector2Id"
+                    android:id="@+id/user1Name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/colorMain"
                     android:fontFamily="sans-serif-light"
-                    android:hint="아이디"
+                    android:hint="이름"
                     android:textColor="#000"
                     android:maxLines="1"
-                    android:textColorHint="@color/colorLogin"
                     android:textSize="16sp"
                     android:textStyle="normal"
                     android:theme="@style/LoginStyle"/>
 
             </android.support.design.widget.TextInputLayout>
-
         </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="31dp">
+
+            <Button
+                android:id="@+id/user1NumbarDelete"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/delete_icon"
+                android:visibility="invisible" />
+
+            <View
+                android:id="@+id/user1NumberView"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bg_login_et" />
+
+            <TextView
+                android:id="@+id/user1HintNumbar"
+                android:layout_width="wrap_content"
+                android:layout_height="4dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="8dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="12dp"
+                android:textSize="6sp"
+                android:textColor="@color/colorMain"
+                android:text="전화번호"
+                android:background="@color/colorMain"
+                android:visibility="invisible"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/user1NumbarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:theme="@style/SignupStyle"
+                android:paddingRight="10dp"
+                app:hintTextAppearance="@style/HintTextStyle"
+                android:layout_alignParentLeft="true">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/user1Numbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorMain"
+                    android:fontFamily="sans-serif-light"
+                    android:hint="전화번호"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:textColor="#000"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    android:theme="@style/LoginStyle" />
+
+            </android.support.design.widget.TextInputLayout>
+        </RelativeLayout>
+
         <TextView
-            android:id="@+id/protector2ErrorText"
+            android:id="@+id/user1ErrorText"
             android:layout_width="match_parent"
             android:layout_marginTop="8dp"
             android:layout_height="wrap_content"
@@ -144,12 +196,13 @@
             android:textSize="8sp"
             android:textColor="@color/colorError"
             android:visibility="invisible"
-            android:text="해당 아이디가 이미 존재합니다."/>
+            android:text="해당 사용자의 휴대폰 번호가 존재하지 않습니다."/>
+
         <Button
-            android:id="@+id/protector2NextBtn"
+            android:id="@+id/user1NextBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="147dp"
+            android:layout_marginTop="110dp"
             android:background="@drawable/bg_loginbtn"
             android:fontFamily="sans-serif-medium"
             android:letterSpacing="0.01"

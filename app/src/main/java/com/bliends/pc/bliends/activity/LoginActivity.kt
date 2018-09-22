@@ -89,8 +89,10 @@ class LoginActivity : AppCompatActivity() {
             Log.e("texttype",loginPasswd.inputType.toString())
             if(loginPasswd.inputType == 129){
                 loginPasswd.inputType = InputType.TYPE_CLASS_TEXT
+                loginSeeCheckPd.setBackgroundResource(R.drawable.rock)
             }else if(loginPasswd.inputType == InputType.TYPE_CLASS_TEXT){
                 loginPasswd.inputType = 129
+                loginSeeCheckPd.setBackgroundResource(R.drawable.unrock)
             }
         }
 

@@ -24,4 +24,8 @@ interface Services{
                @Field("name") name : String,
                @Field("type") type : String,
                @Field("phone") phone : String) : Call<SignUp>
+
+    @GET("users")
+    fun OverlapId(@Query("limit") limit: Int,
+                  @Query("q") q: String?) : Call<List<User>>
 }

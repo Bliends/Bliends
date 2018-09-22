@@ -25,6 +25,7 @@
             android:background="@drawable/logo" />
 
         <TextView
+            android:textStyle="bold"
             android:id="@+id/protector3Back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,7 +34,6 @@
             android:textColor="@color/colorLogin"
             android:textSize="14sp" />
     </FrameLayout>
-
 
     <TextView
         android:layout_width="wrap_content"
@@ -61,15 +61,16 @@
 
             <Button
                 android:id="@+id/protector3SeePd"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/look"
+                android:layout_marginRight="3dp"
+                android:background="@drawable/unrock"
                 android:visibility="invisible" />
 
             <View
+                android:id="@+id/protector3PdView"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_centerInParent="true"
@@ -91,6 +92,7 @@
                 android:visibility="invisible" />
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/Protector3PdLayout"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:gravity="center"
@@ -117,24 +119,37 @@
             </android.support.design.widget.TextInputLayout>
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/protector3ErrorText"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="25dp"
+            android:textStyle="bold"
+            android:textSize="8sp"
+            android:textColor="@color/colorError"
+            android:visibility="invisible"
+            android:text="8 ~ 20자의 영문, 숫자로 이루어진 비밀번호를 기입해주세요"/>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
-            android:layout_marginTop="31dp">
+            android:layout_marginTop="21dp">
 
             <Button
                 android:id="@+id/protector3SeeCheckPd"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/look"
+                android:layout_marginRight="3dp"
+                android:background="@drawable/unrock"
                 android:visibility="invisible" />
 
             <View
+                android:id="@+id/protector3CheckPdView"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_centerInParent="true"
@@ -156,6 +171,7 @@
                 android:visibility="invisible" />
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/Protector3CheckPdLayout"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_alignParentLeft="true"
@@ -184,7 +200,17 @@
 
             </android.support.design.widget.TextInputLayout>
         </RelativeLayout>
-
+        <TextView
+            android:id="@+id/protector3CheckErrorText"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="25dp"
+            android:textStyle="bold"
+            android:textSize="8sp"
+            android:textColor="@color/colorError"
+            android:visibility="invisible"
+            android:text="비밀번호가 일치하지 않습니다."/>
         <Button
             android:id="@+id/protector3NextBtn"
             android:layout_width="wrap_content"

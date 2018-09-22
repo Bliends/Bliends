@@ -25,6 +25,7 @@
             android:background="@drawable/logo" />
 
         <TextView
+            android:textStyle="bold"
             android:id="@+id/protector1Back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,6 +60,17 @@
             android:layout_marginRight="24dp"
             android:layout_marginTop="42dp">
 
+            <Button
+                android:id="@+id/protectorNameError"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/error_icon"
+                android:visibility="invisible" />
+
+
             <View
                 android:id="@+id/protectorNameView"
                 android:layout_marginTop="10dp"
@@ -92,6 +104,7 @@
                 android:visibility="invisible"/>
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/Protector1NameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:gravity="center"
@@ -116,12 +129,24 @@
             </android.support.design.widget.TextInputLayout>
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/protector1ErrorNametext"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="25dp"
+            android:textStyle="bold"
+            android:textSize="8sp"
+            android:textColor="@color/colorError"
+            android:visibility="invisible"
+            android:text="해당 사용자의 휴대폰 번호가 존재하지 않습니다."/>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
-            android:layout_marginTop="31dp">
+            android:layout_marginTop="21dp">
 
             <Button
                 android:id="@+id/protectorError"
@@ -162,7 +187,7 @@
                 android:layout_marginTop="3dp"
                 android:layout_marginLeft="8dp"
                 android:paddingLeft="6dp"
-                android:paddingRight="32dp"
+                android:paddingRight="30dp"
                 android:textSize="6sp"
                 android:textColor="@color/colorMain"
                 android:text="보호자 전화번호 확인"
@@ -209,7 +234,7 @@
             android:textSize="8sp"
             android:textColor="@color/colorError"
             android:visibility="invisible"
-            android:text="Error 해당 사용자의 번호가 존재하지 않습니다."/>
+            android:text="해당 사용자의 휴대폰 번호가 존재하지 않습니다."/>
 
         <Button
             android:id="@+id/protector1NextBtn"

@@ -25,6 +25,7 @@
             android:background="@drawable/logo"/>
 
         <TextView
+            android:textStyle="bold"
             android:id="@+id/loginSignup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -67,7 +68,6 @@
                 android:layout_marginRight="10dp"
                 android:background="@drawable/delete_icon"
                 android:visibility="invisible" />
-
             <View
                 android:id="@+id/loginIdView"
                 android:layout_marginTop="10dp"
@@ -125,12 +125,12 @@
 
             <Button
                 android:id="@+id/loginSeeCheckPd"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/look"
+                android:layout_marginRight="3dp"
+                android:background="@drawable/unrock"
                 android:visibility="invisible" />
 
             <View

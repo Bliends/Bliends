@@ -20,11 +20,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SignUpUtil(context: Context) {
-    var context: Context? = null
-
-    init {
-        this.context = context
-    }
+    var context: Context? = context
 
     fun name(view: TextInputEditText) {
 //        context!!.toast("이름을 입력해 주세요")
@@ -55,7 +51,6 @@ class SignUpUtil(context: Context) {
         view.error = context!!.getString(R.string.signup_cheakpassword_error)
     }
 
-
     fun signUp(name: String, id: String, type: String, phone: String, password: String, activity: Activity) {
         Log.e("test", "test")
         var res: Call<SignUp> = RetrofitUtil.postService.SignUp(
@@ -65,6 +60,8 @@ class SignUpUtil(context: Context) {
                 type,
                 phone
         )
+
+
 
         res.enqueue(object : Callback<SignUp> {
 
