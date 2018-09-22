@@ -68,9 +68,6 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
         gps.getLocation()
         gps.stopUsingGPS()
 
-
-
-
         AddMarkerUtil.setInit(context!!, googleMap!!)
 
         AddMarkerUtil.followUserWad(gps.latitude, gps.longitude)
@@ -79,7 +76,7 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
         mLayoutManager.reverseLayout = true
         mLayoutManager.stackFromEnd = true
 
-        mLocationAdapter  = LocationAdapter(context!!, googleMap, behavior, mLog)
+        mLocationAdapter  = LocationAdapter(behavior, mLog)
         location_log.adapter = mLocationAdapter
         location_log.layoutManager = LinearLayoutManager(context)
         location_log.setHasFixedSize(false)

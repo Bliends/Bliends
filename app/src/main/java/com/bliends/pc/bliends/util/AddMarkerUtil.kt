@@ -1,7 +1,6 @@
 package com.bliends.pc.bliends.util
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -43,6 +42,7 @@ object AddMarkerUtil{
         initMarker(context)
     }
 
+    @SuppressLint("InflateParams")
     private fun initMarker(context: Context){
         markerRootView = LayoutInflater.from(context).inflate(R.layout.log_marker, null)
         logMarkerMessage = markerRootView!!.find(R.id.log_marker_message)
@@ -52,10 +52,9 @@ object AddMarkerUtil{
         val latLng = LatLng(lat, lng)
 
         if(userBindMarker != null) userBindMarker!!.remove()
-        else {
-            cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16.25F)
-            googleMap!!.animateCamera(cameraUpdate)
-        }
+
+        cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16.25F)
+        googleMap!!.animateCamera(cameraUpdate)
 
         geoCoder = Geocoder(context)
 
@@ -70,6 +69,7 @@ object AddMarkerUtil{
         userBindMarker = googleMap!!.addMarker(marker)
     }
 
+    @SuppressLint("SetTextI18n")
     fun addWad(lat: Double, lng : Double, message: String){
         if(lastMarker != null) lastMarker!!.remove()
 
@@ -80,7 +80,6 @@ object AddMarkerUtil{
         val locationName : Address? = geoCoder !!.getFromLocation(lat, lng, 1)[0]
         val marker = MarkerOptions().position(latLng)
 
-        //logMarkerMessage!!.text = locationName!!.getAddressLine(0)
         logMarkerMessage!!.text = message
         marker.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(context!!, markerRootView!!)))
 

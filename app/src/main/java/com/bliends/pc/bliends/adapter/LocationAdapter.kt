@@ -1,6 +1,5 @@
 package com.bliends.pc.bliends.adapter
 
-import android.content.Context
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -10,13 +9,9 @@ import android.widget.LinearLayout
 import com.bliends.pc.bliends.R
 import com.bliends.pc.bliends.data.Location
 import com.bliends.pc.bliends.util.AddMarkerUtil
-import com.google.android.gms.maps.GoogleMap
 import org.jetbrains.anko.find
 
-class LocationAdapter(private val context: Context,
-                      private val googleMap: GoogleMap,
-                      private val behavior: BottomSheetBehavior<LinearLayout>,
-                      private var mLocationLog: ArrayList<Location>) :
+class LocationAdapter(private val behavior: BottomSheetBehavior<LinearLayout>, private var mLocationLog: ArrayList<Location>) :
         RecyclerView.Adapter<LocationAdapter.ViewHolder>(), View.OnClickListener {
 
     private lateinit var view : View
