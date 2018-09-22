@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import com.bliends.pc.bliends.R
 import com.bliends.pc.bliends.util.UserPhoneNumbarCheck
@@ -22,7 +23,9 @@ class ProtectorSignup1 : AppCompatActivity() {
     var okcheck = false
     var name = false
     var nameokcheck = false
-    var namecheck = "^(?=.*)[^\\s]{1,20}\$"
+    var protectorname = ""
+    var protectornumber = ""
+    var namecheck = "^(?=.*)[^\\s]{1,20}$"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -82,10 +85,8 @@ class ProtectorSignup1 : AppCompatActivity() {
                         Protector1NameLayout.setHintTextAppearance(R.style.HintTextStyle)
                         if (nameokcheck) {
                             protector1ErrorNametext.visibility = View.VISIBLE
-                            Protector1NameDelete.visibility = View.VISIBLE
                         } else {
                             protector1ErrorNametext.visibility = View.INVISIBLE
-                            Protector1NameDelete.visibility = View.INVISIBLE
                         }
                     }
 
@@ -160,6 +161,7 @@ class ProtectorSignup1 : AppCompatActivity() {
             } else {
                 numbercheck = false
                 okcheck = true
+                protectornumber = Protector1CheckNumbar.text.toString()
                 protector1NumberView.setBackgroundResource(R.drawable.bg_login_select_et)
                 Protector1CheckNumbarLayout.setHintTextAppearance(R.style.HintTextStyle)
                 protector1ErrorText.visibility = View.VISIBLE
@@ -172,7 +174,14 @@ class ProtectorSignup1 : AppCompatActivity() {
             val numbarm = Pattern.matches(namecheck, Protector1Name.text)
 
             if (okcheck && numbarm) {
-                startActivity<ProtectorSignup2>()
+                noterrorname()
+                Log.e("name",protectorname)
+                Log.e("number",protectornumber)
+                startActivity<ProtectorSignup2>(
+                        "type" to intent.getStringExtra("type"),
+                        "number" to protectornumber,
+                        "name" to protectorname
+                )
                 finish()
             } else if (!okcheck && !numbarm) {
                 errorphone()
@@ -197,10 +206,11 @@ class ProtectorSignup1 : AppCompatActivity() {
     }
     fun noterrorname() {
         name = false
+        protectorname = Protector1Name.text.toString()
         nameokcheck = true
         protector1ErrorNametext.visibility = View.VISIBLE
         protectorInspectionBtn.visibility = View.INVISIBLE
-        protector1ErrorNametext.text = "옳바른 이름입니다."
+        protector1ErrorNametext.text = "옳바른 이름입니다"
         Protector1Name.requestFocus()
         protector1ErrorNametext.setTextColor(ContextCompat.getColor(this@ProtectorSignup1, R.color.colorLogin))
         protectorNameView.setBackgroundResource(R.drawable.bg_login_select_et)
@@ -210,6 +220,7 @@ class ProtectorSignup1 : AppCompatActivity() {
     fun errorname(){
         name = true
         nameokcheck = false
+        Protector1NameDelete.visibility = View.INVISIBLE
         protector1ErrorNametext.visibility = View.VISIBLE
         protectorInspectionBtn.visibility = View.INVISIBLE
         protectorNameError.visibility = View.VISIBLE

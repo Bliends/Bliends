@@ -1,5 +1,6 @@
 package com.bliends.pc.bliends.activity
 
+import android.app.Activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -7,20 +8,48 @@ import android.support.v4.content.ContextCompat
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import com.bliends.pc.bliends.R
+import com.bliends.pc.bliends.data.SignUp
+import com.bliends.pc.bliends.util.RetrofitUtil
+import com.bliends.pc.bliends.util.SignUpUtil
+import kotlinx.android.synthetic.main.activity_protector_signup2.*
 import kotlinx.android.synthetic.main.activity_protector_signup3.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.regex.Pattern
 
 class ProtectorSignup3 : AppCompatActivity() {
     var pdcheck = false
     var pd = false
     var checkcheck = false
+    var type : String? = null
+    var name: String? = null
+    var id : String? = null
+    var passwd = ""
+    var phone : String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_protector_signup3)
+
+        type = intent.getStringExtra("type")
+        if(type == "C"){
+            signup3.text = "보호자 회원가입(2/3)"
+        }else if(type == "P"){
+            signup3.text = "사용자 회원가입(2/3)"
+        }
+        name = intent.getStringExtra("name")
+        phone = intent.getStringExtra("number")
+        id = intent.getStringExtra("id")
+        Log.e("id",id)
+        Log.e("name",name)
+        Log.e("phone",phone)
         var Pdcheck = "^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{8,20}$"
         Protector3Pd.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
@@ -184,11 +213,12 @@ class ProtectorSignup3 : AppCompatActivity() {
         } else if (pdm && pdcheck) {
             protector3ErrorText.visibility = View.VISIBLE
             protector3ErrorText.text = "사용가능한 비밀번호 입니다."
+            passwd = Protector3Pd.text.toString()
             protector3ErrorText.setTextColor(ContextCompat.getColor(this@ProtectorSignup3, R.color.colorLogin))
             protector3PdView.setBackgroundResource(R.drawable.bg_login_select_et)
             Protector3PdLayout.setHintTextAppearance(R.style.HintTextStyle)
-            startActivity<LoginActivity>()
-            finish()
+            Log.e("passwd",passwd)
+           signUp()
         }
     }
 
@@ -196,6 +226,41 @@ class ProtectorSignup3 : AppCompatActivity() {
         startActivity<ProtectorSignup2>()
         finish()
     }
-
 }
+
+    fun signUp() {
+        Log.e("test", "test")
+        var res: Call<SignUp> = RetrofitUtil.postService.SignUp(
+                id!!,
+                passwd,
+                name!!,
+                type!!,
+                phone!!
+        )
+
+        res.enqueue(object : Callback<SignUp> {
+
+            override fun onResponse(call: Call<SignUp>?, response: Response<SignUp>?) {
+                when{
+                    response!!.code() == 200 -> {
+                        response.body().let {
+                            toast(name + "님의 회원가입이 정상적으로 완료되었습니다.")
+                            startActivity<LoginActivity>()
+                            finish()
+                        }
+                    }
+                    else ->{
+                        Log.e("errorcode",response!!.code().toString())
+                        val ErrorObj = JSONObject(response.errorBody()!!.string())
+                        toast(ErrorObj.getString("message"))
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<SignUp>?, t: Throwable?) {
+                Log.e("signuperror", t!!.message)
+                toast("Sever Error")
+            }
+        })
+    }
 }
