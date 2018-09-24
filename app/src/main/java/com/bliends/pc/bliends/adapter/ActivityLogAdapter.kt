@@ -11,6 +11,7 @@ import android.widget.LinearLayout
 import com.bliends.pc.bliends.R
 import com.bliends.pc.bliends.data.ActivityLog
 import com.bliends.pc.bliends.util.AddMarkerUtil
+import com.bliends.pc.bliends.util.DateStringUtil
 import kotlinx.android.synthetic.main.location_log_item.view.*
 import org.jetbrains.anko.find
 import org.jetbrains.anko.textColor
@@ -41,7 +42,7 @@ class ActivityLogAdapter(private val behavior: BottomSheetBehavior<LinearLayout>
             holder.itemView.money_text.textColor = Color.WHITE
         }
 
-        holder.itemView.time_text.text = mActivityLog[holder.adapterPosition].createdAt!!
+        holder.itemView.time_text.text = DateStringUtil.replaceDate(mActivityLog[holder.adapterPosition].createdAt!!)
 
         view.setOnClickListener {
             if(mActivityLog[holder.adapterPosition].label == null) {

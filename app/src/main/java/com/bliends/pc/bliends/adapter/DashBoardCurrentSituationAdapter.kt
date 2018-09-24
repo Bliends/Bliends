@@ -11,6 +11,7 @@ import com.bliends.pc.bliends.R.layout.dash_board_current_situation_arrive
 import com.bliends.pc.bliends.R.layout.dash_board_current_situation_buy
 import com.bliends.pc.bliends.data.ActivityLog
 import com.bliends.pc.bliends.util.AddMarkerUtil
+import com.bliends.pc.bliends.util.DateStringUtil
 import org.jetbrains.anko.find
 
 class DashBoardCurrentSituationAdapter(private var mSituationLog: ArrayList<ActivityLog>)
@@ -26,13 +27,13 @@ class DashBoardCurrentSituationAdapter(private var mSituationLog: ArrayList<Acti
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        dateText!!.text = mSituationLog[position].createdAt
+        dateText!!.text = DateStringUtil.replaceDate(mSituationLog[position].createdAt!!)
         if(getItemViewType(holder.adapterPosition) == 0) {
             addressText!!.text = mSituationLog[position].label!!.name + "에 도착하였습니다."
         }else{
             addressText!!.text = AddMarkerUtil.getAdress(
                     mSituationLog[position].latitude,
-                    mSituationLog[position].longitude)!!.getAddressLine(0) + " 에서 \n지폐를 인식했습니다."
+                    mSituationLog[position].longitude)!!.getAddressLine(0) + "\n에서 지폐를 인식했습니다."
         }
 
         holder.btnShowLocation.setOnClickListener {
@@ -55,7 +56,7 @@ class DashBoardCurrentSituationAdapter(private var mSituationLog: ArrayList<Acti
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        var layout = if(viewType == 0) dash_board_current_situation_arrive else dash_board_current_situation_buy
+        val layout = if(viewType == 0) dash_board_current_situation_arrive else dash_board_current_situation_buy
         val v =  LayoutInflater.from(parent.context).inflate(layout, parent, false)
         addressText = v.find(R.id.current_situation_message_two)
         dateText = v.find(R.id.current_situation_message_one)

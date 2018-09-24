@@ -9,6 +9,7 @@ import android.widget.TextView
 import com.bliends.pc.bliends.R
 import com.bliends.pc.bliends.R.layout.*
 import com.bliends.pc.bliends.data.Help
+import com.bliends.pc.bliends.util.DateStringUtil
 import org.jetbrains.anko.backgroundColorResource
 import org.jetbrains.anko.find
 
@@ -20,7 +21,7 @@ class HelpAdapter(private var mHelpLog: ArrayList<Help>) : RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.dateText.text = mHelpLog[position].createdAt
+        holder.dateText.text = DateStringUtil.replaceDate(mHelpLog[position].createdAt!!)
         if(position == 0) holder.background.backgroundColorResource = R.color.helpNewItemBackground
     }
 
