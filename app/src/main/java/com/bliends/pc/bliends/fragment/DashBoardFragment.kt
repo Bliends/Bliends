@@ -1,9 +1,9 @@
 package com.bliends.pc.bliends.fragment
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.view.ViewPager
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -12,24 +12,28 @@ import android.view.ViewGroup
 import com.bliends.pc.bliends.R
 import com.bliends.pc.bliends.adapter.DashBoardCurrentSituationAdapter
 import com.bliends.pc.bliends.adapter.DashBoardHowManyPlaceAdapter
-import com.bliends.pc.bliends.data.CurrentSituation
-import com.bliends.pc.bliends.data.HowManyPlace
+import com.bliends.pc.bliends.data.DashBoardLabel
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import kotlinx.android.synthetic.main.fragment_dash_board.*
 import android.graphics.Paint
+import com.bliends.pc.bliends.data.ActivityLog
+import com.bliends.pc.bliends.data.DashBoardDate
+import com.bliends.pc.bliends.util.RetrofitRes
+import com.bliends.pc.bliends.util.RetrofitUtil
 import com.jjoe64.graphview.helper.StaticLabelsFormatter
 import com.jjoe64.graphview.series.BarGraphSeries
 import com.jjoe64.graphview.series.PointsGraphSeries
 
-
 class DashBoardFragment : Fragment() {
 
-    private lateinit var dashBoardCurrentSituationAdapter : DashBoardCurrentSituationAdapter
-    private var mSituationLog = ArrayList<CurrentSituation>()
+    private lateinit var dashBoardCurrentSituationAdapter: DashBoardCurrentSituationAdapter
+    private var mSituationLog = ArrayList<ActivityLog>()
 
-    private lateinit var dashBoardHowManyPlaceAdapter : DashBoardHowManyPlaceAdapter
-    private var mPlaceLog = ArrayList<HowManyPlace>()
+    private lateinit var dashBoardHowManyPlaceAdapter: DashBoardHowManyPlaceAdapter
+    private var mPlaceLog = ArrayList<DashBoardLabel>()
+
+    private val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNTM3NzA0NTUxfQ.fegceqw-hj0XK5iBrgBAiOoabcd1EJZUb3zwYkHOSkA"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,9 +50,7 @@ class DashBoardFragment : Fragment() {
         how_many_place_log.setHasFixedSize(true)
         how_many_place_log.itemAnimator = DefaultItemAnimator()
 
-        initGraph()
         setGraphData()
-
         setLogData()
     }
 
@@ -61,43 +63,80 @@ class DashBoardFragment : Fragment() {
         fun newInstance() = DashBoardFragment()
     }
 
-    private fun initGraph(){
+    private fun setLogData() {
+        RetrofitUtil.postService.getActivityLogList(token).enqueue(object : RetrofitRes<ArrayList<ActivityLog>>(context!!) {
+            override fun callback(code: Int, body: ArrayList<ActivityLog>?) {
+                if(code == 200){
+                    body!!.forEach {
+                        dashBoardCurrentSituationAdapter.add(it)
+                    }
+                }
+            }
+        })
+
+        RetrofitUtil.postService.getDashBoardByLabel(token).enqueue(object : RetrofitRes<ArrayList<DashBoardLabel>>(context!!) {
+            override fun callback(code: Int, body: ArrayList<DashBoardLabel>?) {
+                if (code == 200) {
+                    body!!.forEach {
+                        dashBoardHowManyPlaceAdapter.add(it)
+                    }
+                }
+            }
+        })
+    }
+
+    private fun setGraphData() {
+        RetrofitUtil.postService.getDashBoardByDate(token, 7).enqueue(object : RetrofitRes<ArrayList<DashBoardDate>>(context!!) {
+            @SuppressLint("SetTextI18n")
+            override fun callback(code: Int, body: ArrayList<DashBoardDate>?) {
+                if (code == 200) {
+                    var count = 0
+                    val lineDataList = ArrayList<DataPoint>()
+                    val barDataList = ArrayList<DataPoint>()
+                    val horizontalDateList = ArrayList<String>()
+                    var maxCountDate: DashBoardDate? = null
+                    var maxCount = 0
+                    body!!.forEach {
+                        if (maxCountDate == null) maxCountDate = it
+                        else {
+                            if (maxCountDate!!.count!! <= it.count!!) {
+                                maxCountDate = it
+                                maxCount = count
+                            }
+                        }
+                        lineDataList.add(DataPoint(count.toDouble(), it.count!! - 1.toDouble()))
+                        barDataList.add(DataPoint(count.toDouble(), it.count!!.toDouble()))
+                        horizontalDateList.add("${it.month}/${it.date}")
+                        count++
+                    }
+                    if(body.size > 1){
+                        drawGraph(horizontalDateList, lineDataList, barDataList, maxCountDate!!, maxCount)
+                        best_day_text.text = "최근 ${maxCountDate!!.month}/${maxCountDate!!.date} 에"
+                    }else{
+                        if(body.size >= 1){
+                            best_day_text.text = "최근 ${maxCountDate!!.month}/${maxCountDate!!.date} 에"
+                            best_day_down_text.text = "총 ${maxCountDate!!.count} 번 활동했습니다."
+                            graph.visibility = View.INVISIBLE
+                        }
+                    }
+                }
+            }
+        })
+    }
+
+    private fun drawGraph(horizontalDateList : ArrayList<String>,
+                          lineDataList : ArrayList<DataPoint>, barDataList : ArrayList<DataPoint>, maxCountDate : DashBoardDate, maxCount : Int){
+
         graph.gridLabelRenderer.gridColor = Color.TRANSPARENT
         graph.gridLabelRenderer.verticalLabelsColor = Color.TRANSPARENT
-        val staticLabelsFormatter = StaticLabelsFormatter(graph)
-        staticLabelsFormatter.setHorizontalLabels(arrayOf("월", "화", "수", "목", "금", "토", "일"))
-        graph.gridLabelRenderer.labelFormatter = staticLabelsFormatter
         graph.gridLabelRenderer.labelHorizontalHeight = 180
         graph.gridLabelRenderer.horizontalLabelsColor = Color.argb(255, 30, 38, 64)
-    }
 
-    private fun setLogData(){
-        dashBoardCurrentSituationAdapter.add(CurrentSituation())
-        dashBoardCurrentSituationAdapter.add(CurrentSituation())
-        dashBoardCurrentSituationAdapter.add(CurrentSituation())
-        dashBoardCurrentSituationAdapter.add(CurrentSituation())
-        dashBoardCurrentSituationAdapter.add(CurrentSituation())
-        dashBoardCurrentSituationAdapter.add(CurrentSituation())
-        dashBoardCurrentSituationAdapter.add(CurrentSituation())
+        val staticLabelsFormatter = StaticLabelsFormatter(graph)
+        staticLabelsFormatter.setHorizontalLabels(horizontalDateList.toTypedArray())
+        graph.gridLabelRenderer.labelFormatter = staticLabelsFormatter
 
-        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
-        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
-        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
-        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
-        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
-        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
-        dashBoardHowManyPlaceAdapter.add(HowManyPlace())
-    }
-
-    private fun setGraphData(){
-        val lineSeries = LineGraphSeries(
-                arrayOf(DataPoint(0.0, 18.0),
-                        DataPoint(1.0, 14.0),
-                        DataPoint(2.0, 12.0),
-                        DataPoint(3.0, 13.0),
-                        DataPoint(4.0, 12.0),
-                        DataPoint(5.0, 8.0),
-                        DataPoint(6.0, 8.0)))
+        val lineSeries = LineGraphSeries(lineDataList.toTypedArray())
         lineSeries.color = R.color.bottomNavColor
         lineSeries.isDrawDataPoints = true
         lineSeries.dataPointsRadius = 15f
@@ -108,28 +147,20 @@ class DashBoardFragment : Fragment() {
         lineSeries.setCustomPaint(paint)
         lineSeries.color = R.color.bottomNavColor
 
-        val barSeries = BarGraphSeries(
-                arrayOf(DataPoint(0.0, 19.0),
-                        DataPoint(1.0, 15.0),
-                        DataPoint(2.0, 13.0),
-                        DataPoint(3.0, 14.0),
-                        DataPoint(4.0, 13.0),
-                        DataPoint(5.0, 9.0),
-                        DataPoint(6.0, 9.0)))
-
+        val barSeries = BarGraphSeries(barDataList.toTypedArray())
         barSeries.isDrawValuesOnTop = true
         barSeries.valuesOnTopColor = Color.argb(255, 30, 38, 64)
         barSeries.color = Color.TRANSPARENT
         barSeries.spacing = 100
 
         val pointSeries = PointsGraphSeries(
-                arrayOf(DataPoint(0.0, lineSeries.highestValueY)))
+                arrayOf(DataPoint(maxCount.toDouble(), maxCountDate!!.count!!.toDouble())))
 
         pointSeries.shape = PointsGraphSeries.Shape.POINT
         pointSeries.color = Color.argb(255, 60, 179, 113)
 
         val pointSeries2 = PointsGraphSeries(
-                arrayOf(DataPoint(0.0, lineSeries.highestValueY)))
+                arrayOf(DataPoint(maxCount.toDouble(), maxCountDate!!.count!!.toDouble())))
 
         pointSeries2.shape = PointsGraphSeries.Shape.POINT
         pointSeries2.color = Color.argb(30, 60, 179, 113)

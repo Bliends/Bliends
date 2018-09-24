@@ -59,7 +59,7 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
+    <com.bliends.pc.bliends.view.SmoothNestedView
         android:id="@+id/nested"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -114,6 +114,20 @@
                     android:layout_marginRight="54dp"
                     android:layout_marginBottom="24dp">
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:text="최근 하루만 활동해서 활동 그래프를 그릴 수 없습니다!"
+                        android:textSize="11sp"
+                        android:gravity="center"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/best_day_down_text" />
+
                     <com.jjoe64.graphview.GraphView
                         android:id="@+id/graph"
                         android:layout_width="match_parent"
@@ -131,7 +145,7 @@
                         android:id="@+id/best_day_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="월요일에"
+                        android:text="최근 9/24 에"
                         android:textColor="#3cb371"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toTopOf="@+id/best_day_down_text"
@@ -143,7 +157,7 @@
                         android:id="@+id/best_day_down_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="가장 많이 활동하였습니다."
+                        android:text="최근 가장 많이 활동하였습니다."
                         android:textColor="#3a4567"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toTopOf="@+id/graph"
@@ -184,5 +198,5 @@
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="RtlSymmetry" />
         </android.support.constraint.ConstraintLayout>
-    </android.support.v4.widget.NestedScrollView>
+    </com.bliends.pc.bliends.view.SmoothNestedView>
 </android.support.design.widget.CoordinatorLayout>

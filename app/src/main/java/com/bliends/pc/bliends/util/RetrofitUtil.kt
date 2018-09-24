@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitUtil{
 
 //    http://norr.uy.to:5000/api
-val URL = "http://norr.uy.to:5000/api/"
+    val URL = "http://norr.uy.to:5000/api/"
 
     var retrofit = Retrofit.Builder()
             .baseUrl(URL)

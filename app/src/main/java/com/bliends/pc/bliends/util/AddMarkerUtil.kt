@@ -20,6 +20,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.*
 import org.jetbrains.anko.find
 import org.jetbrains.anko.windowManager
+import java.util.*
 
 @SuppressLint("StaticFieldLeak")
 object AddMarkerUtil{
@@ -39,6 +40,7 @@ object AddMarkerUtil{
     fun setInit(context: Context, googleMap: GoogleMap){
         this.context = context
         this.googleMap = googleMap
+        this.geoCoder = Geocoder(context, Locale.KOREAN)
         initMarker(context)
     }
 
@@ -56,13 +58,12 @@ object AddMarkerUtil{
         cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16.25F)
         googleMap!!.animateCamera(cameraUpdate)
 
-        geoCoder = Geocoder(context)
-
-        val locationName : Address? = geoCoder !!.getFromLocation(lat, lng, 1)[0]
         val marker = MarkerOptions()
                 .position(latLng)
-                .title(locationName!!.featureName)
-                .snippet(locationName.getAddressLine(0))
+
+        try{ val locationName : Address? = geoCoder !!.getFromLocation(lat, lng, 1)[0]
+            marker.title(locationName!!.getAddressLine(0))
+        }catch (e: Exception){}
 
         marker.icon(bitmapDescriptorFromVector(context, R.drawable.location_wad))
 
@@ -70,14 +71,12 @@ object AddMarkerUtil{
     }
 
     @SuppressLint("SetTextI18n")
-    fun addWad(lat: Double, lng : Double, message: String){
+    fun addWad(lat: Double, lng: Double, message: String){
         if(lastMarker != null) lastMarker!!.remove()
 
-        geoCoder = Geocoder(context)
+        val latLng = LatLng(lat!!.toDouble(), lng!!.toDouble())
 
-        val latLng = LatLng(lat, lng)
-
-        val locationName : Address? = geoCoder !!.getFromLocation(lat, lng, 1)[0]
+        val locationName : Address? = geoCoder!!.getFromLocation(lat, lng, 1)[0]
         val marker = MarkerOptions().position(latLng)
 
         logMarkerMessage!!.text = message
@@ -88,6 +87,22 @@ object AddMarkerUtil{
 
         lastMarker = googleMap!!.addMarker(marker)
     }
+
+    @SuppressLint("SetTextI18n")
+    fun addLabel(lat: Double, lng: Double, message: String){
+
+        val latLng = LatLng(lat, lng)
+
+        val marker = MarkerOptions().position(latLng)
+
+        logMarkerMessage!!.text = message
+        marker.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(context!!, markerRootView!!)))
+
+        googleMap!!.addMarker(marker)
+    }
+
+    fun getAdress(lat: Float?, lng: Float?) : Address?
+        = geoCoder!!.getFromLocation(lat!!.toDouble(), lng!!.toDouble(), 1)[0]
 
     private fun bitmapDescriptorFromVector(context: Context?, vectorResId: Int): BitmapDescriptor {
         val vectorDrawable = ContextCompat.getDrawable(context!!, vectorResId)

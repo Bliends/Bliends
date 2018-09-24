@@ -10,12 +10,15 @@ import com.google.android.gms.maps.*
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.widget.LinearLayout
-import android.widget.TextView
-import com.bliends.pc.bliends.adapter.LocationAdapter
-import com.bliends.pc.bliends.data.Location
+import com.bliends.pc.bliends.adapter.ActivityLogAdapter
+import com.bliends.pc.bliends.data.ActivityLog
+import com.bliends.pc.bliends.data.Label
 import com.bliends.pc.bliends.util.AddMarkerUtil
 import com.bliends.pc.bliends.util.GPSUtil
+import com.bliends.pc.bliends.util.RetrofitRes
+import com.bliends.pc.bliends.util.RetrofitUtil
 import kotlinx.android.synthetic.main.fragment_location.*
 import org.jetbrains.anko.find
 
@@ -24,8 +27,11 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
     private lateinit var mapView : MapView
     private lateinit var behavior: BottomSheetBehavior<LinearLayout>
 
-    private var mLog = ArrayList<Location>()
-    private lateinit var mLocationAdapter : LocationAdapter
+    private var mLog = ArrayList<ActivityLog>()
+    private lateinit var mActivityLogAdapter : ActivityLogAdapter
+
+    private val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNTM3NzA0NTUxfQ.fegceqw-hj0XK5iBrgBAiOoabcd1EJZUb3zwYkHOSkA"
+    private val token_2 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTM3NzA0NTI0fQ.RSqPYZfHMIElw3DpszZu3G5_5VY9DFpEwqthnIyD85M"
 
     companion object {
         fun newInstance() = LocationFragment()
@@ -76,24 +82,38 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
         mLayoutManager.reverseLayout = true
         mLayoutManager.stackFromEnd = true
 
-        mLocationAdapter  = LocationAdapter(behavior, mLog)
-        location_log.adapter = mLocationAdapter
+        mActivityLogAdapter  = ActivityLogAdapter(behavior, mLog)
+        location_log.adapter = mActivityLogAdapter
         location_log.layoutManager = LinearLayoutManager(context)
         location_log.setHasFixedSize(false)
         location_log.itemAnimator = DefaultItemAnimator()
 
-        mLocationAdapter.add(Location())
-        mLocationAdapter.add(Location())
-        mLocationAdapter.add(Location())
-        mLocationAdapter.add(Location())
-        mLocationAdapter.add(Location())
-        mLocationAdapter.add(Location())
-        mLocationAdapter.add(Location())
-        mLocationAdapter.add(Location())
-        mLocationAdapter.add(Location())
-        mLocationAdapter.add(Location())
-        mLocationAdapter.add(Location())
-        mLocationAdapter.add(Location())
+        RetrofitUtil.postService.getActivityLogList(token)
+                .enqueue(object : RetrofitRes<ArrayList<ActivityLog>>(context!!) {
+            override fun callback(code: Int, body: ArrayList<ActivityLog>?) {
+                Log.e("Activity res code", code.toString())
+                if(code == 200) {
+                    body!!.forEach {
+                        mActivityLogAdapter.add(it)
+                    }
+                }
+            }
+        })
+
+        RetrofitUtil.postService.getLabelList(token)
+                .enqueue(object : RetrofitRes<ArrayList<Label>>(context!!) {
+                    override fun callback(code: Int, body: ArrayList<Label>?) {
+                        Log.e("Label res code", code.toString())
+                        if(code == 200) {
+                            body!!.forEach {
+                                AddMarkerUtil.addLabel(
+                                        it.latitude!!.toDouble(),
+                                        it.longitude!!.toDouble(),
+                                        it.name!!)
+                            }
+                        }
+                    }
+                })
     }
 
     override fun onClick(v: View?) {
@@ -105,3 +125,26 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
         }
     }
 }
+
+/*        RetrofitUtil.postService.postActivityLog(token_2, 0, 36.3728748F, 127.4279327F, 8000)
+                .enqueue(object : RetrofitRes<ActivityLog>(context!!){
+                    override fun callback(code: Int, body: ActivityLog?) {
+                        Log.e("Activity Post res code", code.toString())
+                        Log.e("Activty_id", body!!.id.toString())
+                    }
+                })*/
+/*        RetrofitUtil.postService.postLabel(token_2, "집", 36.370787F, 127.431975F, 3)
+                .enqueue(object : RetrofitRes<Label>(context!!){
+                    override fun callback(code: Int, body: Label?) {
+                        Log.e("Activity Post res code", code.toString())
+                        Log.e("Activty_id", body!!.id.toString())
+                    }
+                })*/
+
+/*        RetrofitUtil.postService.postActivityLog(token_2, 1, 36.370787F, 127.431975F, 0)
+                .enqueue(object : RetrofitRes<ActivityLog>(context!!){
+                    override fun callback(code: Int, body: ActivityLog?) {
+                        Log.e("Activity Post res code", code.toString())
+                        Log.e("Activty_id", body!!.id.toString())
+                    }
+                })*/

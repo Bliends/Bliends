@@ -4,12 +4,16 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bliends.pc.bliends.R
 import com.bliends.pc.bliends.adapter.HelpAdapter
 import com.bliends.pc.bliends.data.Help
+import com.bliends.pc.bliends.util.RetrofitRes
+import com.bliends.pc.bliends.util.RetrofitUtil
+import com.bliends.pc.bliends.util.TTSUtil
 import kotlinx.android.synthetic.main.fragment_help.*
 
 class HelpFragment : Fragment(), View.OnClickListener{
@@ -17,12 +21,15 @@ class HelpFragment : Fragment(), View.OnClickListener{
     private var mLog = ArrayList<Help>()
     private lateinit var mHelpAdapter : HelpAdapter
 
+    private val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNTM3NzA0NTUxfQ.fegceqw-hj0XK5iBrgBAiOoabcd1EJZUb3zwYkHOSkA"
+    private val token_2 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTM3NzA0NTI0fQ.RSqPYZfHMIElw3DpszZu3G5_5VY9DFpEwqthnIyD85M"
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val mLayoutManager = LinearLayoutManager(context)
-        mLayoutManager.reverseLayout = true
-        mLayoutManager.stackFromEnd = true
+/*        mLayoutManager.reverseLayout = true
+        mLayoutManager.stackFromEnd = true*/
 
         mHelpAdapter = HelpAdapter(mLog)
         recycle_help_log.adapter = mHelpAdapter
@@ -30,11 +37,18 @@ class HelpFragment : Fragment(), View.OnClickListener{
         recycle_help_log.setHasFixedSize(false)
         recycle_help_log.itemAnimator = DefaultItemAnimator()
 
-        mHelpAdapter.add(Help(0))
-        mHelpAdapter.add(Help(1))
-        mHelpAdapter.add(Help(2))
-
         floating_call.setOnClickListener(this)
+
+        RetrofitUtil.postService.getHelpList(token).enqueue(object : RetrofitRes<ArrayList<Help>>(context!!){
+            override fun callback(code: Int, body: ArrayList<Help>?) {
+                Log.e("Help res code", code.toString())
+                if(code == 200) {
+                    body!!.forEach {
+                        mHelpAdapter.add(it)
+                    }
+                }
+            }
+        })
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
@@ -47,5 +61,11 @@ class HelpFragment : Fragment(), View.OnClickListener{
         dialogFragment.isCancelable = false
         dialogFragment.show(activity!!.fragmentManager, "call_dialog")
     }
-
+/*        RetrofitUtil.postService.postHelp(token_2, 36.3728748F, 127.4279327F, "M", null)
+                .enqueue(object : RetrofitRes<Help>(context!!){
+                    override fun callback(code: Int, body: Help?) {
+                        Log.e("Activity Post res code", code.toString())
+                        Log.e("Activty_id", body!!.id.toString())
+                    }
+                })*/
 }

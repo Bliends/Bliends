@@ -9,9 +9,6 @@ import android.widget.TextView
 import com.bliends.pc.bliends.R
 import com.bliends.pc.bliends.R.layout.*
 import com.bliends.pc.bliends.data.Help
-import com.bliends.pc.bliends.data.Help.Companion.HELP_LOST_MONEY
-import com.bliends.pc.bliends.data.Help.Companion.HELP_LOST_WAY
-import com.bliends.pc.bliends.data.Help.Companion.HELP_REQUEST
 import org.jetbrains.anko.backgroundColorResource
 import org.jetbrains.anko.find
 
@@ -23,22 +20,29 @@ class HelpAdapter(private var mHelpLog: ArrayList<Help>) : RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.dateText.text = mHelpLog[position].time
-        if(position == itemCount - 1) holder.background.backgroundColorResource = R.color.helpNewItemBackground
+        holder.dateText.text = mHelpLog[position].createdAt
+        if(position == 0) holder.background.backgroundColorResource = R.color.helpNewItemBackground
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         var layout = -1
         when(viewType){
-            HELP_REQUEST-> layout = help_log_request
-            HELP_LOST_WAY-> layout = help_log_lost_way
-            HELP_LOST_MONEY-> layout = help_log_lost_money
+            0 -> layout = help_log_request
+            1 -> layout = help_log_lost_money
+            2 -> layout = help_log_lost_way
         }
         val v = LayoutInflater.from(parent.context).inflate(layout, parent, false)
         return ViewHolder(v)
     }
 
-    override fun getItemViewType(position: Int): Int = mHelpLog[position].type
+    override fun getItemViewType(position: Int): Int {
+        when(mHelpLog[position].situation){
+            "E" -> return 0
+            "M" -> return 1
+            "L" -> return 2
+        }
+        return -1
+    }
 
     override fun getItemCount(): Int = mHelpLog.size
 
