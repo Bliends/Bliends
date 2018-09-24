@@ -123,7 +123,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             loginBtn.onLongClick {
-                startActivity<MainActivity>()
+                startActivity<UserMainActivity>()
             }
 
             loginBtn.onClick {
