@@ -24,6 +24,7 @@ class SplashActivity : AppCompatActivity() {
         } catch (e: ArrayIndexOutOfBoundsException) {
             token = null
         }
+
         Handler().postDelayed({
             if (token != null) {
                 toast("자동로그인 완료 되었습니다.")

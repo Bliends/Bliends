@@ -22,7 +22,9 @@ import android.view.View.OnFocusChangeListener
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
+import com.bliends.pc.bliends.data.User
 import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.sdk25.coroutines.onLongClick
 
 
 class LoginActivity : AppCompatActivity() {
@@ -115,15 +117,20 @@ class LoginActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable) {}
         })
 
-            loginSignup.setOnClickListener {
+            loginSignup.onClick {
                 startActivity<SignupSelectActivity>()
                 finish()
             }
 
-            loginBtn.setOnClickListener {
+            loginBtn.onLongClick {
+                startActivity<MainActivity>()
+            }
+
+            loginBtn.onClick {
                 Login()
             }
         }
+
 
         fun Login() {
             var res: Call<Sign> = RetrofitUtil.postService.Sign(loginId.text.toString(), loginPasswd.text.toString())
@@ -157,14 +164,14 @@ class LoginActivity : AppCompatActivity() {
         }
 
         fun GetUser(token: String) {
-            var res: Call<UserInfo> = RetrofitUtil.postService.UserInfo(token)
-            res.enqueue(object : Callback<UserInfo> {
+            var res: Call<User> = RetrofitUtil.postService.UserInfo(token)
+            res.enqueue(object : Callback<User> {
 
-                override fun onResponse(call: Call<UserInfo>?, response: Response<UserInfo>?) {
+                override fun onResponse(call: Call<User>?, response: Response<User>?) {
                     when {
                         response!!.code() == 200 -> response.body().let {
                             Log.e("name", Gson().toJson(response.body()!!))
-                            ORMUtil(this@LoginActivity).userORM.save(response.body()!!.user!!)
+                            ORMUtil(this@LoginActivity).userORM.save(response.body()!!)
                         }
                         else -> {
                             val ErrorObj = JSONObject(response.errorBody()!!.string())
@@ -173,7 +180,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<UserInfo>?, t: Throwable?) {
+                override fun onFailure(call: Call<User>?, t: Throwable?) {
                     Log.e("getuser Error", t!!.message)
                     toast("Sever Error")
                 }

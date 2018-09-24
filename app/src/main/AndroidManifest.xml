@@ -6,32 +6,27 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_app"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.SplashActivity"
-            android:theme="@style/NoTitle" />
-        <activity android:name=".activity.MainActivity">
+            android:theme="@style/NoTitle" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.MainActivity"/>
+
         <activity
             android:name=".activity.LoginActivity"
             android:theme="@style/NoTitle" />
         <activity
             android:name=".activity.SignupSelectActivity"
-            android:theme="@style/NoTitle" />
-        <activity
-            android:name=".activity.SignupProtectorActivity"
-            android:theme="@style/NoTitle" />
-        <activity
-            android:name=".activity.SignupUserActivity"
             android:theme="@style/NoTitle" />
         <activity
             android:name=".activity.ProtectorSignup1"
@@ -41,9 +36,13 @@
             android:theme="@style/NoTitle" />
         <activity
             android:name=".activity.ProtectorSignup3"
-            android:theme="@style/NoTitle"></activity>
-        <activity android:name=".activity.UserSignup1"
-            android:theme="@style/NoTitle"></activity>
+            android:theme="@style/NoTitle" />
+        <activity
+            android:name=".activity.UserSignup1"
+            android:theme="@style/NoTitle" />
+        <activity android:name=".activity.UserMainActivity"
+            android:theme="@style/NoTitle">
+        </activity>
     </application>
 
 </manifest>

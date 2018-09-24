@@ -15,7 +15,7 @@ interface Services{
              @Field("password") password: String) : Call<Sign>
 
     @GET("sign")
-    fun UserInfo(@Header ("Authorization") Authorization : String) : Call<UserInfo>
+    fun UserInfo(@Header ("Authorization") Authorization : String) : Call<User>
 
     @FormUrlEncoded
     @POST("users")
