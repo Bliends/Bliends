@@ -22,12 +22,17 @@ import android.view.View.OnFocusChangeListener
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
+import android.widget.Toast
 import com.bliends.pc.bliends.data.User
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.sdk25.coroutines.onLongClick
 
 
 class LoginActivity : AppCompatActivity() {
+    companion object {
+        var usertutorial = 0
+        var protectortutorial = 0
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -141,12 +146,9 @@ class LoginActivity : AppCompatActivity() {
 //                Log.e("login" + response!!.code().toString(), response.body()!!.message)
                     when {
                         response!!.code() == 200 -> response.body()?.let {
-                            toast(response.body()!!.message)
                             var token = response.body()!!.token
                             GetUser(token)
                             ORMUtil(this@LoginActivity).tokenORM.save(response.body()!!)
-                            startActivity<MainActivity>()
-                            finish()
                         }
                         else -> {
                             val ErrorObj = JSONObject(response.errorBody()!!.string())
@@ -171,6 +173,25 @@ class LoginActivity : AppCompatActivity() {
                     when {
                         response!!.code() == 200 -> response.body().let {
                             Log.e("name", Gson().toJson(response.body()!!))
+                            if(response.body()!!.type == "P"){
+                                LoginActivity.usertutorial++
+                                if(usertutorial == 1){
+                                    //사용자 튜토리얼로 이어줘야함
+                                    toast("사용자 튜토리얼")
+                                }else{
+                                    startActivity<UserMainActivity>()
+                                    finish()
+                                }
+                            }else{
+                                LoginActivity.protectortutorial++
+                                if(protectortutorial == 1){
+                                    //보호자 튜토리얼로 이어줘야함
+                                    toast("보호자 튜토리얼")
+                                }else{
+                                    startActivity<MainActivity>()
+                                    finish()
+                                }
+                            }
                             ORMUtil(this@LoginActivity).userORM.save(response.body()!!)
                         }
                         else -> {

@@ -15,9 +15,10 @@ import android.os.Handler
 import android.os.Message
 import android.util.Log
 import com.bliends.pc.bliends.data.Help
-import com.bliends.pc.bliends.data.Sign
-import com.bliends.pc.bliends.util.ORMUtil
 import com.bliends.pc.bliends.util.RetrofitUtil
+import com.bliends.pc.bliends.data.Sign
+import com.bliends.pc.bliends.data.User
+import com.bliends.pc.bliends.util.ORMUtil
 import kotlinx.android.synthetic.main.activity_user_main.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.startActivity
@@ -92,57 +93,63 @@ class UserMainActivity : AppCompatActivity() {
         }
         return tt
     }
-        fun Callhelp(situation: String) {
-            var list: List<Any> = ORMUtil(this@UserMainActivity).tokenORM.find(Sign())
-            var sign = list[list.size - 1] as Sign
-            var attachments : String? = null
-            if(situation == "E") {
-                attachments = "file://$path"
-            }else{
-                attachments = null
-            }
-            var res = RetrofitUtil.postService.Help(
-                    sign.token,
-                    0.0f,
-                    0.0f,
-                    situation,
-                            RetrofitUtil.audioMultipartBody(attachments!!, "profileImg")
-            )
 
-            res.enqueue(object : Callback<Help> {
-                override fun onResponse(call: Call<Help>, response: Response<Help>) {
-                    when (response.code()) {
-                        201 -> {
-                            Log.e("help", "ok")
-                            if (situation != "E") {
-                                toast("정상적으로 발송이 완료되었습니다.")
-                            }
-                        }
+    fun Callhelp(situation: String) {
+        var list: List<Any> = ORMUtil(this@UserMainActivity).tokenORM.find(Sign())
+        var sign = list[list.size - 1] as Sign
+        var attachments: String? = null
+        if (situation == "E") {
+            attachments = "file://$path"
+        } else {
+            attachments = null
+        }
+        var res = RetrofitUtil.postService.Help(
+                sign.token,
+                0.0f,
+                0.0f,
+                situation,
+                RetrofitUtil.audioMultipartBody(attachments!!, "profileImg")
+        )
 
-                        else -> {
-                            Log.e(response.code().toString(),response.message())
+        res.enqueue(object : Callback<Help> {
+            override fun onResponse(call: Call<Help>, response: Response<Help>) {
+                when (response.code()) {
+                    201 -> {
+                        Log.e("help", "ok")
+                        if (situation != "E") {
+                            toast("정상적으로 발송이 완료되었습니다.")
                         }
                     }
-                }
 
-                override fun onFailure(call: Call<Help>, t: Throwable) {
-                    Log.e("Help Error", t!!.message)
-                    toast("Sever Error")
-                }
-            })
-        }
-
-        override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-            menuInflater.inflate(R.menu.user_menu, menu)
-            return true
-        }
-
-        override fun onOptionsItemSelected(item: MenuItem): Boolean {
-            when (item.itemId) {
-                R.id.userSetting -> {
-                    startActivity<LoginActivity>()
+                    else -> {
+                        Log.e(response.code().toString(), response.message())
+                    }
                 }
             }
-            return super.onOptionsItemSelected(item)
-        }
+
+            override fun onFailure(call: Call<Help>, t: Throwable) {
+                Log.e("Help Error", t!!.message)
+                toast("Sever Error")
+            }
+        })
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.user_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.userSetting -> {
+                //테스트로 로그인 부분으로 넘어가게 해놨음
+                ORMUtil(this).tokenORM.delete(Sign())
+                ORMUtil(this).userORM.delete(User())
+                startActivity<LoginActivity>()
+                finish()
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+}
