@@ -7,22 +7,6 @@ import java.io.File
 
 interface Services{
 
-    @FormUrlEncoded
-    @POST("sign")
-    fun Sign(@Field("userid") userid: String,
-             @Field("password") password: String) : Call<Sign>
-
-    @GET("sign")
-    fun UserInfo(@Header ("Authorization") Authorization : String) : Call<UserInfo>
-
-    @FormUrlEncoded
-    @POST("users")
-    fun SignUp(@Field("userid") userid : String,
-               @Field("password")password : String,
-               @Field("name") name : String,
-               @Field("type") type : String,
-               @Field("phone") phone : String) : Call<SignUp>
-
     @GET("helps/{help_id}")
     fun useIdGetHelp(@Header ("Authorization") Authorization : String,
                       @Path("help_id") help_id: Int) : Call<Help>
