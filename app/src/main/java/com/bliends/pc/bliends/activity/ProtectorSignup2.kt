@@ -10,9 +10,7 @@ import android.util.Log
 import android.view.View
 import com.bliends.pc.bliends.R
 import com.bliends.pc.bliends.util.Overlap
-import kotlinx.android.synthetic.main.activity_protector_signup1.*
 import kotlinx.android.synthetic.main.activity_protector_signup2.*
-import kotlinx.android.synthetic.main.activity_protector_signup3.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -90,7 +88,7 @@ class ProtectorSignup2 : AppCompatActivity() {
                 protector2InspectionBtn.visibility = View.INVISIBLE
                 protector2Error.visibility = View.VISIBLE
                 protector2ErrorText.visibility = View.VISIBLE
-                protector2ErrorText.text = "8 ~ 20자의 영문, 숫자로 이루어진 암호를 기입해주세요."
+                protector2ErrorText.text = "ID는 6자이상, 영문자, 숫자(선택)로 이루어져야 합니다"
                 Protector2IdLayout.setHintTextAppearance(R.style.HintError)
                 protector2ErrorText.setTextColor(ContextCompat.getColor(this@ProtectorSignup2, R.color.colorError))
                 protector2hintIdView.setBackgroundResource(R.drawable.bg_login_error_et)

@@ -13,8 +13,6 @@ import android.view.View
 import com.bliends.pc.bliends.R
 import com.bliends.pc.bliends.data.SignUp
 import com.bliends.pc.bliends.util.RetrofitUtil
-import com.bliends.pc.bliends.util.SignUpUtil
-import kotlinx.android.synthetic.main.activity_protector_signup2.*
 import kotlinx.android.synthetic.main.activity_protector_signup3.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.startActivity

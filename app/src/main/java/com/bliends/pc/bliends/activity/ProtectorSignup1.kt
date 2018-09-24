@@ -12,7 +12,6 @@ import android.view.View
 import com.bliends.pc.bliends.R
 import com.bliends.pc.bliends.util.UserPhoneNumbarCheck
 import kotlinx.android.synthetic.main.activity_protector_signup1.*
-import kotlinx.android.synthetic.main.activity_user_signup1.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
