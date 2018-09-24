@@ -1,6 +1,7 @@
 package com.bliends.pc.bliends.util
 
 import android.content.Context
+import com.bliends.pc.bliends.data.Sign
 import ninja.sakib.pultusorm.core.PultusORM
 
 class ORMUtil(context: Context) {

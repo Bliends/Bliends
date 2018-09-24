@@ -41,7 +41,7 @@
             android:name=".activity.UserSignup1"
             android:theme="@style/NoTitle" />
         <activity android:name=".activity.UserMainActivity"
-            android:theme="@style/NoTitle">
+            android:theme="@style/MainTheme">
         </activity>
     </application>
 

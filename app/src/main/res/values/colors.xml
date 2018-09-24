@@ -9,6 +9,6 @@
     <color name="colorMain">#F6f6f7</color>
     <color name="colorSub">#1e2640</color>
     <color name="colornotselectcolor">#c4c5c5</color>
-    <color name="colorLoginPrimaryDark">#F6f6f7</color>
+    <color name="colorLoginPrimaryDark">#FFFFFF</color>
     <color name="colorError">#d31237</color>
 </resources>

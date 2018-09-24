@@ -14,6 +14,13 @@
         <item name="colorPrimaryDark">@color/colorLoginPrimaryDark</item>
     </style>
 
+    <style name="MainTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimaryDark">@color/colorMain</item>
+    </style>
+
+
     <style name="LoginStyle">
         <item name="colorControlNormal">@color/colorLogin</item>
         <item name="android:textColorHighlight">#8f8f8f</item>
