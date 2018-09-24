@@ -40,6 +40,15 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         behavior = BottomSheetBehavior.from(bottom_sheet)
+        behavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback(){
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if(newState == BottomSheetBehavior.STATE_COLLAPSED)
+                    btn_open_log.setCompoundDrawablesWithIntrinsicBounds(R.drawable.location_bottom_sheet_down, 0, 0, 0)
+                else if(newState == BottomSheetBehavior.STATE_EXPANDED)
+                    btn_open_log.setCompoundDrawablesWithIntrinsicBounds(R.drawable.location_bottom_sheet_up, 0, 0, 0)
+            }
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
+        })
         btn_open_log.setOnClickListener(this)
     }
 
