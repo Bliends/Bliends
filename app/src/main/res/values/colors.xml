@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#000000</color>
-    <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#3cb371</color>
+    <color name="colorAccent">#3cb371</color>
     <color name="colorLogin">#3cb371</color>
+    <color name="bottomNavColor">#1e2640</color>
     <color name="colorStrokeLogin">#d9d9d9</color>
     <color name="colorbottomNav">#000000</color>
     <color name="colorMain">#F6f6f7</color>
     <color name="colorSub">#1e2640</color>
     <color name="colornotselectcolor">#c4c5c5</color>
-    <color name="colorLoginPrimaryDark">#F6f6f7</color>
+    <color name="colorLoginPrimaryDark">#FFFFFF</color>
     <color name="colorError">#d31237</color>
+
+    <color name="helpNewItemBackground">#f6f6f7</color>
+    <color name="dialogBackground">#0a000000</color>
+    <color name="trans">#00000000</color>
 </resources>

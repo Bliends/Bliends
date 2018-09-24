@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_dash_board"
+        android:enabled="true"
+        android:title="대시보드"
+        android:icon="@drawable/nav_dash_board"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_location"
+        android:enabled="true"
+        android:title="위치 추적"
+        app:showAsAction="always"
+        android:icon="@drawable/nav_location"/>
+
+    <item
+        android:id="@+id/action_help"
+        android:enabled="true"
+        android:title="도움요청"
+        android:icon="@drawable/nav_help"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_setting"
+        android:enabled="true"
+        android:title="환경설정"
+        android:icon="@drawable/nav_setting"
+        app:showAsAction="always"/>
+
+</menu>
