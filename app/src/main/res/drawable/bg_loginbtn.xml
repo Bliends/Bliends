@@ -5,12 +5,13 @@
 
 
     <solid
-        android:color="@color/colorLogin"/>
+        android:color="@color/colorLogin"
+        />
 
     <corners
-        android:radius="3dp"/>
+        android:radius="25dp"/>
 
     <size
-        android:width="268dp"
+        android:width="312dp"
         android:height="50dp"/>
 </shape>

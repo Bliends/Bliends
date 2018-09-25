@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/colorMain"
+    android:weightSum="2.2"
+    tools:context=".activity.SignupSelectActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:layout_weight="0.2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/colorLogin"
+            android:lineSpacingExtra="9sp"
+            android:textStyle="bold"
+            android:layout_gravity="left|center"
+            android:text="회원가입 선택"
+            />
+        <TextView
+            android:id="@+id/selectBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_gravity="right|center"
+            android:textColor="@color/colorLogin"
+            android:lineSpacingExtra="6sp"
+            android:text="로그인하기"
+            />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/protectorBtn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/colorMain">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/protector_icon"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/colorSub"
+            android:layout_marginTop="24dp"
+            android:textStyle="bold"
+            android:text="보호자 회원가입"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="@color/colorSub"
+            android:layout_marginTop="24dp"
+            android:text="위 회원가입은 보호자가 사용하는 회원가입입니다."/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/userBtn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@color/colorSub">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/user_icon"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="24dp"
+            android:textStyle="bold"
+            android:text="사용자 회원가입"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="24dp"
+            android:text="위 회원가입은 사용자가 사용하는 회원가입입니다."/>
+
+    </LinearLayout>
+
+</LinearLayout>

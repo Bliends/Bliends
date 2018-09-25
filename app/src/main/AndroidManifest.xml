@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.bliends.pc.bliends">
+    package="com.bliends.pc.bliends">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.DIAL_PHONE" />
 
     <application
+        android:name=".socket.SocketApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_app"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".socket.SocketApplication"
         android:theme="@style/AppTheme">
 
         <meta-data
@@ -25,13 +26,40 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBKtgrS0shGJRy-GgnuYzS-njwpVZvYeVk" />
 
-        <activity android:name=".activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+        <activity
+            android:name=".activity.SplashActivity"
+            android:theme="@style/NoTitle">
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".activity.MainActivity" />
+
+        <activity
+            android:name=".activity.LoginActivity"
+            android:theme="@style/NoTitle" />
+        <activity
+            android:name=".activity.SignupSelectActivity"
+            android:theme="@style/NoTitle" />
+        <activity
+            android:name=".activity.ProtectorSignup1"
+            android:theme="@style/NoTitle" />
+        <activity
+            android:name=".activity.ProtectorSignup2"
+            android:theme="@style/NoTitle" />
+        <activity
+            android:name=".activity.ProtectorSignup3"
+            android:theme="@style/NoTitle" />
+        <activity
+            android:name=".activity.UserSignup1"
+            android:theme="@style/NoTitle" />
+        <activity
+            android:name=".activity.UserMainActivity"
+            android:theme="@style/NoTitle" />
     </application>
 
 </manifest>
