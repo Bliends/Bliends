@@ -21,7 +21,7 @@ class HelpAdapter(private var mHelpLog: ArrayList<Help>) : RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.dateText.text = DateStringUtil.replaceDate(mHelpLog[position].createdAt!!)
+        holder.dateText.text = DateStringUtil.replaceDate(mHelpLog[position].updatedAt!!)
         if(position == 0) holder.background.backgroundColorResource = R.color.helpNewItemBackground
     }
 

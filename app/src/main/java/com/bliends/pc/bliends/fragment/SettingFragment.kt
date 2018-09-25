@@ -6,12 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bliends.pc.bliends.R
+import kotlinx.android.synthetic.main.fragment_setting.*
 
 
-class SettingFragment : Fragment() {
+class SettingFragment : Fragment(), View.OnClickListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        add_label_settings.setOnClickListener(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -21,5 +27,15 @@ class SettingFragment : Fragment() {
 
     companion object {
         fun newInstance() = SettingFragment()
+    }
+
+    override fun onClick(v: View?) {
+        when(v!!.id){
+            R.id.add_label_settings->{
+                val addLabelFragment = AddLabelDialogFragment()
+                addLabelFragment.isCancelable = false
+                addLabelFragment.show(activity!!.fragmentManager, "add_dialog")
+            }
+        }
     }
 }
