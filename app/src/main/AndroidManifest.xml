@@ -63,6 +63,8 @@
         <activity android:name=".activity.UserSelectActivity"
             android:theme="@android:style/Theme.Translucent">
         </activity>
+
+        <service android:name=".service.MoneyService"/>
     </application>
 
 </manifest>

@@ -65,11 +65,15 @@ class UserSelectActivity : Activity() {
                 overridePendingTransition(0, 0)
             }
         }
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+
+        TTSUtil.speakStop()
     }
     fun tts(message: String){
         TTSUtil.usingTTS(this@UserSelectActivity,message)
-        TTSUtil.speakStop()
     }
     override fun overridePendingTransition(enterAnim: Int, exitAnim: Int) {
         super.overridePendingTransition(enterAnim, exitAnim)

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.bliends.pc.bliends.R
-import android.R.menu
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
@@ -15,7 +14,7 @@ import android.os.Environment
 import android.os.Handler
 import android.os.Message
 import android.util.Log
-import android.view.WindowManager
+import com.bliends.pc.bliends.service.MoneyService
 import com.bliends.pc.bliends.data.Help
 import com.bliends.pc.bliends.util.RetrofitUtil
 import com.bliends.pc.bliends.data.Sign
@@ -29,13 +28,14 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.startActivityForResult
 import org.jetbrains.anko.toast
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
+import java.io.IOException
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -51,8 +51,15 @@ class UserMainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_main)
         setSupportActionBar(userToolbar)
-
-
+        try {
+            val intent = Intent(
+                    applicationContext, //현재제어권자
+                    MoneyService::class.java) // 이동할 컴포넌트
+            startService(intent) // 서비스 시작
+        }catch (e : IllegalArgumentException){
+            toast("블루투스가 꺼졌습니다.블루투스르 다시 켜주세요")
+            TTSUtil.usingTTS(this@UserMainActivity, "블루투스가 꺼졌습니다.블루투스르 다시 켜주세요")
+        }
         userCall.onClick {
             var intent = Intent(this@UserMainActivity,UserSelectActivity::class.java)
             intent.putExtra("bl",true)
@@ -61,10 +68,11 @@ class UserMainActivity : AppCompatActivity() {
         }
 
         userCallHelp.onClick {
-            var intent = Intent(this@UserMainActivity,UserSelectActivity::class.java)
-            intent.putExtra("bl",false)
-            startActivityForResult(intent,1)
+            time = timmer()
+            Timer().schedule(time, 0, 1000)
+            recordstart()
         }
+
 
         userWayLose.onClick {
             var intent = Intent(this@UserMainActivity,UserSelectActivity::class.java)
@@ -98,18 +106,12 @@ class UserMainActivity : AppCompatActivity() {
                             startActivity(Intent("android.intent.action.CALL", Uri.parse("tel:112")))
                         }
                     }
-                    1 -> {
-                        recordstart()
-//                        loaction()
-                    }
 
                     2 -> {
                         Callhelp('L'.toString())
-//                        loaction()
                     }
                     3 -> {
                         Callhelp('M'.toString())
-//                        loaction()
                     }
                 }
         }
@@ -124,10 +126,9 @@ class UserMainActivity : AppCompatActivity() {
     }
 
     fun recordstart() {
-        time = timmer()
-        Timer().schedule(time, 0, 1000)
         var recodePath = "Bliends_" + SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         var dirPath = File(Environment.getExternalStorageDirectory().absolutePath,"Bliends")
+        if (!dirPath.exists()) dirPath.mkdirs()
         dirPath.mkdir()
         file= File.createTempFile(recodePath,".3gp",dirPath)//파일생성
         path = file!!.path
@@ -141,18 +142,35 @@ class UserMainActivity : AppCompatActivity() {
         }
     }
 
+    fun recordstop() {
+        recorder!!.stop ();
+        recorder!!.reset (); // setAudioSource () 단계로 돌아가서 객체를 재사용 할 수 있습니다.
+        recorder!!.release ()
+    }
+
     fun timmer(): TimerTask {
         var s = 0
 
+
+
         var tt = object : TimerTask() {
+
+            val handler = @SuppressLint("HandlerLeak")
+            object : Handler() {
+                @SuppressLint("SetTextI18n")
+                override fun handleMessage(msg: Message) {
+                    recordstop()
+                    Callhelp("E")
+                    time.cancel()
+                }
+            }
+
             override fun run() {
                 Log.e("s",s.toString())
                 if (s >= 10) {
-                    Callhelp("E")
-                    recorder!!.release()
-                    recorder = null
-                    this.cancel()
                     s = 0
+                    val msg = handler.obtainMessage()
+                    handler.sendMessage(msg)
                 }
                 s++
             }
@@ -160,7 +178,10 @@ class UserMainActivity : AppCompatActivity() {
         return tt
     }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        TTSUtil.speakStop()
+    }
 
 
     fun Callhelp(situation_: String) {
@@ -224,9 +245,6 @@ class UserMainActivity : AppCompatActivity() {
                 finish()
             }
         }
-
         return super.onOptionsItemSelected(item)
     }
-
-
 }
