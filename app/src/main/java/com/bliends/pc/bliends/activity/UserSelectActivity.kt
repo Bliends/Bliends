@@ -13,6 +13,7 @@ import android.view.Gravity
 import android.view.Window
 import android.widget.LinearLayout
 import android.widget.PopupWindow
+import com.bliends.pc.bliends.util.TTSUtil
 import kotlinx.android.synthetic.main.activity_user_select.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 
@@ -26,11 +27,6 @@ class UserSelectActivity : Activity() {
                 WindowManager.LayoutParams.FLAG_BLUR_BEHIND)
         setContentView(R.layout.activity_user_select)
 
-        if (Build.VERSION.SDK_INT >= 21) {
-            // 21 버전 이상일 때
-            window.statusBarColor = ContextCompat.getColor(this, R.color.colorUserMain)
-        }
-
         var a = intent.getBooleanExtra("bl",false)
 
         if(a){
@@ -43,31 +39,38 @@ class UserSelectActivity : Activity() {
 
         userselectYes.onClick {
             if(a) {
+                tts("보호자에게 전화")
                 var intent = intent
                 intent.putExtra("bl",true)
                 setResult(RESULT_OK, intent)
             }else{
+                tts("예")
                 setResult(RESULT_OK, intent)
             }
-            overridePendingTransition(0, 0);
             finish()
+            overridePendingTransition(0, 0);
         }
 
         userselectNo.onClick {
             if(a){
+                tts("경찰서에 전화")
                 var intent = intent
                 intent.putExtra("bl",false)
                 setResult(RESULT_OK, intent)
                 finish()
-                overridePendingTransition(0, 0);
+                overridePendingTransition(0, 0)
             }else{
+                tts("아니요")
                 finish()
-                overridePendingTransition(0, 0);
+                overridePendingTransition(0, 0)
             }
         }
 
     }
-
+    fun tts(message: String){
+        TTSUtil.usingTTS(this@UserSelectActivity,message)
+        TTSUtil.speakStop()
+    }
     override fun overridePendingTransition(enterAnim: Int, exitAnim: Int) {
         super.overridePendingTransition(enterAnim, exitAnim)
     }

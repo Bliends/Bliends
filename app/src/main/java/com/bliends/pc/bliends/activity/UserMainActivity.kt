@@ -22,6 +22,7 @@ import com.bliends.pc.bliends.data.Sign
 import com.bliends.pc.bliends.data.User
 import com.bliends.pc.bliends.util.GPSUtil
 import com.bliends.pc.bliends.util.ORMUtil
+import com.bliends.pc.bliends.util.TTSUtil
 import kotlinx.android.synthetic.main.activity_user_main.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -56,6 +57,7 @@ class UserMainActivity : AppCompatActivity() {
             var intent = Intent(this@UserMainActivity,UserSelectActivity::class.java)
             intent.putExtra("bl",true)
             startActivityForResult(intent,0)
+            tts("전화하기\n 경찰서에 전화하시려면 왼쪽을 클릭하시고 보호자에게 전화하시려면 오른쪽을 클릭해주세요")
         }
 
         userCallHelp.onClick {
@@ -68,19 +70,21 @@ class UserMainActivity : AppCompatActivity() {
             var intent = Intent(this@UserMainActivity,UserSelectActivity::class.java)
             intent.putExtra("bl",false)
             startActivityForResult(intent,2)
+            tts("길을 잃어버렸을때 보내는 요청입니다.\n 오른쪽 클릭은 보내기 왼쪽을릭은 취소입니다.")
         }
 
         userMoney.onClick {
             var intent = Intent(this@UserMainActivity,UserSelectActivity::class.java)
             intent.putExtra("bl",false)
             startActivityForResult(intent,3)
+            tts("돈이 부족할때 보내는 요청입니다.\n 오른쪽 클릭은 보내기 왼쪽을릭은 취소입니다.")
         }
     }
 
-    fun loaction(){
-        longitude = GPSUtil(this@UserMainActivity).getLocation()!!.longitude
-        latitude = GPSUtil(this@UserMainActivity).getLocation()!!.latitude
+    fun tts(message: String){
+    TTSUtil.usingTTS(this@UserMainActivity,message)
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -109,6 +113,14 @@ class UserMainActivity : AppCompatActivity() {
                     }
                 }
         }
+    }
+
+    fun location(){
+        var gps = GPSUtil(applicationContext)
+        gps!!.getLocation()
+        longitude = gps!!.longitude
+        latitude = gps!!.latitude
+        gps!!.stopUsingGPS()
     }
 
     fun recordstart() {
@@ -148,7 +160,11 @@ class UserMainActivity : AppCompatActivity() {
         return tt
     }
 
+
+
+
     fun Callhelp(situation_: String) {
+        location()
         var list: List<Any> = ORMUtil(this@UserMainActivity).tokenORM.find(Sign())
         var sign = list[list.size - 1] as Sign
         var attachments: MultipartBody.Part? = null
@@ -162,8 +178,8 @@ class UserMainActivity : AppCompatActivity() {
         Log.e("situation", situation_)
         var res = RetrofitUtil.postService.Help(
                 sign.token,
-                GPSUtil(this@UserMainActivity).getLocation()!!.latitude!!,
-                GPSUtil(this@UserMainActivity).getLocation()!!.longitude!!,
+                latitude!!,
+                longitude!!,
                 situation_,
                 attachments
         )

@@ -116,6 +116,8 @@ class GPSUtil(private val mContext: Context) : Service(), LocationListener {
         makeDialog()
     }
 
+
+
      fun makeDialog() {
         val alt_bld = AlertDialog.Builder(mContext)
 
