@@ -6,18 +6,11 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
-import android.widget.Switch
 import com.bliends.pc.bliends.R
-import kotlinx.android.synthetic.main.dialog_change_phone.*
 import kotlinx.android.synthetic.main.fragment_setting.*
 
 
 class SettingFragment : Fragment(), View.OnClickListener{
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
