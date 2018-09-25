@@ -96,16 +96,16 @@ class UserMainActivity : AppCompatActivity() {
                     }
                     1 -> {
                         recordstart()
-                        loaction()
+//                        loaction()
                     }
 
                     2 -> {
                         Callhelp('L'.toString())
-                        loaction()
+//                        loaction()
                     }
                     3 -> {
                         Callhelp('M'.toString())
-                        loaction()
+//                        loaction()
                     }
                 }
         }
@@ -137,7 +137,6 @@ class UserMainActivity : AppCompatActivity() {
                 Log.e("s",s.toString())
                 if (s >= 10) {
                     Callhelp("E")
-                    recorder!!.stop()
                     recorder!!.release()
                     recorder = null
                     this.cancel()
@@ -163,8 +162,8 @@ class UserMainActivity : AppCompatActivity() {
         Log.e("situation", situation_)
         var res = RetrofitUtil.postService.Help(
                 sign.token,
-                latitude!!,
-                longitude!!,
+                GPSUtil(this@UserMainActivity).getLocation()!!.latitude!!,
+                GPSUtil(this@UserMainActivity).getLocation()!!.longitude!!,
                 situation_,
                 attachments
         )
@@ -212,4 +211,6 @@ class UserMainActivity : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
+
+
 }

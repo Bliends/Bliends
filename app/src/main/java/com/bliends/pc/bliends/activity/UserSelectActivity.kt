@@ -49,6 +49,7 @@ class UserSelectActivity : Activity() {
             }else{
                 setResult(RESULT_OK, intent)
             }
+            overridePendingTransition(0, 0);
             finish()
         }
 
@@ -58,10 +59,16 @@ class UserSelectActivity : Activity() {
                 intent.putExtra("bl",false)
                 setResult(RESULT_OK, intent)
                 finish()
+                overridePendingTransition(0, 0);
             }else{
                 finish()
+                overridePendingTransition(0, 0);
             }
         }
 
+    }
+
+    override fun overridePendingTransition(enterAnim: Int, exitAnim: Int) {
+        super.overridePendingTransition(enterAnim, exitAnim)
     }
 }
