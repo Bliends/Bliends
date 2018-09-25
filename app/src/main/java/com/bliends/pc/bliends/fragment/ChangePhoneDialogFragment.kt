@@ -1,10 +1,12 @@
 package com.bliends.pc.bliends.fragment
 
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.app.Dialog
 import android.app.DialogFragment
-import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -13,11 +15,12 @@ import android.view.View
 import com.bliends.pc.bliends.R
 import android.view.ViewGroup
 import android.view.LayoutInflater
-import kotlinx.android.synthetic.main.dialog_call.*
 import android.view.WindowManager
 import kotlinx.android.synthetic.main.dialog_change_phone.*
+import org.jetbrains.anko.defaultSharedPreferences
+import org.jetbrains.anko.toast
 
-class CallDialogFragment : DialogFragment(), View.OnClickListener{
+class ChangePhoneDialogFragment : DialogFragment(), View.OnClickListener{
 
     private var mDialog : Dialog? = null
 
@@ -27,38 +30,46 @@ class CallDialogFragment : DialogFragment(), View.OnClickListener{
         val layoutParams = WindowManager.LayoutParams()
         layoutParams.copyFrom(mDialog!!.window.attributes)
 
-        val view = View.inflate(activity, R.layout.dialog_call, null)
+        val view = View.inflate(activity, R.layout.dialog_change_phone, null)
         mDialog!!.window.attributes = layoutParams
         mDialog!!.setContentView(view)
 
         return mDialog as Dialog
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        call_weak_person.setOnClickListener(this)
-        call_police.setOnClickListener(this)
-        btn_cancel.setOnClickListener(this)
+        val pref = context?.getSharedPreferences("phoneNum", MODE_PRIVATE)
+        change_phone_edit.hint = pref!!.getString("phoneNum", "전화 번호를 입력하세요")
+        btn_change.setOnClickListener(this)
     }
 
     @Nullable
     override fun onCreateView(inflater: LayoutInflater?, @Nullable container: ViewGroup?, @Nullable savedInstanceState: Bundle?): View? {
-        val v = inflater!!.inflate(R.layout.dialog_call, container, false)
+        val v = inflater!!.inflate(R.layout.dialog_change_phone, container, false)
 
         mDialog!!.window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
 
         return v
     }
 
+    @SuppressLint("CommitPrefEdits")
     @TargetApi(Build.VERSION_CODES.M)
     override fun onClick(v: View?) {
         when(v!!.id){
-            R.id.call_weak_person ->{
-                val pref = context?.getSharedPreferences("phoneNum", Context.MODE_PRIVATE)
-                startActivity(Intent("android.intent.action.DIAL", Uri.parse("tel:" + pref!!.getString("phoneNum", "전화 번호를 입력하세요"))))
+            R.id.btn_change -> {
+                if(change_phone_edit.length() == 11) {
+                    val pref = context?.getSharedPreferences("phoneNum", MODE_PRIVATE)
+                    with(pref!!.edit()) {
+                        putString("phoneNum", "${change_phone_edit.text}")
+                        apply()
+                    }
+                    dismiss()
+                }else{
+                    toast("다시 입력하세요!")
+                }
             }
-            R.id.call_police -> startActivity(Intent("android.intent.action.DIAL", Uri.parse("tel:112")))
-            R.id.btn_cancel -> dismiss()
         }
     }
 }
