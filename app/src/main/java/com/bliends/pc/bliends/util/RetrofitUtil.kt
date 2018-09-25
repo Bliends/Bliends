@@ -10,7 +10,7 @@ import java.io.File
 object RetrofitUtil{
 
 //    http://norr.uy.to:5000/api
-val URL = "http://norr.uy.to:5000/api/"
+    val URL = "http://norr.uy.to:5000/api/"
 
     var retrofit = Retrofit.Builder()
             .baseUrl(URL)
@@ -19,8 +19,8 @@ val URL = "http://norr.uy.to:5000/api/"
 
     val postService = retrofit!!.create(Services::class.java)
 
-    fun audioMultipartBody(file : String, name: String): MultipartBody.Part {
+    fun audioMultipartBody(file : File, name: String): MultipartBody.Part {
         val mFile = RequestBody.create(MediaType.parse("audio/*"), file)
-        return MultipartBody.Part.createFormData(name, file, mFile)
+        return MultipartBody.Part.createFormData(name, file.path, mFile)
     }
 }

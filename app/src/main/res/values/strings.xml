@@ -4,4 +4,7 @@
     <string name="signup_id_error">아이디를 입력해 주세요</string>
     <string name="signup_password_error">비밀번호를 입력해 주세요</string>
     <string name="signup_cheakpassword_error">비밀번호가 일치 하지 않습니다</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
