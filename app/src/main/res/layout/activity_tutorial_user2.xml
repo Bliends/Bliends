@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".activity.TutorialUser1">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/focus_money"/>
+
+    <TextView
+        android:layout_marginTop="48dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#1e2640"
+        android:lineSpacingExtra="8sp"
+        android:gravity="center_horizontal"
+        android:text="현금인식 모듈 사용법"
+        />
+
+    <TextView
+        android:layout_marginTop="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="#1e2640"
+        android:lineSpacingExtra="12sp"
+        android:gravity="center_horizontal"
+        android:text="현금 앞쪽 점자를 통해 위치를 잡고 그곳을 기준으로
+왼쪽 아래 금액부분에 기기를 인식시켜주세요"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="105dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/bg_tutorial_index"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bg_tutorial_not_index"/>
+
+    </LinearLayout>
+
+</LinearLayout>

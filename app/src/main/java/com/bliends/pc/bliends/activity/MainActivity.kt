@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        getPermission()
 
         mainViewPag.adapter = MainPagerAdapter(supportFragmentManager)
         mainViewPag.offscreenPageLimit = 4
@@ -99,23 +98,4 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             Log.e("BNVHelper", "Unable to change value of shift mode", e)
         }
     }
-
-    //권한 설정
-    fun getPermission() {
-        ActivityCompat.requestPermissions(this@MainActivity,
-                arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.ACCESS_FINE_LOCATION),
-                0)
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int,
-                                            permissions: Array<String>, grantResults: IntArray) {
-        if (requestCode == 0) {
-            if (grantResults[0] != 0) {
-                Toast.makeText(this, "권한이 거절 되었습니다. 어플을 이용하려면 권한을 승낙하여야 합니다.", Toast.LENGTH_SHORT).show()
-                finish()
-            }
-        }
-    }
-
 }

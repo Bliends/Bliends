@@ -1,9 +1,12 @@
 package com.bliends.pc.bliends.activity
 
+import android.Manifest
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.support.v4.app.ActivityCompat
 import android.util.Log
+import android.widget.Toast
 import com.bliends.pc.bliends.R
 import com.bliends.pc.bliends.util.ORMUtil
 import com.bliends.pc.bliends.data.Sign
@@ -17,7 +20,6 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-
         try {
             var list: List<Any> = ORMUtil(this@SplashActivity).tokenORM.find(Sign())
             var userlist : List<Any> = ORMUtil(this@SplashActivity).userORM.find(User())

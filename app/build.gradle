@@ -14,6 +14,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -53,4 +54,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:15.0.1'
     implementation 'com.android.support:cardview-v7:27.1.1'
     implementation 'com.jjoe64:graphview:4.2.2'
+
+    //bluetooth - spp
+    implementation 'com.akexorcist:bluetoothspp:1.0.0'
 }

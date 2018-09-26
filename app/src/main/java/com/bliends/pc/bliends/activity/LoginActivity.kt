@@ -1,8 +1,10 @@
 package com.bliends.pc.bliends.activity
 
+import android.Manifest
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.support.v4.app.ActivityCompat
 import android.util.Log
 import android.view.View
 import com.bliends.pc.bliends.R
@@ -36,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
+        getPermission()
         loginId.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
 
             if (hasFocus) {
@@ -128,7 +130,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             loginBtn.onLongClick {
-                startActivity<MainActivity>()
+                startActivity<TutorialStart>("User" to "User")
             }
 
             loginBtn.onClick {
@@ -176,7 +178,7 @@ class LoginActivity : AppCompatActivity() {
                             if(response.body()!!.type == "P"){
                                 LoginActivity.usertutorial++
                                 if(usertutorial == 1){
-                                    //사용자 튜토리얼로 이어줘야함
+                                    startActivity<TutorialStart>("User" to "User")
                                     toast("사용자 튜토리얼")
                                 }else{
                                     startActivity<UserMainActivity>()
@@ -185,7 +187,7 @@ class LoginActivity : AppCompatActivity() {
                             }else{
                                 LoginActivity.protectortutorial++
                                 if(protectortutorial == 1){
-                                    //보호자 튜토리얼로 이어줘야함
+                                    startActivity<TutorialStart>("User" to "Protuctor")
                                     toast("보호자 튜토리얼")
                                 }else{
                                     startActivity<MainActivity>()
@@ -207,5 +209,25 @@ class LoginActivity : AppCompatActivity() {
                 }
             })
         }
+    //권한 설정
+    fun getPermission() {
+        ActivityCompat.requestPermissions(this@LoginActivity,
+                arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.RECORD_AUDIO,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.CALL_PHONE),
+                0)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<String>, grantResults: IntArray) {
+        if (requestCode == 0) {
+            if (grantResults[0] != 0 || grantResults[1] != 0 || grantResults[2] != 0 || grantResults[3] !=0) {
+                Toast.makeText(this, "권한이 거절 되었습니다. 어플을 이용하려면 권한을 승낙하여야 합니다.", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+        }
+    }
 
     }

@@ -1,6 +1,7 @@
 package com.bliends.pc.bliends.util
 
 import com.bliends.pc.bliends.data.*
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 import java.io.File
@@ -55,6 +56,14 @@ interface Services{
     @GET("users")
     fun OverlapId(@Query("limit") limit: Int,
                   @Query("q") q: String?) : Call<List<User>>
+
+    @Multipart
+    @POST("helps")
+    fun Help(@Header ("Authorization") Authorization : String,
+             @Part("latitude") latitude: Double,
+             @Part("longitude") longitude: Double,
+             @Part("situation") situation : String,
+             @Part attachments : MultipartBody.Part?) : Call<Help>
 
     @FormUrlEncoded
     @POST("activitylogs")
