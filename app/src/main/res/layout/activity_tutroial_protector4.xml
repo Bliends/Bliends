@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center|top"
+    android:orientation="vertical"
+    tools:context=".activity.TutorialUser1">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:paddingTop="32dp"
+        android:paddingRight="24dp"
+        android:paddingBottom="59dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tutroialProtector4Next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:lineSpacingExtra="6sp"
+            android:textColor="@color/colorLogin"
+            android:textSize="14sp"
+            tools:text="시작하기" />
+    </FrameLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/map"/>
+
+    <TextView
+        android:layout_marginTop="48dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#1e2640"
+        android:lineSpacingExtra="8sp"
+        android:gravity="center_horizontal"
+        android:text="위치추적"
+        />
+
+    <TextView
+        android:layout_marginTop="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="#1e2640"
+        android:lineSpacingExtra="12sp"
+        android:gravity="center_horizontal"
+        android:text="집과 그 외 자주 가는 장소를 마커 등록을 통해
+사용자가 그 위치에 가까워지는 경우 알림을 줍니다"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="105dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bg_tutorial_not_index"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/bg_tutorial_not_index"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bg_tutorial_index"/>
+
+    </LinearLayout>
+
+</LinearLayout>

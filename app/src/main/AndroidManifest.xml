@@ -57,14 +57,40 @@
             android:theme="@style/NoTitle" />
         <activity
             android:name=".activity.UserMainActivity"
-            android:theme="@style/MainTheme">
+            android:theme="@style/MainTheme" />
+        <activity
+            android:name=".activity.UserSelectActivity"
+            android:theme="@android:style/Theme.Translucent" />
 
-        </activity>
-        <activity android:name=".activity.UserSelectActivity"
-            android:theme="@android:style/Theme.Translucent">
-        </activity>
+        <service android:name=".service.MoneyService" />
 
-        <service android:name=".service.MoneyService"/>
+        <activity
+            android:name=".activity.TutorialStart"
+            android:theme="@style/MainTheme" />
+        <activity
+            android:name=".activity.TutorialUser1"
+            android:theme="@style/MainTheme" />
+        <activity
+            android:name=".activity.TutorialProtector1"
+            android:theme="@style/MainTheme" />
+        <activity
+            android:name=".activity.TutorialUser2"
+            android:theme="@style/MainTheme" />
+        <activity
+            android:name=".activity.TutorialUser3"
+            android:theme="@style/MainTheme" />
+
+        <activity android:name=".activity.TutroialProtector2"
+            android:theme="@style/MainTheme" />
+
+        <activity android:name=".activity.TutroialProtector3"
+            android:theme="@style/MainTheme" />
+
+        <activity android:name=".activity.TutroialProtector4"
+            android:theme="@style/MainTheme" />
+
+        <activity android:name=".activity.TutroialShow"
+            android:theme="@style/MainTheme" />
     </application>
 
 </manifest>

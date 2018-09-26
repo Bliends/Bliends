@@ -37,13 +37,13 @@ class MoneyService : Service() {
                 bt.enable()
                 toast("블루투스가 꺼졌습니다.블루투스르 다시 켜주세요")
                 TTSUtil.usingTTS(this@MoneyService, "블루투스가 꺼졌습니다.블루투스르 다시 켜주세요")
-                Log.e("asdfasdfasdfsfdasdfa","나재민")
+                Log.e("isServiceAvailable","노연결")
             } else {
                 if (!bt.isServiceAvailable) {
                     bt.setupService()
                     bt.startService(BluetoothState.DEVICE_OTHER)
                     bt.autoConnect("BLIENDS")
-                    Log.e("asdfasdfasdfsfdasdfa","나재딩")
+                    Log.e("isServiceAvailable","연결")
                 }
             }
 

@@ -130,7 +130,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             loginBtn.onLongClick {
-                startActivity<UserMainActivity>()
+                startActivity<TutorialStart>("User" to "User")
             }
 
             loginBtn.onClick {
@@ -178,7 +178,7 @@ class LoginActivity : AppCompatActivity() {
                             if(response.body()!!.type == "P"){
                                 LoginActivity.usertutorial++
                                 if(usertutorial == 1){
-                                    //사용자 튜토리얼로 이어줘야함
+                                    startActivity<TutorialStart>("User" to "User")
                                     toast("사용자 튜토리얼")
                                 }else{
                                     startActivity<UserMainActivity>()
@@ -187,7 +187,7 @@ class LoginActivity : AppCompatActivity() {
                             }else{
                                 LoginActivity.protectortutorial++
                                 if(protectortutorial == 1){
-                                    //보호자 튜토리얼로 이어줘야함
+                                    startActivity<TutorialStart>("User" to "Protuctor")
                                     toast("보호자 튜토리얼")
                                 }else{
                                     startActivity<MainActivity>()
@@ -223,7 +223,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int,
                                             permissions: Array<String>, grantResults: IntArray) {
         if (requestCode == 0) {
-            if (grantResults[0] != 0 || grantResults[1] != 0 || grantResults[2] != 0) {
+            if (grantResults[0] != 0 || grantResults[1] != 0 || grantResults[2] != 0 || grantResults[3] !=0) {
                 Toast.makeText(this, "권한이 거절 되었습니다. 어플을 이용하려면 권한을 승낙하여야 합니다.", Toast.LENGTH_SHORT).show()
                 finish()
             }

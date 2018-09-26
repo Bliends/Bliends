@@ -22,7 +22,6 @@ class Help{
     @SerializedName("filename")
     @Expose
     var filename: String? = null
-
     @SerializedName("created_at")
     @Expose
     var createdAt: String? = null
