@@ -19,11 +19,15 @@ import kotlinx.android.synthetic.main.fragment_dash_board.*
 import android.graphics.Paint
 import com.bliends.pc.bliends.data.ActivityLog
 import com.bliends.pc.bliends.data.DashBoardDate
+import com.bliends.pc.bliends.data.Sign
+import com.bliends.pc.bliends.util.ORMUtil
 import com.bliends.pc.bliends.util.RetrofitRes
 import com.bliends.pc.bliends.util.RetrofitUtil
 import com.jjoe64.graphview.helper.StaticLabelsFormatter
 import com.jjoe64.graphview.series.BarGraphSeries
 import com.jjoe64.graphview.series.PointsGraphSeries
+import org.jetbrains.anko.support.v4.toast
+import org.jetbrains.anko.toast
 
 class DashBoardFragment : Fragment() {
 
@@ -33,7 +37,8 @@ class DashBoardFragment : Fragment() {
     private lateinit var dashBoardHowManyPlaceAdapter: DashBoardHowManyPlaceAdapter
     private var mPlaceLog = ArrayList<DashBoardLabel>()
 
-    private val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNTM3NzA0NTUxfQ.fegceqw-hj0XK5iBrgBAiOoabcd1EJZUb3zwYkHOSkA"
+//    private val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNTM3NzA0NTUxfQ.fegceqw-hj0XK5iBrgBAiOoabcd1EJZUb3zwYkHOSkA"
+    private var token : String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,6 +57,11 @@ class DashBoardFragment : Fragment() {
 
         setGraphData()
         setLogData()
+
+        val list = ORMUtil(context!!).tokenORM.find(Sign())
+        val sign = list[list.size - 1] as Sign
+        token = sign.token
+        if(token == null) toast("토큰값이 없습니다!")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -64,7 +74,7 @@ class DashBoardFragment : Fragment() {
     }
 
     private fun setLogData() {
-        RetrofitUtil.postService.getActivityLogList(token).enqueue(object : RetrofitRes<ArrayList<ActivityLog>>(context!!) {
+        RetrofitUtil.postService.getActivityLogList(token!!).enqueue(object : RetrofitRes<ArrayList<ActivityLog>>(context!!) {
             override fun callback(code: Int, body: ArrayList<ActivityLog>?) {
                 if(code == 200){
                     body!!.forEach {
@@ -74,7 +84,7 @@ class DashBoardFragment : Fragment() {
             }
         })
 
-        RetrofitUtil.postService.getDashBoardByLabel(token).enqueue(object : RetrofitRes<ArrayList<DashBoardLabel>>(context!!) {
+        RetrofitUtil.postService.getDashBoardByLabel(token!!).enqueue(object : RetrofitRes<ArrayList<DashBoardLabel>>(context!!) {
             override fun callback(code: Int, body: ArrayList<DashBoardLabel>?) {
                 if (code == 200) {
                     body!!.forEach {
@@ -86,7 +96,7 @@ class DashBoardFragment : Fragment() {
     }
 
     private fun setGraphData() {
-        RetrofitUtil.postService.getDashBoardByDate(token, 7).enqueue(object : RetrofitRes<ArrayList<DashBoardDate>>(context!!) {
+        RetrofitUtil.postService.getDashBoardByDate(token!!, 7).enqueue(object : RetrofitRes<ArrayList<DashBoardDate>>(context!!) {
             @SuppressLint("SetTextI18n")
             override fun callback(code: Int, body: ArrayList<DashBoardDate>?) {
                 if (code == 200) {

@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f5f5f5">
+    android:background="#f5f5f5"
+    tools:context=".fragment.SettingFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -121,9 +122,9 @@
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/settings_label"
+                    android:drawableLeft="@drawable/settings_change_phone"
                     android:drawablePadding="28dp"
-                    android:drawableStart="@drawable/settings_label"
+                    android:drawableStart="@drawable/settings_change_phone"
                     android:text="단축번호 변경하기"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"

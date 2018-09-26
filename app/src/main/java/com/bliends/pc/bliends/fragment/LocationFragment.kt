@@ -15,12 +15,11 @@ import android.widget.LinearLayout
 import com.bliends.pc.bliends.adapter.ActivityLogAdapter
 import com.bliends.pc.bliends.data.ActivityLog
 import com.bliends.pc.bliends.data.Label
-import com.bliends.pc.bliends.util.AddMarkerUtil
-import com.bliends.pc.bliends.util.GPSUtil
-import com.bliends.pc.bliends.util.RetrofitRes
-import com.bliends.pc.bliends.util.RetrofitUtil
+import com.bliends.pc.bliends.data.Sign
+import com.bliends.pc.bliends.util.*
 import kotlinx.android.synthetic.main.fragment_location.*
 import org.jetbrains.anko.find
+import org.jetbrains.anko.support.v4.toast
 
 class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
 
@@ -30,7 +29,8 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
     private var mLog = ArrayList<ActivityLog>()
     private lateinit var mActivityLogAdapter : ActivityLogAdapter
 
-    private val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNTM3NzA0NTUxfQ.fegceqw-hj0XK5iBrgBAiOoabcd1EJZUb3zwYkHOSkA"
+    //private val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNTM3NzA0NTUxfQ.fegceqw-hj0XK5iBrgBAiOoabcd1EJZUb3zwYkHOSkA"
+    private var token : String? = null
     private val token_2 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTM3NzA0NTI0fQ.RSqPYZfHMIElw3DpszZu3G5_5VY9DFpEwqthnIyD85M"
 
     companion object {
@@ -50,6 +50,11 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {}
         })
         btn_open_log.setOnClickListener(this)
+
+        val list = ORMUtil(context!!).tokenORM.find(Sign())
+        val sign = list[list.size - 1] as Sign
+        token = sign.token
+        if(token == null) toast("토큰값이 없습니다!")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{
@@ -97,7 +102,7 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
         location_log.setHasFixedSize(false)
         location_log.itemAnimator = DefaultItemAnimator()
 
-        RetrofitUtil.postService.getActivityLogList(token)
+        RetrofitUtil.postService.getActivityLogList(token!!)
                 .enqueue(object : RetrofitRes<ArrayList<ActivityLog>>(context!!) {
             override fun callback(code: Int, body: ArrayList<ActivityLog>?) {
                 Log.e("Activity res code", code.toString())
@@ -109,7 +114,7 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
             }
         })
 
-        RetrofitUtil.postService.getLabelList(token)
+        RetrofitUtil.postService.getLabelList(token!!)
                 .enqueue(object : RetrofitRes<ArrayList<Label>>(context!!) {
                     override fun callback(code: Int, body: ArrayList<Label>?) {
                         Log.e("Label res code", code.toString())

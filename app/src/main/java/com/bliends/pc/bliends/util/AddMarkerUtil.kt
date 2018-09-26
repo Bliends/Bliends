@@ -113,7 +113,7 @@ object AddMarkerUtil{
         return BitmapDescriptorFactory.fromBitmap(bitmap)
     }
 
-    private fun createDrawableFromView(context: Context, view: View) : Bitmap {
+    fun createDrawableFromView(context: Context, view: View) : Bitmap {
         val displayMetrics = DisplayMetrics()
 
         context.windowManager.defaultDisplay.getMetrics(displayMetrics)
