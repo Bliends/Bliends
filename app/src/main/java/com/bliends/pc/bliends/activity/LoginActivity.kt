@@ -187,7 +187,7 @@ class LoginActivity : AppCompatActivity() {
                             }else{
                                 LoginActivity.protectortutorial++
                                 if(protectortutorial == 1){
-                                    startActivity<TutorialStart>("User" to "Protuctor")
+                                    startActivity<TutorialStart>("User" to "Protector")
                                     toast("보호자 튜토리얼")
                                 }else{
                                     startActivity<MainActivity>()

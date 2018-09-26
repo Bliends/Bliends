@@ -12,9 +12,12 @@ import com.bliends.pc.bliends.R
 import kotlinx.android.synthetic.main.dialog_add_label.*
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import com.bliends.pc.bliends.activity.TutroialShow
 import com.bliends.pc.bliends.data.Label
+import com.bliends.pc.bliends.data.Sign
 import com.bliends.pc.bliends.util.AddMarkerUtil.createDrawableFromView
 import com.bliends.pc.bliends.util.GPSUtil
+import com.bliends.pc.bliends.util.ORMUtil
 import com.bliends.pc.bliends.util.RetrofitRes
 import com.bliends.pc.bliends.util.RetrofitUtil
 import com.google.android.gms.maps.*
@@ -23,6 +26,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import org.jetbrains.anko.find
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 class AddLabelDialogFragment : DialogFragment(), OnMapReadyCallback, View.OnClickListener{
@@ -39,7 +43,8 @@ class AddLabelDialogFragment : DialogFragment(), OnMapReadyCallback, View.OnClic
     private var markerRootView : View? = null
     private var logMarkerMessage : TextView? = null
 
-    private val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNTM3NzA0NTUxfQ.fegceqw-hj0XK5iBrgBAiOoabcd1EJZUb3zwYkHOSkA"
+//    private val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNTM3NzA0NTUxfQ.fegceqw-hj0XK5iBrgBAiOoabcd1EJZUb3zwYkHOSkA"
+    private var token : String? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         mDialog = Dialog(activity, R.style.DialogFragment)
@@ -60,6 +65,10 @@ class AddLabelDialogFragment : DialogFragment(), OnMapReadyCallback, View.OnClic
 
         btn_cancel.setOnClickListener(this)
         btn_add.setOnClickListener(this)
+        if(isStart) {
+            set_label_name.setText("집")
+            set_label_name.isEnabled = false
+        }
         label_search.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 if(v.textSize > 0) {
@@ -76,6 +85,10 @@ class AddLabelDialogFragment : DialogFragment(), OnMapReadyCallback, View.OnClic
             }
             false
         })
+        val list = ORMUtil(context).tokenORM.find(Sign())
+        val sign = list[list.size - 1] as Sign
+        token = sign.token
+        if(token == null) toast("토큰값이 없습니다!")
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -143,7 +156,7 @@ class AddLabelDialogFragment : DialogFragment(), OnMapReadyCallback, View.OnClic
             R.id.btn_add ->{
                 if((address != null && lastMarker != null) && set_label_name.textSize > 0){
                     RetrofitUtil.postService.postLabel(
-                            token,
+                            token!!,
                             set_label_name.text.toString(),
                             address!!.latitude.toFloat(),
                             address!!.longitude.toFloat(),
@@ -152,6 +165,7 @@ class AddLabelDialogFragment : DialogFragment(), OnMapReadyCallback, View.OnClic
                         override fun callback(code: Int, body: Label?) {
                             if(code == 201){
                                 toast("라벨을 추가했습니다.")
+                                startActivity<TutroialShow>("User" to "Protector")
                                 dismiss()
                             }else{
                                 toast("라벨를 추가하는데 실패했습니다.")
@@ -163,6 +177,14 @@ class AddLabelDialogFragment : DialogFragment(), OnMapReadyCallback, View.OnClic
                 }
             }
             R.id.btn_cancel -> dismiss()
+        }
+    }
+
+    companion object {
+        private var isStart = false
+        fun newInstance(isStart: Boolean): AddLabelDialogFragment {
+            this.isStart = isStart
+            return AddLabelDialogFragment()
         }
     }
 }

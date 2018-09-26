@@ -22,10 +22,10 @@ class TutorialStart : AppCompatActivity() {
                 "Start",false)
 
         tutroalStart.onClick {
-            if (user == "Protuctor") {
+            if (user == "Protector") {
                 startActivity<TutorialProtector1>()
             } else if (user == "User") {
-                startActivity<TutorialUser1>()
+                startActivity<TutorialProtector1>()
             }
         }
     }

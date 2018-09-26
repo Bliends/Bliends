@@ -56,7 +56,6 @@ class ChangePhoneDialogFragment : DialogFragment(), View.OnClickListener{
         return v
     }
 
-    @SuppressLint("CommitPrefEdits")
     @TargetApi(Build.VERSION_CODES.M)
     override fun onClick(v: View?) {
         when(v!!.id){
