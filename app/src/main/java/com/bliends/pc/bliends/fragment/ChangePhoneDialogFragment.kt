@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.Nullable
+import android.telephony.PhoneNumberFormattingTextWatcher
 import android.view.View
 import com.bliends.pc.bliends.R
 import android.view.ViewGroup
@@ -42,6 +43,7 @@ class ChangePhoneDialogFragment : DialogFragment(), View.OnClickListener{
         super.onViewCreated(view, savedInstanceState)
         val pref = context?.getSharedPreferences("phoneNum", MODE_PRIVATE)
         change_phone_edit.hint = pref!!.getString("phoneNum", "전화 번호를 입력하세요")
+        change_phone_edit.addTextChangedListener(PhoneNumberFormattingTextWatcher())
         btn_change.setOnClickListener(this)
     }
 
@@ -59,7 +61,7 @@ class ChangePhoneDialogFragment : DialogFragment(), View.OnClickListener{
     override fun onClick(v: View?) {
         when(v!!.id){
             R.id.btn_change -> {
-                if(change_phone_edit.length() == 11) {
+                if(change_phone_edit.length() == 13) {
                     val pref = context?.getSharedPreferences("phoneNum", MODE_PRIVATE)
                     with(pref!!.edit()) {
                         putString("phoneNum", "${change_phone_edit.text}")
