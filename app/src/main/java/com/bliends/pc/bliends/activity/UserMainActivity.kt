@@ -143,15 +143,13 @@ class UserMainActivity : AppCompatActivity() {
     }
 
     fun recordstop() {
-        recorder!!.stop ();
-        recorder!!.reset (); // setAudioSource () 단계로 돌아가서 객체를 재사용 할 수 있습니다.
+        recorder!!.stop ()
+        recorder!!.reset () // setAudioSource () 단계로 돌아가서 객체를 재사용 할 수 있습니다.
         recorder!!.release ()
     }
 
     fun timmer(): TimerTask {
         var s = 0
-
-
 
         var tt = object : TimerTask() {
 
@@ -239,10 +237,7 @@ class UserMainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.userSetting -> {
                 //테스트로 로그인 부분으로 넘어가게 해놨음
-                ORMUtil(this).tokenORM.delete(Sign())
-                ORMUtil(this).userORM.delete(User())
-                startActivity<LoginActivity>()
-                finish()
+                startActivity<UserSettingActivity>()
             }
         }
         return super.onOptionsItemSelected(item)

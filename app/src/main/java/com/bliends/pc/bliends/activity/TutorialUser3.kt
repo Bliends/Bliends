@@ -68,6 +68,8 @@ class TutorialUser3 : AppCompatActivity(), GestureDetector.OnGestureListener {
 
         tutroialUser3Next.onClick {
             startActivity<UserMainActivity>()
+            TTSUtil.speakStop()
+            finish()
         }
     }
 }

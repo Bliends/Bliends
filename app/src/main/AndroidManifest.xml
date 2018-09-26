@@ -79,9 +79,12 @@
         <activity
             android:name=".activity.TutorialUser3"
             android:theme="@style/NoTitle" />
-
-        <activity android:name=".activity.TutroialShow"
+        <activity
+            android:name=".activity.TutroialShow"
             android:theme="@style/NoTitle" />
+        <activity android:name=".activity.UserSettingActivity"
+                android:theme="@style/NoTitle"
+            ></activity>
     </application>
 
 </manifest>

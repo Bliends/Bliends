@@ -103,14 +103,11 @@ class MoneyService : Service() {
         super.onStart(intent, startId)
         if (!bt.isBluetoothEnabled) {
             bt.enable()
-            Log.e("asdfasdfasdfsfdasdfa","나재민")
         } else {
             if (!bt.isServiceAvailable) {
                 bt.setupService()
                 bt.startService(BluetoothState.DEVICE_OTHER)
                 bt.autoConnect("BLIENDS")
-
-                Log.e("asdfasdfasdfsfdasdfa","나재딩")
             }
         }
     }
