@@ -165,7 +165,7 @@ class AddLabelDialogFragment : DialogFragment(), OnMapReadyCallback, View.OnClic
                         override fun callback(code: Int, body: Label?) {
                             if(code == 201){
                                 toast("라벨을 추가했습니다.")
-                                startActivity<TutroialShow>("User" to "Protector")
+                                if(isStart)startActivity<TutroialShow>("User" to "Protector")
                                 dismiss()
                             }else{
                                 toast("라벨를 추가하는데 실패했습니다.")

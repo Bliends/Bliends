@@ -100,7 +100,7 @@ class DashBoardFragment : Fragment() {
             @SuppressLint("SetTextI18n")
             override fun callback(code: Int, body: ArrayList<DashBoardDate>?) {
                 if (code == 200) {
-                    var count = 0
+                    var count = body!!.size - 1
                     val lineDataList = ArrayList<DataPoint>()
                     val barDataList = ArrayList<DataPoint>()
                     val horizontalDateList = ArrayList<String>()
@@ -114,12 +114,15 @@ class DashBoardFragment : Fragment() {
                                 maxCount = count
                             }
                         }
-                        lineDataList.add(DataPoint(count.toDouble(), it.count!! - 1.toDouble()))
+                        lineDataList.add(DataPoint(count.toDouble(), it.count!! - 0.5.toDouble()))
                         barDataList.add(DataPoint(count.toDouble(), it.count!!.toDouble()))
-                        horizontalDateList.add("${it.month}/${it.date}")
-                        count++
+                        horizontalDateList.add("${it.date}일")
+                        count--
                     }
                     if(body.size > 1){
+                        lineDataList.reverse()
+                        barDataList.reverse()
+                        horizontalDateList.reverse()
                         drawGraph(horizontalDateList, lineDataList, barDataList, maxCountDate!!, maxCount)
                         best_day_text.text = "최근 ${maxCountDate!!.month}/${maxCountDate!!.date} 에"
                     }else{
@@ -141,6 +144,8 @@ class DashBoardFragment : Fragment() {
         graph.gridLabelRenderer.verticalLabelsColor = Color.TRANSPARENT
         graph.gridLabelRenderer.labelHorizontalHeight = 180
         graph.gridLabelRenderer.horizontalLabelsColor = Color.argb(255, 30, 38, 64)
+        graph.gridLabelRenderer.textSize = 50f
+        graph.gridLabelRenderer.labelsSpace = -50
 
         val staticLabelsFormatter = StaticLabelsFormatter(graph)
         staticLabelsFormatter.setHorizontalLabels(horizontalDateList.toTypedArray())
@@ -164,13 +169,13 @@ class DashBoardFragment : Fragment() {
         barSeries.spacing = 100
 
         val pointSeries = PointsGraphSeries(
-                arrayOf(DataPoint(maxCount.toDouble(), maxCountDate!!.count!!.toDouble())))
+                arrayOf(DataPoint(maxCount.toDouble(), maxCountDate!!.count!!-0.5.toDouble())))
 
         pointSeries.shape = PointsGraphSeries.Shape.POINT
         pointSeries.color = Color.argb(255, 60, 179, 113)
 
         val pointSeries2 = PointsGraphSeries(
-                arrayOf(DataPoint(maxCount.toDouble(), maxCountDate!!.count!!.toDouble())))
+                arrayOf(DataPoint(maxCount.toDouble(), maxCountDate!!.count!!-0.5.toDouble())))
 
         pointSeries2.shape = PointsGraphSeries.Shape.POINT
         pointSeries2.color = Color.argb(30, 60, 179, 113)
