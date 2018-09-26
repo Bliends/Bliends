@@ -7,7 +7,9 @@
     <color name="bottomNavColor">#1e2640</color>
     <color name="colorStrokeLogin">#d9d9d9</color>
     <color name="colorbottomNav">#000000</color>
-    <color name="colorMain">#F6f6f7</color>
+    <color name="colorMain">#FFFFFF</color>
+    <color name="colorUserMain">#F6f6f7</color>
+
     <color name="colorSub">#1e2640</color>
     <color name="colornotselectcolor">#c4c5c5</color>
     <color name="colorLoginPrimaryDark">#FFFFFF</color>

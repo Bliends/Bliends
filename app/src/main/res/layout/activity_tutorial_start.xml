@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@color/colorUserMain"
+    tools:context=".activity.TutorialStart">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_splash_icon"/>
+
+    <ImageView
+        android:layout_marginTop="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/logo_txt"/>
+
+    <TextView
+        android:layout_marginTop="56dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="#1e2640"
+        android:lineSpacingExtra="12sp"
+        android:gravity="center"
+        android:text="Bliends는 시각장애인의 편의를 제공하기 위한\n 모바일 어플리케이션 서비스입니다."
+        />
+
+    <Button
+        android:id="@+id/tutroalStart"
+        android:layout_marginTop="71dp"
+        android:layout_width="wrap_content"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="normal"
+        android:textColor="#ffffff"
+        android:letterSpacing="0.01"
+        android:lineSpacingExtra="2sp"
+        android:text="시작하기"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_loginbtn"/>
+
+</LinearLayout>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center|top"
+    android:orientation="vertical"
+    tools:context=".activity.TutorialUser1">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:paddingTop="32dp"
+        android:paddingRight="24dp"
+        android:paddingBottom="59dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tutroiaProtectorlNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:lineSpacingExtra="6sp"
+            android:textColor="@color/colorLogin"
+            android:textSize="14sp"
+            tools:text="다음으로" />
+    </FrameLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/label"/>
+
+    <TextView
+        android:layout_marginTop="48dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#1e2640"
+        android:lineSpacingExtra="8sp"
+        android:gravity="center_horizontal"
+        android:text="라벨추가하기"
+        />
+
+    <TextView
+        android:layout_marginTop="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="#1e2640"
+        android:lineSpacingExtra="12sp"
+        android:gravity="center_horizontal"
+        android:text="집과 그 외 자주 가는 장소를 마커 등록을 통해
+사용자가 그 위치에 가까워지는 경우 알림을 줍니다."
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:textColor="#b91616"
+        android:layout_marginTop="12dp"
+        android:lineSpacingExtra="12sp"
+        android:gravity="center_horizontal"
+        android:text="버튼을 누르면 라벨을 추가하는 팝업이 뜹니다, 집을 설정해주세요."
+        />
+
+    <Button
+        android:id="@+id/tutroalProtectorLabel"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="normal"
+        android:textColor="#ffffff"
+        android:letterSpacing="0.01"
+        android:lineSpacingExtra="2sp"
+        android:text="라벨추가하러 가기"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_loginbtn"/>
+
+</LinearLayout>

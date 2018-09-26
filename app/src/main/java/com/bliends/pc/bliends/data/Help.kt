@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 class Help{
-
     @SerializedName("id")
     @Expose
     var id: Int? = null
@@ -23,7 +22,6 @@ class Help{
     @SerializedName("filename")
     @Expose
     var filename: String? = null
-
     @SerializedName("created_at")
     @Expose
     var createdAt: String? = null

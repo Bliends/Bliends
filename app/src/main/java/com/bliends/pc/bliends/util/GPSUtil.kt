@@ -116,7 +116,9 @@ class GPSUtil(private val mContext: Context) : Service(), LocationListener {
         makeDialog()
     }
 
-    private fun makeDialog() {
+
+
+     fun makeDialog() {
         val alt_bld = AlertDialog.Builder(mContext)
 
         alt_bld.setMessage("GPS 사용이 필요합니다.\n설정창으로 가시겠습니까?").setCancelable(

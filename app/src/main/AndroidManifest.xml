@@ -8,6 +8,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.DIAL_PHONE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:name=".socket.SocketApplication"
@@ -17,11 +20,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBKtgrS0shGJRy-GgnuYzS-njwpVZvYeVk" />
@@ -29,16 +30,13 @@
         <activity
             android:name=".activity.SplashActivity"
             android:theme="@style/NoTitle">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".activity.MainActivity" />
-
         <activity
             android:name=".activity.LoginActivity"
             android:theme="@style/NoTitle" />
@@ -59,7 +57,40 @@
             android:theme="@style/NoTitle" />
         <activity
             android:name=".activity.UserMainActivity"
-            android:theme="@style/NoTitle" />
+            android:theme="@style/MainTheme" />
+        <activity
+            android:name=".activity.UserSelectActivity"
+            android:theme="@android:style/Theme.Translucent" />
+
+        <service android:name=".service.MoneyService" />
+
+        <activity
+            android:name=".activity.TutorialStart"
+            android:theme="@style/MainTheme" />
+        <activity
+            android:name=".activity.TutorialUser1"
+            android:theme="@style/MainTheme" />
+        <activity
+            android:name=".activity.TutorialProtector1"
+            android:theme="@style/MainTheme" />
+        <activity
+            android:name=".activity.TutorialUser2"
+            android:theme="@style/MainTheme" />
+        <activity
+            android:name=".activity.TutorialUser3"
+            android:theme="@style/MainTheme" />
+
+        <activity android:name=".activity.TutroialProtector2"
+            android:theme="@style/MainTheme" />
+
+        <activity android:name=".activity.TutroialProtector3"
+            android:theme="@style/MainTheme" />
+
+        <activity android:name=".activity.TutroialProtector4"
+            android:theme="@style/MainTheme" />
+
+        <activity android:name=".activity.TutroialShow"
+            android:theme="@style/MainTheme" />
     </application>
 
 </manifest>
