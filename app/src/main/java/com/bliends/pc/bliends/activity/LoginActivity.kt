@@ -179,7 +179,6 @@ class LoginActivity : AppCompatActivity() {
                                 LoginActivity.usertutorial++
                                 if(usertutorial == 1){
                                     startActivity<TutorialStart>("User" to "User")
-                                    toast("사용자 튜토리얼")
                                 }else{
                                     startActivity<UserMainActivity>()
                                     finish()
@@ -188,7 +187,6 @@ class LoginActivity : AppCompatActivity() {
                                 LoginActivity.protectortutorial++
                                 if(protectortutorial == 1){
                                     startActivity<TutorialStart>("User" to "Protuctor")
-                                    toast("보호자 튜토리얼")
                                 }else{
                                     startActivity<MainActivity>()
                                     finish()

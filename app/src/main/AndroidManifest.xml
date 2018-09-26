@@ -69,28 +69,19 @@
             android:theme="@style/MainTheme" />
         <activity
             android:name=".activity.TutorialUser1"
-            android:theme="@style/MainTheme" />
+            android:theme="@style/NoTitle" />
         <activity
             android:name=".activity.TutorialProtector1"
-            android:theme="@style/MainTheme" />
+            android:theme="@style/NoTitle" />
         <activity
             android:name=".activity.TutorialUser2"
-            android:theme="@style/MainTheme" />
+            android:theme="@style/NoTitle" />
         <activity
             android:name=".activity.TutorialUser3"
-            android:theme="@style/MainTheme" />
-
-        <activity android:name=".activity.TutroialProtector2"
-            android:theme="@style/MainTheme" />
-
-        <activity android:name=".activity.TutroialProtector3"
-            android:theme="@style/MainTheme" />
-
-        <activity android:name=".activity.TutroialProtector4"
-            android:theme="@style/MainTheme" />
+            android:theme="@style/NoTitle" />
 
         <activity android:name=".activity.TutroialShow"
-            android:theme="@style/MainTheme" />
+            android:theme="@style/NoTitle" />
     </application>
 
 </manifest>

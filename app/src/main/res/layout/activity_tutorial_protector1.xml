@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center|top"
     android:orientation="vertical"
+    android:background="@color/colorLoginPrimaryDark"
     tools:context=".activity.TutorialUser1">
 
     <FrameLayout
@@ -23,7 +24,7 @@
             android:lineSpacingExtra="6sp"
             android:textColor="@color/colorLogin"
             android:textSize="14sp"
-            tools:text="다음으로" />
+            android:text="다음으로" />
     </FrameLayout>
 
     <ImageView

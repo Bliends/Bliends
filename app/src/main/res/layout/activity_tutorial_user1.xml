@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center|top"
     android:orientation="vertical"
+    android:background="@color/colorLoginPrimaryDark"
     tools:context=".activity.TutorialUser1">
 
     <FrameLayout
@@ -23,11 +24,12 @@
             android:lineSpacingExtra="6sp"
             android:textColor="@color/colorLogin"
             android:textSize="14sp"
-            tools:text="다음으로" />
+            android:text="다음으로" />
     </FrameLayout>
 
     <ImageView
         android:layout_width="wrap_content"
+        android:layout_marginLeft="5dp"
         android:layout_height="wrap_content"
         android:background="@drawable/bluetooth"/>
 
@@ -51,8 +53,7 @@
         android:textColor="#1e2640"
         android:lineSpacingExtra="12sp"
         android:gravity="center_horizontal"
-        android:text="블루투스 설정창에서  Bliends를 검색해주시고
-페어링을 위해 pin번호를 입력해주세요"
+        android:text="블루투스 설정창에서  Bliends를 검색해주시고\n페어링을 위해 pin번호를 입력해주세요"
         />
 
     <Button

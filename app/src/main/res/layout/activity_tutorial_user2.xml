@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".activity.TutorialUser1">
+    android:background="@color/colorLoginPrimaryDark"
+    android:orientation="vertical">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -33,9 +33,7 @@
         android:textColor="#1e2640"
         android:lineSpacingExtra="12sp"
         android:gravity="center_horizontal"
-        android:text="현금 앞쪽 점자를 통해 위치를 잡고 그곳을 기준으로
-왼쪽 아래 금액부분에 기기를 인식시켜주세요"
-        />
+        android:text="현금 앞쪽 점자를 통해 위치를 잡고 그곳을 기준으로\n왼쪽 아래 금액부분에 기기를 인식시켜주세요" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -47,7 +45,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
             android:src="@drawable/bg_tutorial_index"/>
 
         <ImageView

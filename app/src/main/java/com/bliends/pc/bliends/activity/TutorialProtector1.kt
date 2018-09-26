@@ -15,7 +15,7 @@ class TutorialProtector1 : AppCompatActivity() {
 
         tutroiaProtectorlNext.onClick {
             //집설정하지 않으면 못넘어가게 막아놓으삼
-            startActivity<TutroialShow>("User" to "Protuctor")
+            startActivity<TutroialShow>("User" to "Protector")
         }
 
         tutroalProtectorLabel.onClick {

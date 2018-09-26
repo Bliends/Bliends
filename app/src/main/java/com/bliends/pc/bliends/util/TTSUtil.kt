@@ -26,12 +26,14 @@ object TTSUtil : TextToSpeech.OnInitListener {
     private var tts: TextToSpeech? = null
     lateinit var text: String
     lateinit var context: Context
+    var recognizer : SpeechRecognizer? = null
     var bl: Boolean = false
     var resoundcheck : Boolean = false
     var check: String = ""
     fun usingTTS(context: Context, text: String) {
         tts = TextToSpeech(context, this)
         this.text = text
+        this.bl = false
     }
 
     fun TutroailusingTTS(context: Context, text: String, check: String,resoundcheck : Boolean) {
@@ -63,9 +65,9 @@ object TTSUtil : TextToSpeech.OnInitListener {
         var intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, context.packageName);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ko-KR")
-        var recognizer = SpeechRecognizer.createSpeechRecognizer(context)
-        recognizer.setRecognitionListener(listener)
-        recognizer.startListening(intent)
+        recognizer = SpeechRecognizer.createSpeechRecognizer(context)
+        recognizer!!.setRecognitionListener(listener)
+        recognizer!!.startListening(intent)
     }
 
     private fun tutroialspeak(text: String) {
@@ -73,7 +75,6 @@ object TTSUtil : TextToSpeech.OnInitListener {
         tts!!.setSpeechRate(1.0f)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             tts!!.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
-            SystemClock.sleep(10)
             sound()
             // API 20
         } else {
@@ -84,16 +85,29 @@ object TTSUtil : TextToSpeech.OnInitListener {
 
     fun sound(){
         Log.e("check",check)
-        if (check == "Start") {
-            Handler().postDelayed({
-                fun run() {
-                    SoundOn()
-                }
-            }, 14000)
-        }else if(check == "end"){
+        Log.e("check",resoundcheck.toString())
+        if (check == "Start" && !resoundcheck) {
+            Log.e("asdfsd","asdfsadf")
 
+            var handler = Handler()
+            handler.postDelayed({
+                SoundOn()
+            },10000)
+        }else if(check == "end" && !resoundcheck){
+
+            var handler = Handler()
+            Log.e("hjgfgd","jhgf")
+            handler.postDelayed({
+                SoundOn()
+            },13000)
         }else if(resoundcheck){
-
+            var handler = Handler()
+            Log.e("hjgfgd","jhgfasdfasdfasdfasdfadfasdfasdfasd")
+            handler.postDelayed({
+                SoundOn()
+            },3500)
+        }else{
+            Log.e("hjgfgd","sadfasdfasdfasdfs")
         }
     }
 
@@ -174,6 +188,9 @@ object TTSUtil : TextToSpeech.OnInitListener {
         if (tts != null) {
             tts!!.stop()
             tts!!.shutdown()
+        }
+        if(recognizer != null){
+            recognizer!!.setRecognitionListener(listener)
         }
     }
 }
