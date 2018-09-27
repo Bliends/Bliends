@@ -29,6 +29,7 @@ class TutorialUser1 : AppCompatActivity() {
     private var btService: BlutoothService? = null
     var bt: BluetoothSPP = BluetoothSPP(this)
     var adapter = BluetoothAdapter.getDefaultAdapter()
+    lateinit var mSocket : BluetoothSocket
     var handler = object : Handler() {
         override fun handleMessage(msg: Message?) {
             super.handleMessage(msg)
@@ -39,6 +40,7 @@ class TutorialUser1 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutorial_user1)
 
+
         if (btService == null) {
             btService = BlutoothService(this, handler)
         }
@@ -47,8 +49,8 @@ class TutorialUser1 : AppCompatActivity() {
                 "블루투스기기 설정 \n" +
                         "블루투스 설정창에서  Bliends  를 검색해주시고\n" +
                         "페어링을 위해 pin번호 0 0 0 0을 입력해주세요\n" +
-                        "블루투스를 설정하시려면 아래 버튼을 눌러주세요\n" +
-                        "블루투스 설정은 보호자와 함께 설정하길 추천드립니다.\n"
+                        "블루투스를 설정하시려면 아래 버튼을 눌러주시고 보호자와 함께 설정하시기를 추천드립니다\n"
+
         )
 
         bt!!.setBluetoothConnectionListener(object : BluetoothSPP.BluetoothConnectionListener {
@@ -97,33 +99,52 @@ class TutorialUser1 : AppCompatActivity() {
                 val device = intent.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)
                 Log.e(device.name, device.address)
 //                BLIENDS
-                var mRemoteDevie: BluetoothDevice = device
-
 
                 if (device.name == "BLIENDS") {
-                    Log.e("bluetooth","asdfsadf")
-                    // java.util.UUID.fromString : 자바에서 중복되지 않는 Unique 키 생성.
-                    val uuid = java.util.UUID.fromString("00001101-0000-1000-8000-00895f9b34fb")
-                    try {
-                        Log.e("bluetooth","연결")
-                        // 소켓 생성, RFCOMM 채널을 통한 연결.
-                        // createRfcommSocketToServiceRecord(uuid) : 이 함수를 사용하여 원격 블루투스 장치와 통신할 수 있는 소켓을 생성함.
-                        // 이 메소드가 성공하면 스마트폰과 페어링 된 디바이스간 통신 채널에 대응하는 BluetoothSocket 오브젝트를 리턴함.
-                        var mSocket = mRemoteDevie.createRfcommSocketToServiceRecord(uuid)
-                        mSocket.connect() // 소켓이 생성 되면 connect() 함수를 호출함으로써 두기기의 연결은 완료된다.
-                        TTSUtil.usingTTS(this@TutorialUser1, "블루투스가 정상적으로 연결되었습니다. 다음으로 넘어갑니다.")
-                        startActivity<TutorialUser2>()
-                        finish()
-                    } catch (e: Exception) { // 블루투스 연결 중 오류 발생
-                        Toast.makeText(this@TutorialUser1, "블루투스 연결 중 오류가 발생했습니다.", Toast.LENGTH_LONG).show()
-                    }
+                    Log.e("bluetooth", "asdfsadf")
+                    connectToSelectedDevice(device)
                 }
-            } else if (BluetoothAdapter.ACTION_DISCOVERY_STARTED == action) {
-                TTSUtil.usingTTS(this@TutorialUser1, "블루투스기기를 찾고 있습니다. 잠시만 기다려주세요")
             }
         }
     }
 
+
+    internal fun connectToSelectedDevice(selectedDeviceName: BluetoothDevice) {
+
+        adapter.cancelDiscovery()
+        unregisterReceiver(mReceiver)
+        // BluetoothDevice 원격 블루투스 기기를 나타냄.
+        var mRemoteDevie: BluetoothDevice = selectedDeviceName
+        // java.util.UUID.fromString : 자바에서 중복되지 않는 Unique 키 생성.
+        val uuid = java.util.UUID.fromString("00001101-0000-1000-8000-00805f9b34fb")
+        try {
+        // 소켓 생성, RFCOMM 채널을 통한 연결.
+        // createRfcommSocketToServiceRecord(uuid) : 이 함수를 사용하여 원격 블루투스 장치와 통신할 수 있는 소켓을 생성함.
+        // 이 메소드가 성공하면 스마트폰과 페어링 된 디바이스간 통신 채널에 대응하는 BluetoothSocket 오브젝트를 리턴함.
+        mSocket = mRemoteDevie.createRfcommSocketToServiceRecord(uuid)
+
+        mSocket.connect() // 소켓이 생성 되면 connect() 함수를 호출함으로써 두기기의 연결은 완료된다.
+
+        startActivity<TutorialUser2>("User" to "User")
+        finish()
+
+        } catch (e: Exception) { // 블루투스 연결 중 오류 발생
+            Log.e("e",e.toString())
+            Toast.makeText(this@TutorialUser1, "블루투스 연결 중 오류가 발생했습니다.", Toast.LENGTH_LONG).show()
+            TTSUtil.usingTTS(this@TutorialUser1, "블루투스 연결 중 오류가 발생했습니다.\n 블루투스 설정창에서 직접 Bliends를 연결해주세요")
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        try {
+            unregisterReceiver(mReceiver)
+        } catch (e: IllegalArgumentException) {
+        }
+        try{
+            mSocket!!.close()
+        }catch(e :Exception){}
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -131,14 +152,11 @@ class TutorialUser1 : AppCompatActivity() {
         if (requestCode == 10) {
             if (resultCode == Activity.RESULT_OK) {
                 Log.e("asdf", "asdf")
-
-                TTSUtil.usingTTS(this@TutorialUser1, "블루투스가 켜졌습니다.\n 기기를 검색합니다.\n 잠시만 기다려주세요")
                 adapter.startDiscovery()
                 var filter = IntentFilter()
-                filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED) //BluetoothAdapter.ACTION_DISCOVERY_STARTED : 블루투스 검색 시작
                 filter.addAction(BluetoothDevice.ACTION_FOUND) //BluetoothDevice.ACTION_FOUND : 블루투스 디바이스 찾음
                 registerReceiver(mReceiver, filter)
-                Log.e("null", "null")
+                TTSUtil.usingTTS(this@TutorialUser1, "기기를 찾고 있습니다. 잠시만 기다려주세요")
             }
         } else {
             toast("블루투스를 켜주세요.")
@@ -147,5 +165,11 @@ class TutorialUser1 : AppCompatActivity() {
         }
     }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        try {
+            unregisterReceiver(mReceiver)
+            mSocket!!.close()
+        }catch (e : IllegalArgumentException){}
+    }
 }

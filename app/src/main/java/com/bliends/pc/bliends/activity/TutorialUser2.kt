@@ -56,6 +56,10 @@ class TutorialUser2 : AppCompatActivity(), GestureDetector.OnGestureListener {
         gestureScanner = GestureDetector(this)
         setContentView(R.layout.activity_tutorial_user2)
 
+        if(intent.getStringExtra("User") == "User"){
+            TTSUtil.usingTTS(this@TutorialUser2, "블루투스가 정상적으로 연결되었습니다. 다음으로 넘어갑니다.")
+        }
+
         TTSUtil.usingTTS(this,
                 "현금인식 모듈 사용법 \n" +
                         "현금 앞쪽 점자를 통해 위치를 잡고 그곳을 기준으로 \n" +

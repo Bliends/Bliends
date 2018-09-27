@@ -105,8 +105,8 @@ class ChangePhoneDialogFragment(user: String) : DialogFragment(), View.OnClickLi
                     apply()
                 }
                 dismiss()
-                tts("설정하신 보호자의 휴대폰가 번호정상적으로 설정되었습니다.")
-                toast("설정하신 보호자의 휴대폰가 번호정상적으로 설정되었습니다.")
+                tts("설정하신 보호자의 휴대폰번호가 정상적으로 등록되었습니다.")
+                toast("설정하신 보호자의 휴대폰번호가 정상적으로 등록되었습니다.")
             } else {
                 dismiss()
                 Log.e("tset", "취소")
