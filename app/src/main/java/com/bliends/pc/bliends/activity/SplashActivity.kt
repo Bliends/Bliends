@@ -11,6 +11,7 @@ import com.bliends.pc.bliends.R
 import com.bliends.pc.bliends.util.ORMUtil
 import com.bliends.pc.bliends.data.Sign
 import com.bliends.pc.bliends.data.User
+import com.google.firebase.messaging.FirebaseMessaging
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
@@ -27,8 +28,9 @@ class SplashActivity : AppCompatActivity() {
             var sign = list[list.size - 1] as Sign
             token = sign.token
             type = user.type
+            FirebaseMessaging.getInstance().subscribeToTopic(user._id)
             Log.e("token", token)
-        } catch (e: ArrayIndexOutOfBoundsException) {
+        } catch (e: Exception) {
             token = null
         }
 

@@ -91,7 +91,7 @@ interface Services{
 
     @PATCH("users/{user_id}")
     fun patchUser(@Header ("Authorization") Authorization : String,
-                  @Path("user_id") user_id : Int,
+                  @Path("user_id") user_id : String,
                   @Body body : JsonObject) : Call<User>
 
     @PATCH("users")
