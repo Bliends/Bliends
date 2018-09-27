@@ -85,10 +85,13 @@ class AddLabelDialogFragment : DialogFragment(), OnMapReadyCallback, View.OnClic
             }
             false
         })
-        val list = ORMUtil(context).tokenORM.find(Sign())
-        val sign = list[list.size - 1] as Sign
-        token = sign.token
-        if(token == null) toast("토큰값이 없습니다!")
+        try{
+            val list = ORMUtil(context).tokenORM.find(Sign())
+            val sign = list[list.size - 1] as Sign
+            token = sign.token
+        }catch (e : Exception){
+            if(token == null) toast("계정 토큰값이 없습니다!")
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.M)

@@ -20,6 +20,7 @@ import com.bliends.pc.bliends.util.*
 import kotlinx.android.synthetic.main.fragment_location.*
 import org.jetbrains.anko.find
 import org.jetbrains.anko.support.v4.toast
+import org.jetbrains.anko.toast
 
 class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
 
@@ -51,10 +52,13 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
         })
         btn_open_log.setOnClickListener(this)
 
-        val list = ORMUtil(context!!).tokenORM.find(Sign())
-        val sign = list[list.size - 1] as Sign
-        token = sign.token
-        if(token == null) toast("토큰값이 없습니다!")
+        try{
+            val list = ORMUtil(context!!).tokenORM.find(Sign())
+            val sign = list[list.size - 1] as Sign
+            token = sign.token
+        }catch (e : Exception){
+            if(token == null) toast("계정 토큰값이 없습니다!")
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{

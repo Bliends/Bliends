@@ -129,9 +129,9 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             }
 
-            loginBtn.onLongClick {
-                startActivity<TutorialStart>("User" to "User")
-            }
+//            loginBtn.onLongClick {
+//                startActivity<TutorialStart>("User" to "User")
+//            }
 
             loginBtn.onClick {
                 Login()

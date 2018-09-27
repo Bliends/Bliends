@@ -18,6 +18,7 @@ import com.bliends.pc.bliends.util.RetrofitUtil
 import com.bliends.pc.bliends.util.TTSUtil
 import kotlinx.android.synthetic.main.fragment_help.*
 import org.jetbrains.anko.support.v4.toast
+import org.jetbrains.anko.toast
 
 class HelpFragment : Fragment(), View.OnClickListener{
 
@@ -43,10 +44,13 @@ class HelpFragment : Fragment(), View.OnClickListener{
 
         floating_call.setOnClickListener(this)
 
-        val list = ORMUtil(context!!).tokenORM.find(Sign())
-        val sign = list[list.size - 1] as Sign
-        token = sign.token
-        if(token == null) toast("토큰값이 없습니다!")
+        try{
+            val list = ORMUtil(context!!).tokenORM.find(Sign())
+            val sign = list[list.size - 1] as Sign
+            token = sign.token
+        }catch (e : Exception){
+            if(token == null) toast("계정 토큰값이 없습니다!")
+        }
 
         RetrofitUtil.postService.getHelpList(token!!).enqueue(object : RetrofitRes<ArrayList<Help>>(context!!){
             override fun callback(code: Int, body: ArrayList<Help>?) {
