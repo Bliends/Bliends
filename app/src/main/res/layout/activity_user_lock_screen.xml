@@ -5,17 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorUserMain"
-    android:gravity="center"
+    android:gravity="center|top"
     android:orientation="vertical"
-    android:weightSum="2"
+    android:weightSum="2.2"
     tools:context=".activity.UserMainActivity">
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/userToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
-
-    </android.support.v7.widget.Toolbar>
 
 
     <LinearLayout
@@ -152,4 +145,37 @@
 
         </LinearLayout>
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
+
+    <LinearLayout
+        android:id="@+id/userLockFinish"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_weight="0.2">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_chevron_right_black_24dp"/>
+
+        <TextView
+            android:layout_marginRight="9.3dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="bold"
+            android:textColor="#1e2640"
+            android:lineSpacingExtra="2sp"
+            android:text="밀어서 잠금해제"
+            />
+
+    </LinearLayout>
+
 </LinearLayout>

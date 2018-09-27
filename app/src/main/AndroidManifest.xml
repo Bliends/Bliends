@@ -64,33 +64,36 @@
 
         <service android:name=".service.MoneyService" />
 
+        <service android:name=".service.UserLockService" />
+
         <activity
             android:name=".activity.TutorialStart"
             android:theme="@style/MainTheme" />
         <activity
             android:name=".activity.TutorialUser1"
-            android:theme="@style/MainTheme" />
+            android:theme="@style/NoTitle" />
         <activity
             android:name=".activity.TutorialProtector1"
-            android:theme="@style/MainTheme" />
+            android:theme="@style/NoTitle" />
         <activity
             android:name=".activity.TutorialUser2"
-            android:theme="@style/MainTheme" />
+            android:theme="@style/NoTitle" />
         <activity
             android:name=".activity.TutorialUser3"
-            android:theme="@style/MainTheme" />
+            android:theme="@style/NoTitle" />
+        <activity
+            android:name=".activity.TutroialShow"
+            android:theme="@style/NoTitle" />
+        <activity
+            android:name=".activity.UserSettingActivity"
+            android:theme="@style/NoTitle" />
+        <activity
+            android:name=".activity.UserLockScreen"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
 
-        <activity android:name=".activity.TutroialProtector2"
-            android:theme="@style/MainTheme" />
-
-        <activity android:name=".activity.TutroialProtector3"
-            android:theme="@style/MainTheme" />
-
-        <activity android:name=".activity.TutroialProtector4"
-            android:theme="@style/MainTheme" />
-
-        <activity android:name=".activity.TutroialShow"
-            android:theme="@style/MainTheme" />
+        </activity>
     </application>
 
 </manifest>

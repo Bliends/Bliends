@@ -55,13 +55,16 @@ class DashBoardFragment : Fragment() {
         how_many_place_log.setHasFixedSize(true)
         how_many_place_log.itemAnimator = DefaultItemAnimator()
 
+        try{
+            val list = ORMUtil(context!!).tokenORM.find(Sign())
+            val sign = list[list.size - 1] as Sign
+            token = sign.token
+        }catch (e : Exception){
+            if(token == null) toast("계정 토큰값이 없습니다!")
+        }
+
         setGraphData()
         setLogData()
-
-        val list = ORMUtil(context!!).tokenORM.find(Sign())
-        val sign = list[list.size - 1] as Sign
-        token = sign.token
-        if(token == null) toast("토큰값이 없습니다!")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

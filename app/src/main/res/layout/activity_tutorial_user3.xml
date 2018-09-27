@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center|top"
-    android:orientation="vertical"
-    tools:context=".activity.TutorialUser1">
+    android:background="@color/colorLoginPrimaryDark"
+    android:orientation="vertical">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
             android:lineSpacingExtra="6sp"
             android:textColor="@color/colorLogin"
             android:textSize="14sp"
-            tools:text="시작하기" />
+            android:text="시작하기" />
     </FrameLayout>
 
     <ImageView
@@ -51,8 +51,7 @@
         android:textColor="#1e2640"
         android:lineSpacingExtra="12sp"
         android:gravity="center_horizontal"
-        android:text="사용자가 도움을 요청할 경우 보호자에게 알림이 갑니다.
-도움요청은 메뉴를 누른 뒤 예,아니요를 선택해주세요"
+        android:text="사용자가 도움을 요청할 경우 보호자에게 알림이 갑니다.\n도움요청은 메뉴를 누른 뒤 예,아니요를 선택해주세요"
         />
 
     <LinearLayout

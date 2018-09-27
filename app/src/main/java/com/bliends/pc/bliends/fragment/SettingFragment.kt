@@ -7,15 +7,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bliends.pc.bliends.R
+import com.bliends.pc.bliends.activity.LoginActivity
+import com.bliends.pc.bliends.data.Sign
+import com.bliends.pc.bliends.data.User
+import com.bliends.pc.bliends.util.ORMUtil
 import kotlinx.android.synthetic.main.fragment_setting.*
+import org.jetbrains.anko.support.v4.startActivity
 
 
 class SettingFragment : Fragment(), View.OnClickListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         add_label_settings.setOnClickListener(this)
         change_phone_settings.setOnClickListener(this)
+        change_password_settings.setOnClickListener(this)
+        logout_settings.setOnClickListener(this)
+
         val pref = context?.getSharedPreferences("notificationSwitch", Context.MODE_PRIVATE)
         switch_notification_settings.isChecked = pref!!.getBoolean("notificationSwitch", true)
         switch_notification_settings.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -50,8 +59,18 @@ class SettingFragment : Fragment(), View.OnClickListener{
                 addLabelFragment.show(activity!!.fragmentManager, "add_dialog")
             }
             R.id.change_phone_settings->{
-                val changePhoneFragment = ChangePhoneDialogFragment()
+                val changePhoneFragment = ChangePhoneDialogFragment("Protector")
                 changePhoneFragment.show(activity!!.fragmentManager, "add_dialog")
+            }
+            R.id.change_password_settings->{
+                val changePasswordFragment = ChangePasswordDialogFragment("Protector")
+                changePasswordFragment.show(activity!!.fragmentManager, "add_dialog")
+            }
+            R.id.logout_settings->{
+                ORMUtil(context!!).tokenORM.delete(Sign())
+                ORMUtil(context!!).userORM.delete(User())
+                startActivity<LoginActivity>()
+                activity!!.finish()
             }
         }
     }

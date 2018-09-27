@@ -1,6 +1,7 @@
 package com.bliends.pc.bliends.util
 
 import com.bliends.pc.bliends.data.*
+import com.google.gson.JsonObject
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -87,4 +88,12 @@ interface Services{
 
     @GET("dashboard/by-label")
     fun getDashBoardByLabel(@Header ("Authorization") Authorization : String) : Call<ArrayList<DashBoardLabel>>
+
+    @PATCH("users/{user_id}")
+    fun patchUser(@Header ("Authorization") Authorization : String,
+                  @Path("user_id") user_id : Int,
+                  @Body body : JsonObject) : Call<User>
+
+    @PATCH("users")
+    fun getUser() : Call<ArrayList<User>>
 }

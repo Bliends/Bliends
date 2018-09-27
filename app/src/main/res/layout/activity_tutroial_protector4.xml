@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center|top"
-    android:orientation="vertical"
-    tools:context=".activity.TutorialUser1">
+    android:background="@color/colorLoginPrimaryDark"
+    android:orientation="vertical">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -23,7 +22,7 @@
             android:lineSpacingExtra="6sp"
             android:textColor="@color/colorLogin"
             android:textSize="14sp"
-            tools:text="시작하기" />
+            android:text="시작하기" />
     </FrameLayout>
 
     <ImageView
@@ -51,8 +50,7 @@
         android:textColor="#1e2640"
         android:lineSpacingExtra="12sp"
         android:gravity="center_horizontal"
-        android:text="집과 그 외 자주 가는 장소를 마커 등록을 통해
-사용자가 그 위치에 가까워지는 경우 알림을 줍니다"
+        android:text="집과 그 외 자주 가는 장소를 마커 등록을 통해\n사용자가 그 위치에 가까워지는 경우 알림을 줍니다"
         />
 
     <LinearLayout

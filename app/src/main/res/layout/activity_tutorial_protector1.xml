@@ -6,26 +6,8 @@
     android:layout_height="match_parent"
     android:gravity="center|top"
     android:orientation="vertical"
+    android:background="@color/colorLoginPrimaryDark"
     tools:context=".activity.TutorialUser1">
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:paddingTop="32dp"
-        android:paddingRight="24dp"
-        android:paddingBottom="59dp"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tutroiaProtectorlNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:lineSpacingExtra="6sp"
-            android:textColor="@color/colorLogin"
-            android:textSize="14sp"
-            tools:text="다음으로" />
-    </FrameLayout>
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

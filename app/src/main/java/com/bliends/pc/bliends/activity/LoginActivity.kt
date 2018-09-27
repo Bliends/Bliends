@@ -129,9 +129,9 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             }
 
-            loginBtn.onLongClick {
-                startActivity<TutorialStart>("User" to "User")
-            }
+//            loginBtn.onLongClick {
+//                startActivity<TutorialStart>("User" to "User")
+//            }
 
             loginBtn.onClick {
                 Login()
@@ -179,7 +179,7 @@ class LoginActivity : AppCompatActivity() {
                                 LoginActivity.usertutorial++
                                 if(usertutorial == 1){
                                     startActivity<TutorialStart>("User" to "User")
-                                    toast("사용자 튜토리얼")
+                                    finish()
                                 }else{
                                     startActivity<UserMainActivity>()
                                     finish()
@@ -188,7 +188,7 @@ class LoginActivity : AppCompatActivity() {
                                 LoginActivity.protectortutorial++
                                 if(protectortutorial == 1){
                                     startActivity<TutorialStart>("User" to "Protector")
-                                    toast("보호자 튜토리얼")
+                                    finish()
                                 }else{
                                     startActivity<MainActivity>()
                                     finish()

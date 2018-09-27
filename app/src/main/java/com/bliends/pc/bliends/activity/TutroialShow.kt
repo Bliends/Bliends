@@ -12,19 +12,12 @@ import com.bliends.pc.bliends.util.TTSUtil
 
 
 class TutroialShow : AppCompatActivity() {
-    var bl = false
     lateinit var adapter : TutroialAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutroial_show)
 
-        var a = intent.getStringExtra("User")
-        if(a == "Protector")
-            bl = true
-        else if(a == "User")
-            bl = false
-
-        adapter =  TutroialAdapter(supportFragmentManager,bl)
+        adapter =  TutroialAdapter(supportFragmentManager)
         TutroialPager.adapter = adapter
     }
 }

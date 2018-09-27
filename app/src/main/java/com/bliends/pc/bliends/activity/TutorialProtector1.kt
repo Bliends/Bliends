@@ -14,12 +14,6 @@ class TutorialProtector1 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutorial_protector1)
 
-/*        tutroiaProtectorlNext.onClick {
-            //집설정하지 않으면 못넘어가게 막아놓으삼
-            // 답변 -> 그냥 라벨 추가하면 넘어가겠끔 함
-            startActivity<TutroialShow>("User" to "Protector")
-        }*/
-
         tutroalProtectorLabel.onClick {
             //집설정 팝업에 Edittext에서 장소를 적지말고 Textview로 집이라고 써주삼
             //그리고 가능하면 집설정하고 더 설정하시겠습니까? 이런거 뜨면서 원래 기존 팝업뜨는것도 괜찮을듯

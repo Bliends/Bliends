@@ -1,7 +1,7 @@
 package com.bliends.pc.bliends.data
 
 class User(){
-    var _id : String = ""
+    var _id : Int = 0
     var userid : String = ""
     var name : String = ""
     var type : String = ""
