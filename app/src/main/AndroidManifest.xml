@@ -64,6 +64,8 @@
 
         <service android:name=".service.MoneyService" />
 
+        <service android:name=".service.UserLockService" />
+
         <activity
             android:name=".activity.TutorialStart"
             android:theme="@style/MainTheme" />
@@ -82,9 +84,16 @@
         <activity
             android:name=".activity.TutroialShow"
             android:theme="@style/NoTitle" />
-        <activity android:name=".activity.UserSettingActivity"
-                android:theme="@style/NoTitle"
-            ></activity>
+        <activity
+            android:name=".activity.UserSettingActivity"
+            android:theme="@style/NoTitle" />
+        <activity
+            android:name=".activity.UserLockScreen"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>

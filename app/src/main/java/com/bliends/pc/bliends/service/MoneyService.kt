@@ -47,7 +47,7 @@ class MoneyService : Service() {
             } else {
                 if (!bt.isServiceAvailable) {
                     bt.setupService()
-                    bt.startService(BluetoothState.DEVICE_OTHER)
+                    bt.startService(BluetoothState.DEVICE_ANDROID)
                     bt.autoConnect("BLIENDS")
                     Log.e("isServiceAvailable", "연결")
                 }

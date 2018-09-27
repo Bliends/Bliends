@@ -1,32 +1,28 @@
 package com.bliends.pc.bliends.activity
 
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import com.bliends.pc.bliends.R
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.media.MediaRecorder
 import android.net.Uri
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
 import android.os.Message
 import android.support.v4.content.ContextCompat
 import android.util.Log
-import android.view.WindowManager
-import com.bliends.pc.bliends.service.MoneyService
+import android.view.*
+import com.bliends.pc.bliends.R
 import com.bliends.pc.bliends.data.Help
-import com.bliends.pc.bliends.util.RetrofitUtil
 import com.bliends.pc.bliends.data.Sign
-import com.bliends.pc.bliends.data.User
-import com.bliends.pc.bliends.service.UserLockService
+import com.bliends.pc.bliends.service.MoneyService
 import com.bliends.pc.bliends.util.GPSUtil
 import com.bliends.pc.bliends.util.ORMUtil
+import com.bliends.pc.bliends.util.RetrofitUtil
 import com.bliends.pc.bliends.util.TTSUtil
-import kotlinx.android.synthetic.main.activity_user_main.*
+import kotlinx.android.synthetic.main.activity_user_lock_screen.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -40,13 +36,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
-import java.io.IOException
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
-
-class UserMainActivity : AppCompatActivity() {
+class UserLockScreen : AppCompatActivity() , GestureDetector.OnGestureListener{
+    private val SWIPE_MIN_DISTANCE = 120
+    private val SWIPE_MAX_OFF_PATH = 250
+    private val SWIPE_THRESHOLD_VELOCITY = 200
+    lateinit var gestureScanner : GestureDetector
     var latitude: Double? = null
     var longitude: Double? = null
     var time = timmer()
@@ -55,70 +52,78 @@ class UserMainActivity : AppCompatActivity() {
     var recorder: MediaRecorder? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_main)
-        setSupportActionBar(userToolbar)
-        val intent = Intent(
-                applicationContext, //현재제어권자
-                MoneyService::class.java) // 이동할 컴포넌트
-        startService(intent) // 서비스 시작
-
-        val Lockintent = Intent(
-                applicationContext, //현재제어권자
-                UserLockService::class.java) // 이동할 컴포넌트
-        startService(Lockintent) // 서비스 시작
-
+        setContentView(R.layout.activity_user_lock_screen)
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or
+                WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD)
+        gestureScanner = GestureDetector(this)
+        try {
+            val intent = Intent(
+                    applicationContext, //현재제어권자
+                    MoneyService::class.java) // 이동할 컴포넌트
+            startService(intent) // 서비스 시작
+        } catch (e: IllegalArgumentException) {
+            toast("블루투스가 꺼졌습니다.블루투스르 다시 켜주세요")
+            TTSUtil.usingTTS(this@UserLockScreen, "블루투스가 꺼졌습니다.블루투스르 다시 켜주세요")
+        }
         userCall.onClick {
-            var intent = Intent(this@UserMainActivity, UserSelectActivity::class.java)
+            var intent = Intent(this@UserLockScreen, UserSelectActivity::class.java)
             intent.putExtra("bl", true)
             startActivityForResult(intent, 0)
             tts("전화하기\n 경찰서에 전화하시려면 왼쪽을 클릭하시고 보호자에게 전화하시려면 오른쪽을 클릭해주세요")
-            userCall.backgroundColor = ContextCompat.getColor(this@UserMainActivity, R.color.colorSub)
-            callText.textColor = ContextCompat.getColor(this@UserMainActivity, R.color.colorMain)
+            userCall.backgroundColor = ContextCompat.getColor(this@UserLockScreen, R.color.colorSub)
+            callText.textColor = ContextCompat.getColor(this@UserLockScreen, R.color.colorMain)
         }
 
         userCallHelp.onClick {
             time = timmer()
             Timer().schedule(time, 0, 1000)
             recordstart()
-            userCallHelp.backgroundColor = ContextCompat.getColor(this@UserMainActivity, R.color.colorSub)
-            helpText.textColor = ContextCompat.getColor(this@UserMainActivity, R.color.colorMain)
+            userCallHelp.backgroundColor = ContextCompat.getColor(this@UserLockScreen, R.color.colorSub)
+            helpText.textColor = ContextCompat.getColor(this@UserLockScreen, R.color.colorMain)
         }
 
 
         userWayLose.onClick {
-            var intent = Intent(this@UserMainActivity, UserSelectActivity::class.java)
+            var intent = Intent(this@UserLockScreen, UserSelectActivity::class.java)
             intent.putExtra("bl", false)
             startActivityForResult(intent, 2)
             tts("길을 잃어버렸을때 보내는 요청입니다.\n 오른쪽 클릭은 보내기 왼쪽을릭은 취소입니다.")
-            userWayLose.backgroundColor = ContextCompat.getColor(this@UserMainActivity, R.color.colorSub)
-            loseText.textColor = ContextCompat.getColor(this@UserMainActivity, R.color.colorMain)
+            userWayLose.backgroundColor = ContextCompat.getColor(this@UserLockScreen, R.color.colorSub)
+            loseText.textColor = ContextCompat.getColor(this@UserLockScreen, R.color.colorMain)
         }
 
         userMoney.onClick {
-            var intent = Intent(this@UserMainActivity, UserSelectActivity::class.java)
+            var intent = Intent(this@UserLockScreen, UserSelectActivity::class.java)
             intent.putExtra("bl", false)
             startActivityForResult(intent, 3)
             tts("돈이 부족할때 보내는 요청입니다.\n 오른쪽 클릭은 보내기 왼쪽을릭은 취소입니다.")
-            userMoney.backgroundColor = ContextCompat.getColor(this@UserMainActivity, R.color.colorSub)
-            moneyText.textColor = ContextCompat.getColor(this@UserMainActivity, R.color.colorMain)
+            userMoney.backgroundColor = ContextCompat.getColor(this@UserLockScreen, R.color.colorSub)
+            moneyText.textColor = ContextCompat.getColor(this@UserLockScreen, R.color.colorMain)
+        }
+
+        userLockFinish.onClick {
+            finish()
         }
     }
 
     fun tts(message: String) {
-        TTSUtil.usingTTS(this@UserMainActivity, message)
+        TTSUtil.usingTTS(this@UserLockScreen, message)
     }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        loseText.textColor = ContextCompat.getColor(this@UserMainActivity, R.color.colorbottomNav)
-        callText.textColor = ContextCompat.getColor(this@UserMainActivity, R.color.colorbottomNav)
-        moneyText.textColor = ContextCompat.getColor(this@UserMainActivity, R.color.colorbottomNav)
+        loseText.textColor = ContextCompat.getColor(this@UserLockScreen, R.color.colorbottomNav)
+        callText.textColor = ContextCompat.getColor(this@UserLockScreen, R.color.colorbottomNav)
+        moneyText.textColor = ContextCompat.getColor(this@UserLockScreen, R.color.colorbottomNav)
 
-        userCall.backgroundColor = ContextCompat.getColor(this@UserMainActivity, R.color.colorUserMain)
-        userWayLose.backgroundColor = ContextCompat.getColor(this@UserMainActivity, R.color.colorUserMain)
-        userMoney.backgroundColor = ContextCompat.getColor(this@UserMainActivity, R.color.colorUserMain)
+        userCall.backgroundColor = ContextCompat.getColor(this@UserLockScreen, R.color.colorUserMain)
+        userWayLose.backgroundColor = ContextCompat.getColor(this@UserLockScreen, R.color.colorUserMain)
+        userMoney.backgroundColor = ContextCompat.getColor(this@UserLockScreen, R.color.colorUserMain)
 
         if (resultCode == Activity.RESULT_OK) {
 
@@ -217,10 +222,10 @@ class UserMainActivity : AppCompatActivity() {
 
     fun Callhelp(situation_: String) {
 
-        helpText.textColor = ContextCompat.getColor(this@UserMainActivity, R.color.colorbottomNav)
-        userCallHelp.backgroundColor = ContextCompat.getColor(this@UserMainActivity, R.color.colorUserMain)
+        helpText.textColor = ContextCompat.getColor(this@UserLockScreen, R.color.colorbottomNav)
+        userCallHelp.backgroundColor = ContextCompat.getColor(this@UserLockScreen, R.color.colorUserMain)
         location()
-        var list: List<Any> = ORMUtil(this@UserMainActivity).tokenORM.find(Sign())
+        var list: List<Any> = ORMUtil(this@UserLockScreen).tokenORM.find(Sign())
         var sign = list[list.size - 1] as Sign
         var attachments: MultipartBody.Part? = null
         attachments = if (situation_ == "E") {
@@ -264,20 +269,38 @@ class UserMainActivity : AppCompatActivity() {
         })
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.user_menu, menu)
+    override fun onTouchEvent(me : MotionEvent): Boolean {
+        return gestureScanner.onTouchEvent(me)
+    }
+
+    override fun onShowPress(p0: MotionEvent?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onSingleTapUp(p0: MotionEvent?): Boolean {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.userSetting -> {
-                //테스트로 로그인 부분으로 넘어가게 해놨음
-                tts("설정으로 이동합니다.")
-                toast("설정으로 이동합니다.")
-                startActivity<UserSettingActivity>()
-            }
+    override fun onDown(p0: MotionEvent?): Boolean {
+        return true
+    }
+
+    override fun onFling(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean {
+        if (p0!!.x - p1!!.x > SWIPE_MIN_DISTANCE && Math.abs(p2) > SWIPE_THRESHOLD_VELOCITY) {
+            finish()
         }
-        return super.onOptionsItemSelected(item)
+        return true
+    }
+
+    override fun onScroll(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean {
+        return true
+    }
+
+    override fun onLongPress(p0: MotionEvent?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
+
+
+
+

@@ -45,7 +45,7 @@ class UserSelectActivity : Activity() {
                 setResult(RESULT_OK, intent)
             }else{
                 tts("예")
-                setResult(RESULT_OK, intent)
+                setResult(RESULT_OK,intent)
             }
             finish()
             overridePendingTransition(0, 0);

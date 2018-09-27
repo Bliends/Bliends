@@ -62,8 +62,7 @@ class TutorialUser3 : AppCompatActivity(), GestureDetector.OnGestureListener {
                         "사용자가 도움을 요청할 경우 보호자에게 알림이 갑니다.\n" +
                         "도움요청은 메뉴를 누른 뒤 예 아니요를 선택해주세요\n" +
                         "Bliends를 시작하시려면 시작 또는 네라고 말해주세요",
-                "end"
-                ,false
+                "Start",false
         )
 
         tutroialUser3Next.onClick {

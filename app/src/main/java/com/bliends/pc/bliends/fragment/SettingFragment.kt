@@ -50,7 +50,7 @@ class SettingFragment : Fragment(), View.OnClickListener{
                 addLabelFragment.show(activity!!.fragmentManager, "add_dialog")
             }
             R.id.change_phone_settings->{
-                val changePhoneFragment = ChangePhoneDialogFragment()
+                val changePhoneFragment = ChangePhoneDialogFragment("Protector")
                 changePhoneFragment.show(activity!!.fragmentManager, "add_dialog")
             }
         }

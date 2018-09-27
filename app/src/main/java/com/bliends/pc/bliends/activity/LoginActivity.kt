@@ -179,6 +179,7 @@ class LoginActivity : AppCompatActivity() {
                                 LoginActivity.usertutorial++
                                 if(usertutorial == 1){
                                     startActivity<TutorialStart>("User" to "User")
+                                    finish()
                                 }else{
                                     startActivity<UserMainActivity>()
                                     finish()
@@ -187,6 +188,7 @@ class LoginActivity : AppCompatActivity() {
                                 LoginActivity.protectortutorial++
                                 if(protectortutorial == 1){
                                     startActivity<TutorialStart>("User" to "Protuctor")
+                                    finish()
                                 }else{
                                     startActivity<MainActivity>()
                                     finish()
