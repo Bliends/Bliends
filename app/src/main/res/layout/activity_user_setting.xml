@@ -31,7 +31,7 @@
             android:background="@android:color/white">
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/add_label_settings"
+                android:id="@+id/user_bluetooth_settings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -65,7 +65,7 @@
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/change_phone_settings"
+                android:id="@+id/user_phone_settings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
