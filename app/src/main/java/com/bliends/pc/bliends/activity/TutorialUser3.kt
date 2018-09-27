@@ -57,6 +57,9 @@ class TutorialUser3 : AppCompatActivity(), GestureDetector.OnGestureListener {
         super.onCreate(savedInstanceState)
         gestureScanner = GestureDetector(this)
         setContentView(R.layout.activity_tutorial_user3)
+
+
+
         TTSUtil.TutroailusingTTS(this,
                 "도움요청 \n" +
                         "사용자가 도움을 요청할 경우 보호자에게 알림이 갑니다.\n" +

@@ -38,26 +38,12 @@ class MoneyService : Service() {
     }
 
     fun bluetoothStart() {
-        try {
-            if (!bt.isBluetoothEnabled) {
-                bt.enable()
-                toast("블루투스가 꺼졌습니다.블루투스르 다시 켜주세요")
-                TTSUtil.usingTTS(this@MoneyService, "블루투스가 꺼졌습니다.블루투스르 다시 켜주세요")
-                Log.e("isServiceAvailable", "노연결")
-            } else {
-                if (!bt.isServiceAvailable) {
-                    bt.setupService()
-                    bt.startService(BluetoothState.DEVICE_ANDROID)
-                    bt.autoConnect("BLIENDS")
-                    Log.e("isServiceAvailable", "연결")
-                }
-            }
-
-            val filter1 = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)
-            registerReceiver(mBroadcastReceiver1, filter1)
             bt.setupService()
             bt.startService(BluetoothState.DEVICE_OTHER)
             bt.autoConnect("BLIENDS")
+
+            Log.e("isServiceAvailable", "연결")
+
 
             bt.setAutoConnectionListener(object : BluetoothSPP.AutoConnectionListener {
                 override fun onNewConnection(name: String, address: String) {
@@ -81,7 +67,6 @@ class MoneyService : Service() {
                 }
 
                 override fun onDeviceConnectionFailed() {
-                    toast("기기와 연걸이 실패하였습니다.")
                 }
             })
 
@@ -100,10 +85,6 @@ class MoneyService : Service() {
                     TTSUtil.usingTTS(this@MoneyService, message)
                 }
             }
-        } catch (e: Exception) {
-            toast("블루투스가 꺼졌습니다.블루투스르 다시 켜주세요")
-            TTSUtil.usingTTS(this@MoneyService, "블루투스가 꺼졌습니다.블루투스르 다시 켜주세요")
-        }
     }
 
     val mBroadcastReceiver1 = object : BroadcastReceiver() {

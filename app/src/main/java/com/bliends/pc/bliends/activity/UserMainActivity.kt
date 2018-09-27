@@ -159,26 +159,35 @@ class UserMainActivity : AppCompatActivity() {
     }
 
     fun recordstart() {
-        var recodePath = "Bliends_" + SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        var dirPath = File(Environment.getExternalStorageDirectory().absolutePath, "Bliends")
-        if (!dirPath.exists()) dirPath.mkdirs()
-        dirPath.mkdir()
-        file = File.createTempFile(recodePath, ".3gp", dirPath)//파일생성
-        path = file!!.path
-        recorder = MediaRecorder().apply {
-            setAudioSource(MediaRecorder.AudioSource.MIC)
-            setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
-            setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT)
-            setOutputFile(path)
-            prepare()
-            start()
+        try {
+            var recodePath = "Bliends" + SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+            var dirPath = File(Environment.getExternalStorageDirectory().absolutePath, "Bliends")
+            if (!dirPath.exists()) dirPath.mkdirs()
+            dirPath.mkdir()
+            file = File.createTempFile(recodePath, ".3gp", dirPath)//파일생성
+            path = file!!.path
+            recorder = MediaRecorder().apply {
+                setAudioSource(MediaRecorder.AudioSource.MIC)
+                setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+                setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+                setOutputFile(path)
+                prepare()
+                start()
+            }
+        } catch (e: IllegalStateException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
         }
     }
 
     fun recordstop() {
-        recorder!!.stop()
-        recorder!!.reset() // setAudioSource () 단계로 돌아가서 객체를 재사용 할 수 있습니다.
-        recorder!!.release()
+        try {
+            recorder!!.stop()// setAudioSource () 단계로 돌아가서 객체를 재사용 할 수 있습니다.
+            recorder!!.release()
+        } catch (e: KotlinNullPointerException) {
+            Log.e("e", e.toString())
+        }
     }
 
     fun timmer(): TimerTask {

@@ -36,6 +36,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -44,12 +45,12 @@ class UserLockScreen : AppCompatActivity() , GestureDetector.OnGestureListener{
     private val SWIPE_MAX_OFF_PATH = 250
     private val SWIPE_THRESHOLD_VELOCITY = 200
     lateinit var gestureScanner : GestureDetector
+    var recorder: MediaRecorder? = null
     var latitude: Double? = null
     var longitude: Double? = null
     var time = timmer()
     var path = ""
     var file: File? = null
-    var recorder: MediaRecorder? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_lock_screen)
@@ -162,29 +163,37 @@ class UserLockScreen : AppCompatActivity() , GestureDetector.OnGestureListener{
         latitude = gps!!.latitude
         gps!!.stopUsingGPS()
     }
-
     fun recordstart() {
-        var recodePath = "Bliends_" + SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        var dirPath = File(Environment.getExternalStorageDirectory().absolutePath, "Bliends")
-        if (!dirPath.exists()) dirPath.mkdirs()
-        dirPath.mkdir()
-        file = File.createTempFile(recodePath, ".3gp", dirPath)//파일생성
-        path = file!!.path
-        recorder = MediaRecorder().apply {
-            setAudioSource(MediaRecorder.AudioSource.MIC)
-            setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
-            setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT)
-            setOutputFile(path)
-            prepare()
-            start()
+        try {
+            var recodePath = "Bliends" + SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+            var dirPath = File(Environment.getExternalStorageDirectory().absolutePath, "Bliends")
+            if (!dirPath.exists()) dirPath.mkdirs()
+            dirPath.mkdir()
+            file = File.createTempFile(recodePath, ".3gp", dirPath)//파일생성
+            path = file!!.path
+            recorder = MediaRecorder().apply {
+                setAudioSource(MediaRecorder.AudioSource.MIC)
+                setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+                setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+                setOutputFile(path)
+                prepare()
+                start()
+            }
+        } catch (e: IllegalStateException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
         }
     }
 
-    fun recordstop() {
-        recorder!!.stop()
-        recorder!!.reset() // setAudioSource () 단계로 돌아가서 객체를 재사용 할 수 있습니다.
+fun recordstop() {
+    try {
+        recorder!!.stop()// setAudioSource () 단계로 돌아가서 객체를 재사용 할 수 있습니다.
         recorder!!.release()
+    } catch (e: KotlinNullPointerException) {
+        Log.e("e", e.toString())
     }
+}
 
     fun timmer(): TimerTask {
         var s = 0
