@@ -28,6 +28,7 @@ class SplashActivity : AppCompatActivity() {
             var sign = list[list.size - 1] as Sign
             token = sign.token
             type = user.type
+
             FirebaseMessaging.getInstance().subscribeToTopic(user._id)
             Log.e("token", token)
         } catch (e: Exception) {

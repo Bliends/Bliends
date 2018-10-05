@@ -44,7 +44,6 @@ class MoneyService : Service() {
 
             Log.e("isServiceAvailable", "연결")
 
-
             bt.setAutoConnectionListener(object : BluetoothSPP.AutoConnectionListener {
                 override fun onNewConnection(name: String, address: String) {
                     //새로운 연결일때

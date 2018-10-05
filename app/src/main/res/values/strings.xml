@@ -6,5 +6,6 @@
     <string name="signup_cheakpassword_error">비밀번호가 일치 하지 않습니다</string>
 
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_ic">"@mipmap/ic_app"</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
